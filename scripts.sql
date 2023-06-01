@@ -1,33 +1,37 @@
-insert into institutions (name) values ("The Collection");
-insert into labs (name, institutionId) values ("The Lab", 0), ("The Lab 2", 0);
-insert into scientists (firstName, lastName) values ("Scientist", "1"), ("Scientist", "2"), ("Scientist", "3");
+insert into institutions (institutionName) values ("The Collection");
+insert into labs (labName, institutionId) values ("The Lab", 1), ("The Lab 2", 1);
+insert into scientists (firstName, lastName) values ("Gottlieb", "Kiesel"), ("Donald", "Anderson"), ("???", "Clark");
 insert into assistants (firstName, lastName) values ("Ast", "1"), ("Ast", "2"), ("Ast", "3");
-insert into experimentTypes (name) values ("Chemistry"), ("Physics"), ("Biology"), ("Engineering"), ("????");
-insert into reports (name, link) values ("Chemistry Report", "chem.com"), ("Physics Report", "physics.com"), ("Bio Report", "bio.com"), ("Engineer's Report", "engineers.com");
+insert into experimentTypes (expTypeName) values ("Chemistry"), ("Physics"), ("Biology"), ("Engineering"), ("????");
+insert into reports (reportName, link) values ("Chemistry Report", "chem.com"), ("Physics Report", "physics.com"), ("Bio Report", "bio.com"), ("Engineer's Report", "engineers.com");
 insert into locations (country, city) values ("USA", "Washington"), ("UK", "London"), ("Japan", "Tokyo"), ("South Africa", "Pretoria"), ("Brazil", "Rio"), ("To delete", "Mute City");
-insert into degrees (name, numOfYears) values ("Associate's", 2), ("Bachelor's", 4), ("Master's", 8), ("Fake", 2), ("Fake2", 1);
-insert into clientTypes (type) values ("Commercial"), ("Individual"), ("Military");
-insert into clients (name) values ("Naked Snake"), ("US Army"), ("A Business");
+insert into degrees (degreeName, numOfYears) values ("Associate's", 2), ("Bachelor's", 4), ("Master's", 8), ("Fake", 2), ("Fake2", 1);
+insert into clientTypes (clientTypeName) values ("Commercial"), ("Individual"), ("Military");
+insert into clients (clientName, clientTypeId) values ("Naked Snake", 2), ("US Army", 3), ("A Business", 1), ("Serious Sam", 2);
 insert into investments (amount, bank) values (10000, "Anon Bank"), (50000, "Secret Bank");
-insert into experiments (name, status, typeId, reportId) values ("Exp 1", "In progress", 0, 0), ("Exp 2", "In progress", 1, 1), ("Exp 3", "In progress", 2, 2);
+insert into experiments (experimentName, status, experimentTypeId, reportId) values ("Exp 1", "In progress", 1, 1), ("Exp 2", "In progress", 1, 2), ("Exp 3", "In progress", 2, 3);
 
 #Should probably use a select instead of hardcoding
-update clients set name = "Big Boss" where name = "Naked Snake";
+update clients set clientName = "Big Boss" where clientName = "Naked Snake";
 update experiments set labId = 1;
-update experiments set labId = 0 where name = "Exp 1";
-update labs set institutionId = 0;
-update labs set locationId = 0;
-update labs set locationId = 1 where name = "The Lab 2";
+update experiments set labId = 2 where experimentName = "Exp 1";
+update labs set institutionId = 1;
+update labs set locationId = 2;
+update labs set locationId = 1 where labName = "The Lab 2";
 update investments set clientId = 1 where amount = 50000;
-update assistants set labId = 0 where lastName != "3";
+update assistants set assisteeId = 2 where lastName != "3";
+update scientists set degreeId = 2 where lastName = "1";
+update scientists set degreeId = 4 where lastName = "2";
+update scientists set degreeId = 3 where lastName = "3";
+update experiments set investmentId = 1;
 
 delete from degrees where numOfYears % 2 != 0;
-delete from degrees where name = "Fake";
+delete from degrees where degreeName = "Fake";
 delete from locations where city = "Mute City";
 delete from labs where institutionId = null;
-delete from experimentTypes where name = "????";
+delete from experimentTypes where expTypeName = "????";
 delete from scientists where lastName = "Some value that doesn't exist";
-delete from institutions where name like "%{$another fake val}%";
+delete from institutions where institutionName like "%{$another fake val}%";
 delete from assistants where lastName like "%{$3}";
 
 alter table scientists add title varchar(45);
@@ -39,20 +43,21 @@ alter table labs add isClassified tinyint;
 
 select * from institutions cross join labs cross join locations cross join scientists cross join degrees cross join assistants cross join clients cross join clientTypes cross join experiments cross join experimentTypes cross join investments cross join reports cross join experimentGroups;
 
-select institutions.id, labs.id from institutions inner join labs on institutions.id = labs.institutionId;
-select clients.name, investments.amount from clients inner join investments on client.id = investments.clientId;
-select experiments.name, reports.name from experiments left join reports on experiments.reportId = reports.id;
-select assistants.lastName from assistants right join scientists on assistants.scientistId = scientists.id;
+select institutions.institutionId, labs.labId from institutions inner join labs on institutions.institutionId = labs.institutionId;
+select clients.clientName, investments.amount from clients inner join investments on clients.clientId = investments.clientId;
+select experiments.experimentName, reports.reportName from experiments left join reports on experiments.reportId = reports.reportId;
+select assistants.lastName, scientists.lastName from assistants right join scientists on assistants.assisteeId = scientists.scientistId;
 #select clients.name, clientTypes.name from clients full outer join clientTypes on clientTypes.id = clients.typeId;
 
-select avg(amount) investAmount from investments group by id;
-select experimentTypes.name, count(*) from experiments, experimentTypes where experiments.id = experimentTypes.id group by experiment.name;
-select clients.name, count(clientTypes.type) from (clients inner join clientTypes on clients.id = clientTypes.id) group by name;
-select id, json_arrayagg(name) as names from experimentTypes group by id;
-select name, group_concat(status) from experiments group by name;
+select avg(amount) averageInvestAmount from investments;
+select experimentName, count(*) from experiments group by experimentName;
+select clients.clientName, count(clientTypes.clientTypeName) from (clients inner join clientTypes on clients.clientId = clientTypes.clientTypeId) group by clientName;
+select expTypeId, json_arrayagg(expTypeName) as names from experimentTypes group by expTypeId;
+select experimentName, group_concat(status) from experiments group by experimentName;
 
-select count(name), numOfYears from degrees group by name having count(name) > 0;
-select count(labId) from scientists group by lastName having labId < 1;
-select name, count(numOfYears) from degrees group by name having numOfYears % 2 = 0;
-select count(link) from reports group by name having link = "Some nonexistent value";
+select count(degreeName) from degrees group by degreeName having count(degreeName) > 0;
+select lastName, count(lastName) from scientists group by lastName having count(lastName) = 1;
+select degrees.degreeName, degrees.numOfYears, count(numOfYears) from degrees group by degreeName, numOfYears having count(numOfYears) % 2 = 1;
+select min(link) from reports group by reportName having min(link) != 10;
+select max(amount) from investments group by investmentId having max(amount) != 50000;
 
