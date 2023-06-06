@@ -4,13 +4,13 @@ public class Client
 {
     private int id;
     private String name;
-    private int clientTypeId;
+    private ClientType clientType;
 
-    public Client(int id, String name, int clientTypeId) 
+    public Client(int id, String name, ClientType type) 
     {
         this.id = id;
         this.name = name;
-        this.clientTypeId = clientTypeId;
+        this.clientType = type;
     }
 
     public int getId() 
@@ -21,9 +21,9 @@ public class Client
     {
         return name;
     }
-    public int getClientTypeId() 
+    public ClientType getClientType() 
     {
-        return clientTypeId;
+        return clientType;
     }
 
     
@@ -37,8 +37,8 @@ public class Client
         this.name = name;
     }
 
-    public void setClientTypeId(int clientTypeId) 
+    public void setClientTypeId(ClientType clientType) 
     {
-        this.clientTypeId = clientTypeId;
+        this.clientType = clientType;
     }
 }

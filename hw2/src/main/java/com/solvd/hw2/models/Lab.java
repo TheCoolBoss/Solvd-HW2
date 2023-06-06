@@ -1,20 +1,21 @@
 package com.solvd.hw2.models;
 
-//Does not include a col added from part 2
+//Does not include a col added from part 2's update
 public class Lab 
 {
     private int id;
     private String name;
-    private int locationId;
-    private int institutionId;
+    private Location location;
+    private Institution institution;
 
-    public Lab(int id, String name, int locationId, int institutionId) 
+    public Lab(int id, String name, Location location, Institution institution) 
     {
         this.id = id;
         this.name = name;
-        this.locationId = locationId;
-        this.institutionId = institutionId;
+        this.location = location;
+        this.institution = institution;
     }
+
 
     public int getId() 
     {
@@ -36,24 +37,26 @@ public class Lab
         this.name = name;
     }
 
-    public int getLocationId() 
+    public Location getLocation() 
     {
-        return locationId;
+        return location;
     }
 
-    public void setLocationId(int locationId) 
+    public void setLocation(Location location) 
     {
-        this.locationId = locationId;
+        this.location = location;
     }
 
-    public int getInstitutionId() 
+    public Institution getInstitution() 
     {
-        return institutionId;
+        return institution;
     }
 
-    public void setInstitutionId(int institutionId) 
+    public void setInstitution(Institution institution) 
     {
-        this.institutionId = institutionId;
+        this.institution = institution;
     }
+
+
 
 }

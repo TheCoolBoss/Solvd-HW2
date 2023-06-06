@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Institutions 
+public class InstitutionsDao 
 {
     private static final Logger LOGGER = LogManager.getLogger("Institution DAO");
     private final String INSTITUTION_TABLE;
 
-    public Institutions(String institutionTable)
+    public InstitutionsDao(String institutionTable)
     {
         INSTITUTION_TABLE = institutionTable;
     }

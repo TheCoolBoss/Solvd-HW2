@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class ClientTypes 
+public class ClientTypeDao 
 {
     private static final Logger LOGGER = LogManager.getLogger("Client Type DAO");
     private final String CLIENT_TYPE_TABLE;
 
-    public ClientTypes(String clientTypeTable)
+    public ClientTypeDao(String clientTypeTable)
     {
         CLIENT_TYPE_TABLE = clientTypeTable;
     }

@@ -6,15 +6,11 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Assistants 
+public class AssistantDao 
 {
     private static final Logger LOGGER = LogManager.getLogger("Assistant DAO");
-    private final String ASSISTANT_TABLE;
-
-    public Assistants(String assistantTable)
-    {
-        ASSISTANT_TABLE = assistantTable;
-    }
+    private static final String ASSISTANT_TABLE = "assistants";
+    
 
     public void make(Connection c, String firstName, String lastName, int scientistId)
     {

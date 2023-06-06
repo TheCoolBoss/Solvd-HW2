@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class ExperimentTypes 
+public class ExperimentTypeDao 
 {
     private static final Logger LOGGER = LogManager.getLogger("Experiment Type DAO");
     private final String EXPERIMENT_TYPE_TABLE;
 
-    public ExperimentTypes(String experimentTypeTable)
+    public ExperimentTypeDao(String experimentTypeTable)
     {
         EXPERIMENT_TYPE_TABLE = experimentTypeTable;
     }

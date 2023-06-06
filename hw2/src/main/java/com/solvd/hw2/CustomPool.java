@@ -3,10 +3,10 @@ package com.solvd.hw2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 
 public class CustomPool 
 {
@@ -14,17 +14,26 @@ public class CustomPool
     // private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(MAX_CONNS);
     private static final Logger LOGGER = LogManager.getLogger("Connection Pool");
 
-    public ArrayList<Connection> activeConns;
-    private ArrayList<Connection> idleConns;
-
+    private static ArrayList<Connection> activeConns;
+    private static ArrayList<Connection> idleConns;
 
     public CustomPool()
     {
-        this.activeConns = new ArrayList<Connection>();
-        this.idleConns = new ArrayList<Connection>();
+        activeConns = new ArrayList<Connection>();
+        idleConns = new ArrayList<Connection>();
     }
 
-    public synchronized Connection getConn()
+    public static ArrayList<Connection> getActiveConns() 
+    {
+        return activeConns;
+    }
+
+    public static ArrayList<Connection> getIdleConns() 
+    {
+        return idleConns;
+    }
+
+    public static synchronized Connection getConn()
     {
         if (activeConns.size() == 0)
         {
@@ -32,13 +41,34 @@ public class CustomPool
             return null;
         }
 
-        Connection temp = activeConns.remove(0);
-        idleConns.add(temp);
-        notifyAll();
-        return temp;
+        return activeConns.get(0);
+        // Connection temp = activeConns.remove(0);
+        // idleConns.add(temp);
+        // notifyAll();
+        // return temp;
     }
 
-    public synchronized void resetConn(Connection conn)
+    public static synchronized void closeConn(Connection conn) throws SQLException
+    {
+        if (idleConns.contains(conn))
+        {
+            LOGGER.error("Connection already closed :(");
+        }
+
+        else if (!activeConns.contains(conn))
+        {
+            LOGGER.error("Couldn't find connection. :(");
+        }
+
+        else
+        {
+            conn.close();
+            idleConns.add(conn);
+            activeConns.remove(conn);
+        }
+    }
+
+    public static synchronized void resetConn(Connection conn)
     {
         if (conn == null)
         {
@@ -57,7 +87,7 @@ public class CustomPool
         }
     }
 
-    public void addConn(Connection conn)
+    public static void addConn(Connection conn)
     {
         activeConns.add(conn);
     }

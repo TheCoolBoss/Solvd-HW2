@@ -5,15 +5,15 @@ public class Assistant
     private int id;
     private String firstName;
     private String lastName;
-    private int assisteeId;
+    Scientist assistee;
 
 
-    public Assistant(int id, String firstName, String lastName, int assisteeId)
+    public Assistant(int id, String firstName, String lastName, Scientist assistee)
     {
         this.id= id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.assisteeId = assisteeId;
+        this.assistee = assistee;
     }
 
     public int getId() 
@@ -31,12 +31,7 @@ public class Assistant
         return lastName;
     }
 
-    public int getAssisteeId() 
-    {
-        return assisteeId;
-    }
 
-    
     public void setId(int id) 
     {
         this.id = id;
@@ -52,8 +47,15 @@ public class Assistant
         this.lastName = lastName;
     }
 
-    public void setAssisteeId(int assisteeId) 
+
+    public Scientist getAssistee()
     {
-        this.assisteeId = assisteeId;
+        return assistee;
     }
+
+    public void setAssistee(Scientist assistee) 
+    {
+        this.assistee = assistee;
+    }
+
 }

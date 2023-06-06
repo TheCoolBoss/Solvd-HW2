@@ -1,31 +1,39 @@
 package com.solvd.hw2;
 
-import java.sql.Connection;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.solvd.hw2.criteria.DegreeCriteria;
-import com.solvd.hw2.dao.Clients;
+import com.solvd.hw2.dao.ClientDao;
 import com.solvd.hw2.generators.QueryGen;
 import com.solvd.hw2.services.ClientService;
+
 
 public class Main 
 {
     private static final Logger LOGGER = LogManager.getLogger("Main");
-    public static void main(String[] args) throws SQLException
+    public static void main(String[] args) throws SQLException, IOException, FileNotFoundException
     {
-        CustomPool pool = new CustomPool();
-        String url = "jdbc:mysql://127.0.0.1:3306/solvddbhw";
-        String user = "root";
-        String pass = "root";
+        //fix path later if needed
+        Properties props = new Properties();
+        props.load(new FileInputStream("Solvd-HW2\\hw2\\src\\main\\resources\\db.properties"));
 
-        Connection conn = DriverManager.getConnection(url, user, pass);
+        new CustomPool();
+        String url = props.getProperty("url");
+        String user = props.getProperty("user");
+        String pass = props.getProperty("pass");
 
-        Statement clients = conn.createStatement();
+        CustomPool.addConn(DriverManager.getConnection(url, user, pass));
+
+        Statement clients = CustomPool.getConn().createStatement();
         ResultSet results = clients.executeQuery("select clientName from clients");
         java.sql.ResultSetMetaData data = results.getMetaData();
         int cols = data.getColumnCount();
@@ -38,7 +46,7 @@ public class Main
             }
         }
 
-        ClientService clientService = new ClientService(new Clients("clients"), conn);
+        ClientService clientService = new ClientService(new ClientDao());
         //clientService.insertClient("Mission Control", 2);
         ResultSet seriousSam = clientService.selectClient(4);
         int seriousCols = seriousSam.getMetaData().getColumnCount();
@@ -62,7 +70,7 @@ public class Main
         LOGGER.info(QueryGen.genUpdate(testUpdate.getFields(), "degrees"));
         LOGGER.info(QueryGen.genSelect(testSelect.getFields(), "degrees"));
 
-        PreparedStatement test = conn.prepareStatement(QueryGen.genSelect(testSelect.getFields(), "degrees"));
+        PreparedStatement test = CustomPool.getConn().prepareStatement(QueryGen.genSelect(testSelect.getFields(), "degrees"));
 
 
         ResultSet testDegreeSelect = test.executeQuery();
@@ -76,6 +84,6 @@ public class Main
 
         }
 
-        conn.close();
+        CustomPool.closeConn(CustomPool.getConn());;
     }
 }

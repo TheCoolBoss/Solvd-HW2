@@ -1,20 +1,24 @@
 package com.solvd.hw2.models;
 
+import java.util.List;
+
 public class Scientist 
 {
     private int id;
     private String firstName;
     private String lastName;
-    private int degreeId;
+    private Degree degree;
+    private List<Experiment> experiments;
 
-    
-    public Scientist(int id, String firstName, String lastName, int degreeId)
+    public Scientist(int id, String firstName, String lastName, Degree degree, List<Experiment> experiments) 
     {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.degreeId = degreeId;
+        this.degree = degree;
+        this.experiments = experiments;
     }
+
 
     public int getId() 
     {
@@ -46,15 +50,27 @@ public class Scientist
         this.lastName = lastName;
     }
 
-    public int getDegreeId() 
+    public Degree getDegree() 
     {
-        return degreeId;
+        return degree;
     }
 
-    public void setDegreeId(int degreeId) 
+    public void setDegree(Degree degree) 
     {
-        this.degreeId = degreeId;
+        this.degree = degree;
     }
+
+    public List<Experiment> getExperiments() 
+    {
+        return experiments;
+    }
+
+    public void setExperiments(List<Experiment> experiments) 
+    {
+        this.experiments = experiments;
+    }
+
+
 
 
 }

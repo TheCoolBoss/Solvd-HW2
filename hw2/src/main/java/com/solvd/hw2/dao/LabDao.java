@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Labs 
+public class LabDao 
 {
     private static final Logger LOGGER = LogManager.getLogger("Lab DAO");
     private final String LAB_TABLE;
 
-    public Labs(String labTable)
+    public LabDao(String labTable)
     {
         LAB_TABLE = labTable;
     }

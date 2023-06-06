@@ -6,21 +6,13 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Degrees 
+public class DegreeDao 
 {
     private static final Logger LOGGER = LogManager.getLogger("Degree DAO");
-    private final String DEGREE_TABLE;
-    private final String DEGREE_ID_COL;
-    private final String DEGREE_NAME_COL;
-    private final String YEAR_COL;
-
-    public Degrees(String degreeTable, String nameCol, String yearCol, String idCol)
-    {
-        DEGREE_TABLE = degreeTable;
-        DEGREE_ID_COL = idCol;
-        DEGREE_NAME_COL = nameCol;
-        YEAR_COL = yearCol;
-    }
+    private final String DEGREE_TABLE = "degrees";
+    private final String DEGREE_ID_COL = "degreeId";
+    private final String DEGREE_NAME_COL = "name";
+    private final String YEAR_COL = "numOfYears";
 
     public void make(Connection c, String name, int years)
     {

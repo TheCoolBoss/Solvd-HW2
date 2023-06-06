@@ -9,23 +9,23 @@ public class Experiment
     private String status;
     private Date startDate;
     private Date endDate;
-    private int experimentTypeId;
-    private int investmentId;
-    private int reportId;
-    private int labId;
+    private ExperimentType experimentType;
+    private Investment investment;
+    private Report report;
+    private Lab lab;
 
-    public Experiment(int id, String name, String status, Date startDate, Date endDate, int experimentTypeId,
-            int investmentId, int reportId, int labId) 
+    public Experiment(int id, String name, String status, Date startDate, Date endDate, ExperimentType experimentType,
+            Investment investment, Report report, Lab lab) 
     {
         this.id = id;
         this.name = name;
         this.status = status;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.experimentTypeId = experimentTypeId;
-        this.investmentId = investmentId;
-        this.reportId = reportId;
-        this.labId = labId;
+        this.experimentType = experimentType;
+        this.investment = investment;
+        this.report = report;
+        this.lab = lab;
     }
 
     public int getId() 
@@ -78,45 +78,43 @@ public class Experiment
         this.endDate = endDate;
     }
 
-    public int getExperimentTypeId() 
+    public ExperimentType getExperimentType() 
     {
-        return experimentTypeId;
+        return experimentType;
     }
 
-    public void setExperimentTypeId(int experimentTypeId) 
+    public void setExperimentType(ExperimentType experimentType) 
     {
-        this.experimentTypeId = experimentTypeId;
+        this.experimentType = experimentType;
     }
 
-    public int getInvestmentId() 
+    public Investment getInvestment() 
     {
-        return investmentId;
+        return investment;
     }
 
-    public void setInvestmentId(int investmentId) 
+    public void setInvestment(Investment investment) 
     {
-        this.investmentId = investmentId;
+        this.investment = investment;
     }
 
-    public int getReportId() 
+    public Report getReport() 
     {
-        return reportId;
+        return report;
     }
 
-    public void setReportId(int reportId) 
+    public void setReport(Report report) 
     {
-        this.reportId = reportId;
+        this.report = report;
     }
 
-    public int getLabId() 
+    public Lab getLab() 
     {
-        return labId;
+        return lab;
     }
 
-    public void setLabId(int labId)
+    public void setLab(Lab lab) 
     {
-        this.labId = labId;
+        this.lab = lab;
     }
-
-    
 }

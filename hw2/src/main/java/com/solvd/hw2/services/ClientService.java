@@ -4,27 +4,25 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.solvd.hw2.dao.Clients;
+import com.solvd.hw2.dao.ClientDao;
 
 public class ClientService 
 {
     private static final Logger LOGGER = LogManager.getLogger("Client Service");
-    private final Clients CLIENT_DAO;
-    private final Connection CONN;
+    private final ClientDao CLIENT_DAO;
 
-    public ClientService(Clients clientDao, Connection conn)
+    public ClientService(ClientDao clientDao)
     {
         CLIENT_DAO = clientDao;
-        this.CONN = conn;
     }
 
     public void insertClient(String name, int clientId)
     {
-        CLIENT_DAO.make(CONN, name, clientId);
+        CLIENT_DAO.make(name, clientId);
     }
 
     public ResultSet selectClient(int id)
     {
-        return CLIENT_DAO.select(CONN, id);
+        return CLIENT_DAO.select(id);
     }
 }

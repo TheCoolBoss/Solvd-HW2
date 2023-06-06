@@ -1,7 +1,6 @@
 package com.solvd.hw2.generators;
 
 import java.util.ArrayList;
-import com.solvd.hw2.criteria.Criteria;
 
 //For testing
 public class QueryGen 
