@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="Client.xsd"/>
+
+    <xs:element name="investment" type="investment"/>
+
+    <xs:complexType name="investment">
+        <xs:sequence>
+            <xs:element name="id" type="xs:integer"/>
+            <xs:element name="amount" type="xs:decimal"/>
+            <xs:element name="client" type="client"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+</xs:schema>

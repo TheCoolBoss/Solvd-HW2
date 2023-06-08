@@ -1,64 +1,57 @@
 package com.solvd.hw2.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import com.solvd.hw2.dao.abstracts.Dao;
+import com.solvd.hw2.models.ClientType;
 
-public class ClientTypeDao 
+public class ClientTypeDao extends Dao
 {
     private static final Logger LOGGER = LogManager.getLogger("Client Type DAO");
-    private final String CLIENT_TYPE_TABLE;
+    private static final String CLIENT_TYPE_TABLE = "clientTypes";
+    private static final String ID_COL = "clientTypeId";
+    private static final String NAME_COL = "clientTypeName";
 
-    public ClientTypeDao(String clientTypeTable)
-    {
-        CLIENT_TYPE_TABLE = clientTypeTable;
-    }
-
-    public void make(Connection c, String name)
+    public List<ClientType> select(ArrayList<String> fields, ClientType criteriaVals, String operator)
     {
         try
         {
-            PreparedStatement newClientType = c.prepareStatement("insert into " + CLIENT_TYPE_TABLE + " (clientTypeName) values (?)");
-            newClientType.setString(1, name);
-            newClientType.executeUpdate();
+            ArrayList<ClientType> ret = new ArrayList<ClientType>();
+            ResultSet results = getSelectResults(fields, criteriaVals, CLIENT_TYPE_TABLE, operator);
+
+            while (results.next())
+            {
+                for (int i = 1; i <= results.getMetaData().getColumnCount(); i++)
+                {
+                    Integer newId = null;
+                    String newName = null;
+
+                    if (results.getMetaData().getColumnLabel(i).equals(ID_COL))
+                    {
+                        newId = results.getInt(i);
+                    }
+
+                    else if (results.getMetaData().getColumnLabel(i).equals(NAME_COL))
+                    {
+                        newName = results.getString(i);
+                    }
+
+                    ret.add(new ClientType(newId, newName));
+                }
+            }
+            
+            return ret;
         }
 
         catch (SQLException sqle)
         {
             LOGGER.error(sqle.getMessage());
+            return null;
         }
     }
 
-    //TODO: add criteria
-    public void update(Connection c, String newName)
-    {
-        try
-        {
-            PreparedStatement updatedClientType = c.prepareStatement("update " + CLIENT_TYPE_TABLE + " set clientTypeName = ?");
-            updatedClientType.setString(1, newName);
-            updatedClientType.executeUpdate();
-        }
-
-        catch (SQLException sqle)
-        {
-            LOGGER.error(sqle.getMessage());
-        }
-    }
-
-    public void delete(Connection c, int idToDelete)
-    {
-        try
-        {
-            PreparedStatement removedClientType = c.prepareStatement("delete from " + CLIENT_TYPE_TABLE + " where clientTypeId = ?");
-            removedClientType.setInt(1, idToDelete);
-            removedClientType.executeUpdate();
-        }
-
-        catch (SQLException sqle)
-        {
-            LOGGER.error(sqle.getMessage());
-        }
-    }
 }
