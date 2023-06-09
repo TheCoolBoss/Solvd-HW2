@@ -35,7 +35,7 @@ public class Main
 
         typeId2.forEach((ClientType type) -> 
         {
-            LOGGER.info("Type: " + type.getClientTypeName());
+            LOGGER.info("Type: " + type.getClientTypeName()); 
         });
 
         idOfTwo.forEach((Client client) ->

@@ -1,4 +1,4 @@
-package parsers;
+package com.solvd.hw2.parsers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -12,10 +12,10 @@ import org.xml.sax.SAXException;
 public class ParserMain 
 {
     //src
-    private static final String FALCON_GANON = "src/main/resources/parsers/clients/FalconGanon.xml";
-    private static final String BEST_PLAYS = "src/main/resources/parsers/labs/BestPlays.xml";
-    private static final String FALCON_GANON_INVEST = "src/main/resources/parsers/investments/FalconGanonInvest.xml";
-    private static final String FALCON_GANON_PLAYS = "src/main/resources/parsers/experiments/FalconGanonPlays.xml";
+    private static final String FALCON_GANON = "hw2/src/main/resources/parsers/clients/FalconGanon.xml";
+    private static final String BEST_PLAYS = "hw2/src/main/resources/parsers/labs/BestPlays.xml";
+    private static final String FALCON_GANON_INVEST = "hw2/src/main/resources/parsers/investments/FalconGanonInvest.xml";
+    private static final String FALCON_GANON_PLAYS = "hw2/src/main/resources/parsers/experiments/FalconGanonPlays.xml";
     private static final Logger LOGGER = LogManager.getLogger("Main");
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, URISyntaxException
@@ -53,16 +53,16 @@ public class ParserMain
 
 
 
-        XmlValidator falconGanonVal = new XmlValidator("src/main/resources/parsers/xsd/Client.xsd");
+        XmlValidator falconGanonVal = new XmlValidator("hw2/src/main/resources/parsers/xsd/Client.xsd");
         LOGGER.info(falconGanonVal.isValid(FALCON_GANON));
 
-        XmlValidator bestPlaysVal = new XmlValidator("src/main/resources/parsers/xsd/Lab.xsd");
+        XmlValidator bestPlaysVal = new XmlValidator("hw2/src/main/resources/parsers/xsd/Lab.xsd");
         LOGGER.info(bestPlaysVal.isValid(BEST_PLAYS));
 
-        XmlValidator investVal = new XmlValidator("src/main/resources/parsers/parsers/xsd/Investment.xsd");
+        XmlValidator investVal = new XmlValidator("hw2/src/main/resources/parsers/xsd/Investment.xsd");
         LOGGER.info(investVal.isValid(FALCON_GANON_INVEST));
 
-        XmlValidator playsVal = new XmlValidator("src/main/resources/parsers/xsd/Experiment.xsd");
+        XmlValidator playsVal = new XmlValidator("hw2/src/main/resources/parsers/xsd/Experiment.xsd");
         LOGGER.info(playsVal.isValid(FALCON_GANON_PLAYS));
     }
 }

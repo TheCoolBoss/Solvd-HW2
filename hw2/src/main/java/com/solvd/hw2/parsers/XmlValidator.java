@@ -1,4 +1,4 @@
-package parsers;
+package com.solvd.hw2.parsers;
 
 import java.io.File;
 import java.net.URISyntaxException;
