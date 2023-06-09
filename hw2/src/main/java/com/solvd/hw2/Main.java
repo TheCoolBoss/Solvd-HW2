@@ -19,7 +19,6 @@ public class Main
     private static final Logger LOGGER = LogManager.getLogger("Main");
     public static void main(String[] args) throws SQLException, IOException, FileNotFoundException
     {
-
         new CustomPool();
 
         Client clientFields = new Client(null, "dummy", null);

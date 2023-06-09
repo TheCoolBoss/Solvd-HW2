@@ -26,7 +26,7 @@ public class CustomPool
         activeConns = new ArrayList<Connection>();
         idleConns = new ArrayList<Connection>();
         props = new Properties();
-        props.load(new FileInputStream("src/main/resources/db.properties"));
+        props.load(new FileInputStream("/hw2/src/main/resources/db.properties"));
         url = props.getProperty("url");
         user = props.getProperty("user");
         pass = props.getProperty("pass");

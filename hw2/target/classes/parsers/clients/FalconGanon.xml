@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<client>
+    <id>0</id>
+    <name>"Captain Falcon and Ganondorf"</name>
+    <clientType>
+        <clientTypeId>1</clientTypeId>
+        <clientTypeName>"Meme"</clientTypeName>
+    </clientType>
+</client>
