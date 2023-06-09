@@ -5,10 +5,10 @@
     <amount>100.0</amount>
     <client>
         <id>0</id>
-        <name>"Captain Falcon and Ganondorf"</name>
+        <name>Captain Falcon and Ganondorf</name>
         <clientType>
             <clientTypeId>1</clientTypeId>
-            <clientTypeName>"Meme"</clientTypeName>
+            <clientTypeName>Meme</clientTypeName>
         </clientType>
     </client>
 </investment>

@@ -1,16 +1,14 @@
 package com.solvd.hw2;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.solvd.hw2.dao.ClientDao;
-import com.solvd.hw2.dao.ClientTypeDao;
+import com.solvd.hw2.dao.*;
+import com.solvd.hw2.services.*;
 import com.solvd.hw2.generators.QueryGen;
 import com.solvd.hw2.models.*;
 
@@ -21,29 +19,24 @@ public class Main
     {
         new CustomPool();
 
-        Client clientFields = new Client(null, "dummy", null);
-        Client clientCriteria = new Client(null, null, new ClientType(2, null));
+        ClientService cs = new ClientService();
+        ClientTypeService cts = new ClientTypeService();
+        List<Client> idOf1 = cs.getById(1);
+        List<Client> typeIdOf2 = cs.getByTypeId(2);
+        String clientTypeOf2 = cts.getTypeNameById(2);
 
-        ClientType typeFields = new ClientType(null, "");
-        ClientType typeCrit = new ClientType(2, null);
-
-        ClientDao clientDao = new ClientDao();
-        ClientTypeDao typeDao = new ClientTypeDao();
-
-        List<Client> idOfTwo = clientDao.select(clientFields.getFields(), clientCriteria, " <= ");
-        List<ClientType> typeId2 = typeDao.select(typeFields.getFields(), typeCrit, " = ");
-
-        typeId2.forEach((ClientType type) -> 
+        for (Client client : idOf1) 
         {
-            LOGGER.info("Type: " + type.getClientTypeName()); 
-        });
+            LOGGER.info("Client id: " + client.getId());
+            LOGGER.info("Client name: " + client.getName());
+            LOGGER.info("Client type: " + cts.getTypeNameById(client.getClientType().getId()));
+        }
 
-        idOfTwo.forEach((Client client) ->
+        for (Client client : typeIdOf2) 
         {
-            LOGGER.info("Name: " + client.getName());
-        });
-
-        QueryGen.genInsert(clientFields, "test");
-        QueryGen.genUpdate(clientFields, "test", new Client(null, "123", new ClientType(2, null)), "");
+            LOGGER.info("Client id: " + client.getId());
+            LOGGER.info("Client name: " + client.getName());
+            LOGGER.info("Client type: " + clientTypeOf2);
+        }
     }
 }

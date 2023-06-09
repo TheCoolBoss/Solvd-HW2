@@ -25,11 +25,11 @@ public class ClientTypeDao extends Dao
 
             while (results.next())
             {
+                Integer newId = null;
+                String newName = null;
+
                 for (int i = 1; i <= results.getMetaData().getColumnCount(); i++)
                 {
-                    Integer newId = null;
-                    String newName = null;
-
                     if (results.getMetaData().getColumnLabel(i).equals(ID_COL))
                     {
                         newId = results.getInt(i);
@@ -39,9 +39,9 @@ public class ClientTypeDao extends Dao
                     {
                         newName = results.getString(i);
                     }
-
-                    ret.add(new ClientType(newId, newName));
                 }
+
+                ret.add(new ClientType(newId, newName));
             }
             
             return ret;

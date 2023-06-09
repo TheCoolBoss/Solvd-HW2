@@ -2,10 +2,10 @@
 
 <lab>
     <id>0</id>
-    <name>"Best Plays"</name>
-    <institution>"Smash Bros"</institution>
+    <name>Best Plays</name>
+    <institution>Smash Bros</institution>
     <location>
-        <city>"Some city"</city>
-        <country>"Some country"</country>
+        <city>Some city</city>
+        <country>Some country</country>
     </location>
 </lab>

@@ -9,7 +9,6 @@ import com.solvd.hw2.CustomPool;
 import com.solvd.hw2.lambda.Concaters;
 import com.solvd.hw2.models.abstracts.Model;
 
-//For testing
 public class QueryGen 
 {
     private static final Logger LOGGER = LogManager.getLogger("Query Gen");
@@ -122,7 +121,8 @@ public class QueryGen
             statementIndex++;
         }
 
-        LOGGER.info(ret.toString());
+        //Left in case I need to renable for testing
+        //LOGGER.info(ret.toString());
         return ret;
     }
 }
