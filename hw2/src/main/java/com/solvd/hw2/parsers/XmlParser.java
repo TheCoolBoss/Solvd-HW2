@@ -1,5 +1,7 @@
 package com.solvd.hw2.parsers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -7,6 +9,8 @@ import org.w3c.dom.NodeList;
 
 public class XmlParser
 {
+    private static final Logger LOGGER = LogManager.getLogger("Parser");
+    
     private Document doc;
     private String tagName;
 
@@ -28,7 +32,7 @@ public class XmlParser
             {
                 if (map.item(j).getNodeType() == Node.ELEMENT_NODE)
                 {
-                    System.out.println(map.item(j).getNodeName() + ": " + map.item(j).getTextContent());
+                    LOGGER.info(map.item(j).getNodeName() + ": " + map.item(j).getTextContent());
                 }
 
             }
