@@ -19,16 +19,9 @@ public class Main
     private static final Logger LOGGER = LogManager.getLogger("Main");
     public static void main(String[] args) throws SQLException, IOException, FileNotFoundException
     {
-        //fix path later if needed
-        Properties props = new Properties();
-        props.load(new FileInputStream("Solvd-HW2\\hw2\\src\\main\\resources\\db.properties"));
 
         new CustomPool();
-        String url = props.getProperty("url");
-        String user = props.getProperty("user");
-        String pass = props.getProperty("pass");
 
-        CustomPool.addConn(DriverManager.getConnection(url, user, pass));
         Client clientFields = new Client(null, "dummy", null);
         Client clientCriteria = new Client(null, null, new ClientType(2, null));
 
@@ -53,6 +46,5 @@ public class Main
 
         QueryGen.genInsert(clientFields, "test");
         QueryGen.genUpdate(clientFields, "test", new Client(null, "123", new ClientType(2, null)), "");
-        CustomPool.closeConn(CustomPool.getConn());;
     }
 }

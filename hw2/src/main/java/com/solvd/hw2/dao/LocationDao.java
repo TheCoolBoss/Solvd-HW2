@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Locations 
+public class LocationDao 
 {
     private static final Logger LOGGER = LogManager.getLogger("Location DAO");
     private final String LOCATION_TABLE;
 
-    public Locations(String locationTable)
+    public LocationDao(String locationTable)
     {
         LOCATION_TABLE = locationTable;
     }

@@ -1,4 +1,4 @@
-package com.solvd.hw2.parsers;
+package parsers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

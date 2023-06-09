@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Reports 
+public class ReportDao 
 {
     private static final Logger LOGGER = LogManager.getLogger("Report DAO");
     private final String REPORTS_TABLE;
 
-    public Reports(String reportsTable)
+    public ReportDao(String reportsTable)
     {
         REPORTS_TABLE = reportsTable;
     }

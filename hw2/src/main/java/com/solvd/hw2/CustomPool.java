@@ -2,25 +2,34 @@ package com.solvd.hw2;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
-// import java.util.concurrent.ExecutorService;
-// import java.util.concurrent.Executors;
+import java.util.Properties;
 
 public class CustomPool 
 {
-    // private static final int MAX_CONNS = 5;
-    // private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(MAX_CONNS);
     private static final Logger LOGGER = LogManager.getLogger("Connection Pool");
 
     private static ArrayList<Connection> activeConns;
     private static ArrayList<Connection> idleConns;
+    private static Properties props;
+    private static String url;
+    private static String user;
+    private static String pass;
 
-    public CustomPool()
+    public CustomPool() throws IOException
     {
         activeConns = new ArrayList<Connection>();
         idleConns = new ArrayList<Connection>();
+        props = new Properties();
+        props.load(new FileInputStream("src/main/resources/db.properties"));
+        url = props.getProperty("url");
+        user = props.getProperty("user");
+        pass = props.getProperty("pass");
     }
 
     public static ArrayList<Connection> getActiveConns() 
@@ -33,62 +42,20 @@ public class CustomPool
         return idleConns;
     }
 
-    public static synchronized Connection getConn()
+    public static synchronized Connection getConn() throws SQLException
     {
-        if (activeConns.size() == 0)
+        if (activeConns.size() == 0 && idleConns.size() == 0)
         {
-            LOGGER.error("No conns to get. :(");
-            return null;
+            activeConns.add(DriverManager.getConnection(url, user, pass));
+        }
+
+        else if (activeConns.size() == 0 && idleConns.size() != 0)
+        {
+            idleConns.remove(0);
+            Connection reOpened = DriverManager.getConnection(url, user, pass);
+            activeConns.add(reOpened);
         }
 
         return activeConns.get(0);
-        // Connection temp = activeConns.remove(0);
-        // idleConns.add(temp);
-        // notifyAll();
-        // return temp;
-    }
-
-    public static synchronized void closeConn(Connection conn) throws SQLException
-    {
-        if (idleConns.contains(conn))
-        {
-            LOGGER.error("Connection already closed :(");
-        }
-
-        else if (!activeConns.contains(conn))
-        {
-            LOGGER.error("Couldn't find connection. :(");
-        }
-
-        else
-        {
-            conn.close();
-            idleConns.add(conn);
-            activeConns.remove(conn);
-        }
-    }
-
-    public static synchronized void resetConn(Connection conn)
-    {
-        if (conn == null)
-        {
-            LOGGER.error("Null connection :(");
-        }
-
-        else if (!idleConns.contains(conn))
-        {
-            LOGGER.error("Couldn't find connection. :(");
-        }
-
-        else
-        {
-            idleConns.remove(conn);
-            activeConns.add(conn);
-        }
-    }
-
-    public static void addConn(Connection conn)
-    {
-        activeConns.add(conn);
     }
 }

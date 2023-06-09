@@ -1,4 +1,4 @@
-package com.solvd.hw2.parsers;
+package parsers;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -28,6 +28,7 @@ public class XmlValidator
 
     public boolean isValid(String xml)
     {
+        boolean ret = false;
         try
         {
             val.validate(new StreamSource(new File(xml)));
@@ -37,7 +38,8 @@ public class XmlValidator
         catch (Exception e)
         {
             LOGGER.error(e.getMessage());
-            return false;
         }
+
+        return ret;
     }
 }

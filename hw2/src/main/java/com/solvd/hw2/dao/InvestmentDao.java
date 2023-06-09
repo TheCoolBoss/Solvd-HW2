@@ -8,12 +8,12 @@ import org.apache.logging.log4j.Logger;
 
 
 //Includes a col that is deleted via queries from 2nd part
-public class Investments
+public class InvestmentDao
 {
     private static final Logger LOGGER = LogManager.getLogger("Investment DAO");
     private final String INVESTMENTS_TABLE;
 
-    public Investments(String investmentsTable)
+    public InvestmentDao(String investmentsTable)
     {
         INVESTMENTS_TABLE = investmentsTable;
     }
