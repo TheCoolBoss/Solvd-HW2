@@ -3,13 +3,10 @@ package com.solvd.hw2;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.solvd.hw2.dao.*;
 import com.solvd.hw2.services.*;
-import com.solvd.hw2.generators.QueryGen;
 import com.solvd.hw2.models.*;
 
 public class Main 
@@ -21,11 +18,11 @@ public class Main
 
         ClientService cs = new ClientService();
         ClientTypeService cts = new ClientTypeService();
-        List<Client> idOf1 = cs.getById(1);
+        List<Client> idOf3 = cs.getById(3);
         List<Client> typeIdOf2 = cs.getByTypeId(2);
         String clientTypeOf2 = cts.getTypeNameById(2);
 
-        for (Client client : idOf1) 
+        for (Client client : idOf3) 
         {
             LOGGER.info("Client id: " + client.getId());
             LOGGER.info("Client name: " + client.getName());

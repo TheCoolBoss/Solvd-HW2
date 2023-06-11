@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.solvd.hw2.generators.*;
+import com.solvd.hw2.lambda.Concaters;
 import com.solvd.hw2.models.abstracts.Model;
 
 public abstract class Dao 
@@ -17,7 +18,7 @@ public abstract class Dao
     {
         try
         {
-            PreparedStatement newModel = QueryGen.genInsert(toInsert, table);
+            PreparedStatement newModel = QueryGen.genInsert(toInsert, table, Concaters.CONCATER, Concaters.ARRAY_LIST_STRING_CONCAT);
             newModel.executeUpdate();
         }
 
@@ -32,7 +33,7 @@ public abstract class Dao
     {
         try
         {
-            PreparedStatement updatedModel = QueryGen.genUpdate(newVals, table, criteriaVals, ConditionGen.makeBasicWhere(criteriaVals.getFields(), operator));
+            PreparedStatement updatedModel = QueryGen.genUpdate(newVals, table, criteriaVals, ConditionGen.makeBasicWhere(criteriaVals.getFields(), operator), Concaters.ARRAY_LIST_STRING_CONCAT);
             updatedModel.executeUpdate();
         }
 
@@ -58,7 +59,7 @@ public abstract class Dao
 
     public ResultSet getSelectResults(ArrayList<String> fields, Model criteriaVals, String table, String operator) throws SQLException
     {
-        PreparedStatement stmt = QueryGen.genSelect(fields, table, criteriaVals, ConditionGen.makeBasicWhere(criteriaVals.getFields(), operator));
+        PreparedStatement stmt = QueryGen.genSelect(fields, table, criteriaVals, ConditionGen.makeBasicWhere(criteriaVals.getFields(), operator), Concaters.ARRAY_LIST_STRING_CONCAT);
         return stmt.executeQuery();
     }
 }

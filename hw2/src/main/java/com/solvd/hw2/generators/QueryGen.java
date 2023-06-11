@@ -7,24 +7,26 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.solvd.hw2.CustomPool;
 import com.solvd.hw2.lambda.Concaters;
+import com.solvd.hw2.lambda.interfaces.IConcat;
+import com.solvd.hw2.lambda.interfaces.IConcatArrayList;
 import com.solvd.hw2.models.abstracts.Model;
 
 public class QueryGen 
 {
     private static final Logger LOGGER = LogManager.getLogger("Query Gen");
 
-    public static PreparedStatement genInsert(Model obj, String table) throws SQLException
+    public static PreparedStatement genInsert(Model obj, String table, IConcat regConcater, IConcatArrayList<String> listConcater) throws SQLException
     {
         ArrayList<String> fields = obj.getFields();
         ArrayList<Object> vals = obj.getVals();
 
         String query = "insert into " + table + " (";
 
-        query = query.concat(Concaters.ARRAY_LIST_STRING_CONCAT.concatArrayList(fields, ", "));
+        query = query.concat(listConcater.concatArrayList(fields, ", "));
         query = query.substring(0, query.length() - 2);
         query = query.concat(") values (");
 
-        query = query.concat(Concaters.CONCATER.concatXTimes("?, ", fields.size()));
+        query = query.concat(regConcater.concatXTimes("? ", fields.size()));
         query = query.substring(0, query.length() - 2);
         query = query.concat(");");
 
@@ -34,7 +36,7 @@ public class QueryGen
     }
 
 
-    public static PreparedStatement genUpdate(Model newVals, String table, Model criteria, String condition) throws SQLException
+    public static PreparedStatement genUpdate(Model newVals, String table, Model criteria, String condition, IConcatArrayList<String> listConcater) throws SQLException
     {
         ArrayList<String> fields = newVals.getFields();
         ArrayList<Object> vals = newVals.getVals();
@@ -50,7 +52,7 @@ public class QueryGen
         }
 
         String query = "update " + table + " set ";
-        query = query.concat(Concaters.ARRAY_LIST_STRING_CONCAT.concatArrayList(fields, " = " + "?, "));
+        query = query.concat(listConcater.concatArrayList(fields, "= ?,"));
         query = query.substring(0, query.length() - 2);
         query = query.concat(condition);
 
@@ -70,7 +72,7 @@ public class QueryGen
     }
 
 
-    public static PreparedStatement genSelect(ArrayList<String> fields, String table, Model criteria, String condition) throws SQLException
+    public static PreparedStatement genSelect(ArrayList<String> fields, String table, Model criteria, String condition, IConcatArrayList<String> listConcater) throws SQLException
     {
         ArrayList<Object> vals = criteria.getVals();
         ArrayList<Object> allVals = new ArrayList<Object>();
@@ -86,13 +88,14 @@ public class QueryGen
 
         else
         {
-            query = query.concat(Concaters.ARRAY_LIST_STRING_CONCAT.concatArrayList(fields, ", "));            
+            query = query.concat(listConcater.concatArrayList(fields, ", "));           
             query = query.substring(0, query.length() - 2);
         }
 
         query = query.concat(" from " + table);
         query = query.concat(condition);
 
+        LOGGER.info(query);
         PreparedStatement ret = makeStatement(query, vals);
 
         return ret;
