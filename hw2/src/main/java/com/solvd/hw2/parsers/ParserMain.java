@@ -12,10 +12,8 @@ import org.xml.sax.SAXException;
 public class ParserMain 
 {
     //src
-    private static final String FALCON_GANON = "hw2/src/main/resources/parsers/clients/FalconGanon.xml";
-    private static final String BEST_PLAYS = "hw2/src/main/resources/parsers/labs/BestPlays.xml";
-    private static final String FALCON_GANON_INVEST = "hw2/src/main/resources/parsers/investments/FalconGanonInvest.xml";
-    private static final String FALCON_GANON_PLAYS = "hw2/src/main/resources/parsers/experiments/FalconGanonPlays.xml";
+    private static final String FALCON_GANON = "hw2/src/main/resources/xml/clients/FalconGanon.xml";
+    private static final String FALCON_GANON_PLAYS = "hw2/src/main/resources/xml/experiments/FalconGanonPlays.xml";
     private static final Logger LOGGER = LogManager.getLogger("Main");
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, URISyntaxException
@@ -28,7 +26,7 @@ public class ParserMain
         XmlParser falconGanonParser = new XmlParser(falconGanon, "client");
         falconGanonParser.getElements();
 
-        XmlValidator playsVal = new XmlValidator("hw2/src/main/resources/parsers/xsd/Experiment.xsd");
+        XmlValidator playsVal = new XmlValidator("hw2/src/main/resources/xml/xsd/Experiment.xsd");
         LOGGER.info(playsVal.isValid(FALCON_GANON_PLAYS));
     }
 }
