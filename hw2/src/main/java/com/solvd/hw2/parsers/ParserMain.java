@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 public class ParserMain 
 {
     //src
@@ -26,7 +27,24 @@ public class ParserMain
         XmlParser falconGanonParser = new XmlParser(falconGanon, "client");
         falconGanonParser.getElements();
 
+        
         XmlValidator playsVal = new XmlValidator("hw2/src/main/resources/xml/xsd/Experiment.xsd");
-        LOGGER.info(playsVal.isValid(FALCON_GANON_PLAYS));
+        LOGGER.info("Validating " + FALCON_GANON_PLAYS);
+        playsVal.check(FALCON_GANON_PLAYS);
+        LOGGER.info("Result of validation: ");
+        if (playsVal.getErrors().size() != 0)
+        {
+            playsVal.getErrors().forEach((SAXParseException saxpe) ->
+            {
+                LOGGER.info(saxpe.getMessage());
+            });
+        }
+
+        else
+        {
+            LOGGER.info("No errors :)");
+        }
+
+        
     }
 }

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <experiment>
-    <id>1</id>
+    <id>0</id>
     <name>Best Captain Falcon and Ganondorf Plays</name>
     <status>Done</status>
     <start>2023-01-01</start>
     <end>2023-06-08</end>
     <type>
-        <experimentTypeId>1</experimentTypeId>
+        <experimentTypeId>0</experimentTypeId>
         <experimentTypeName>Meme Montage</experimentTypeName>
     </type>
     <investment>
