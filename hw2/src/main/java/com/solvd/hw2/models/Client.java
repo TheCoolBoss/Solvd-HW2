@@ -1,7 +1,9 @@
 package com.solvd.hw2.models;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import com.solvd.hw2.models.abstracts.Model;
 
+@XmlRootElement (name="client")
 public class Client extends Model
 {
     private static final String ID_COL = "clientId";
@@ -12,6 +14,7 @@ public class Client extends Model
     private String name;
     private ClientType clientType;
 
+    public Client(){}
     public Client(Integer id, String name, ClientType type) 
     {
         this.id = id;
