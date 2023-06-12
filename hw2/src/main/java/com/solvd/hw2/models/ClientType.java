@@ -1,27 +1,31 @@
 package com.solvd.hw2.models;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import com.solvd.hw2.models.abstracts.Model;
 
+@XmlRootElement (name="clientType")
 public class ClientType extends Model
 {
     private static final String ID_COL = "clientTypeId";
     private static final String NAME_COL = "clientTypeName";
 
-    private Integer id;
+    private Integer clientTypeId;
     private String clientTypeName;
 
+    public ClientType(){}
+    
     public ClientType(Integer id, String clientTypeName) 
     {
-        this.id = id;
+        this.clientTypeId = id;
         this.clientTypeName = clientTypeName;
         populateFieldsAndVals();
     }
 
     protected void populateFieldsAndVals()
     {
-        if (id != null)
+        if (clientTypeId != null)
         {
-            vals.add(id);
+            vals.add(clientTypeId);
             fields.add(ID_COL);
         }
 
@@ -32,9 +36,9 @@ public class ClientType extends Model
         }
     }
 
-    public Integer getId() 
+    public Integer getClientTypeId() 
     {
-        return id;
+        return clientTypeId;
     }
 
     public String getClientTypeName() 
@@ -42,16 +46,13 @@ public class ClientType extends Model
         return clientTypeName;
     }
 
-
-    public void setId(int id) 
+    public void setClientTypeId(Integer id) 
     {
-        this.id = id;
+        this.clientTypeId = id;
     }
 
     public void setClientTypeName(String clientTypeName) 
     {
         this.clientTypeName = clientTypeName;
     }
-
-
 }

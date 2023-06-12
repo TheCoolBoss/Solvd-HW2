@@ -26,7 +26,7 @@ public class Main
         {
             LOGGER.info("Client id: " + client.getId());
             LOGGER.info("Client name: " + client.getName());
-            LOGGER.info("Client type: " + cts.getTypeNameById(client.getClientType().getId()));
+            LOGGER.info("Client type: " + cts.getTypeNameById(client.getClientType().getClientTypeId()));
         }
 
         for (Client client : typeIdOf2) 

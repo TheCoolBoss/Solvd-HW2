@@ -45,7 +45,7 @@ public class ClientDao extends Dao
 
                     else if (results.getMetaData().getColumnLabel(i).equals(TYPE_COL))
                     {
-                        newType.setId(results.getInt(i));
+                        newType.setClientTypeId(results.getInt(i));
                     }
                 }
 
