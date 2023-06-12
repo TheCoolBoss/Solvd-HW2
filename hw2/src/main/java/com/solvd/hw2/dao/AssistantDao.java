@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.solvd.hw2.CustomPool;
 import com.solvd.hw2.dao.abstracts.Dao;
 import com.solvd.hw2.models.Assistant;
 import com.solvd.hw2.models.Scientist;
@@ -62,6 +63,7 @@ public class AssistantDao extends Dao
                 ret.add(new Assistant(newId, firstName, lastName, newScientist));
             }
             
+            CustomPool.closeConn();
             return ret;
         }
 

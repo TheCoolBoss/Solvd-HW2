@@ -1,7 +1,5 @@
 package com.solvd.hw2;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -12,8 +10,6 @@ import java.util.Properties;
 
 public class CustomPool 
 {
-    private static final Logger LOGGER = LogManager.getLogger("Connection Pool");
-
     private static ArrayList<Connection> activeConns;
     private static ArrayList<Connection> idleConns;
     private static Properties props;
@@ -57,5 +53,12 @@ public class CustomPool
         }
 
         return activeConns.get(0);
+    }
+
+    public static synchronized void closeConn() throws SQLException
+    {
+        activeConns.get(0).close();
+        idleConns.add(getConn());
+        activeConns.remove(0);
     }
 }

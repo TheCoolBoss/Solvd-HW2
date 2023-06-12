@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.solvd.hw2.CustomPool;
-import com.solvd.hw2.lambda.Concaters;
 import com.solvd.hw2.lambda.interfaces.IConcat;
 import com.solvd.hw2.lambda.interfaces.IConcatArrayList;
 import com.solvd.hw2.models.abstracts.Model;

@@ -11,15 +11,12 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 public class XmlValidator 
 {   
-    private static final Logger LOGGER = LogManager.getLogger("Validator");
     private Validator val;
     private List<SAXParseException> errors;
 

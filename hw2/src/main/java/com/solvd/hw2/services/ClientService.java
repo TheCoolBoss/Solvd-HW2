@@ -1,18 +1,12 @@
 package com.solvd.hw2.services;
 
-import java.util.ArrayList;
 import java.util.List;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import com.solvd.hw2.dao.ClientDao;
-import com.solvd.hw2.dao.ClientTypeDao;
 import com.solvd.hw2.models.Client;
 import com.solvd.hw2.models.ClientType;
 
 public class ClientService 
 {
-    private static final Logger LOGGER = LogManager.getLogger("Client Service");
-    private static final ClientTypeDao TYPE_DAO = new ClientTypeDao();
     private static final ClientDao CLIENT_DAO = new ClientDao();
     private static final String CLIENT_TABLE = "clients";
 

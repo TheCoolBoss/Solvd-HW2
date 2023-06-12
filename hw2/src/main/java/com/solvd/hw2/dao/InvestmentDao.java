@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.solvd.hw2.CustomPool;
 import com.solvd.hw2.dao.abstracts.Dao;
 import com.solvd.hw2.models.Investment;
 
@@ -51,6 +53,7 @@ public class InvestmentDao extends Dao
                 ret.add(new Investment(newId, amount, bank));
             }
             
+            CustomPool.closeConn();
             return ret;
         }
 
