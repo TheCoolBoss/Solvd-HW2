@@ -1,6 +1,7 @@
 package com.solvd.hw2.jaxb;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 import javax.xml.bind.JAXBException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -39,13 +40,20 @@ public class JaxbMain
             + "Type name: " + expTest.getExperimentType().getTypeName()
             );
 
-
         Investment testInvestment = expTest.getInvestment();
         LOGGER.info("Exp investment info:\n" + 
             "Amount: " + testInvestment.getAmount() + "\n"
             + "Client: " + testInvestment.getClient().getClientType().getClientTypeName() + " " 
             + testInvestment.getClient().getName()
             );
+
+        LOGGER.info("Scientists:");
+        List<Scientist> scientists = expTest.getScientists();
+        scientists.forEach((Scientist scientist) -> 
+        {
+            LOGGER.info(scientist.getFirstName() + " " + scientist.getLastName());
+            LOGGER.info("Degree " + scientist.getDegree().getDegreeName() + " of id " + scientist.getDegree().getId());
+        });
 
     }    
 }

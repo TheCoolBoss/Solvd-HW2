@@ -1,7 +1,9 @@
 package com.solvd.hw2.models;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import com.solvd.hw2.models.abstracts.Model;
 
+@XmlRootElement (name="degree")
 public class Degree extends Model
 {
     private static final String DEGREE_ID_COL = "degreeId";
@@ -12,6 +14,8 @@ public class Degree extends Model
     private String degreeName;
     private Integer numOfYears;
 
+    public Degree(){}
+    
     public Degree(Integer id, String degreeName, Integer numOfYears) 
     {
         this.id = id;

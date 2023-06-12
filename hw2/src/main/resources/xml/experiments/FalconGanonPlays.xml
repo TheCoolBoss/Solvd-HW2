@@ -22,4 +22,26 @@
             </clientType>
         </client>
     </investment>
+    <scientists>
+        <scientist>
+            <id>0</id>
+            <firstName>Captain</firstName>
+            <lastName>Falcon</lastName>
+            <degree>
+                <id>7</id>
+                <degreeName>F-Zero</degreeName>
+                <numOfYears>33</numOfYears>
+            </degree>
+        </scientist>
+        <scientist>
+            <id>1</id>
+            <firstName>Ganondorf</firstName>
+            <lastName> </lastName>
+            <degree>
+                <id>3</id>
+                <degreeName>Power</degreeName>
+                <numOfYears>3</numOfYears>
+            </degree>
+        </scientist>
+    </scientists>
 </experiment>

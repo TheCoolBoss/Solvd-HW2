@@ -2,8 +2,15 @@ package com.solvd.hw2.models;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import com.solvd.hw2.models.abstracts.Model;
 
+
+@XmlRootElement (name="scientist")
+@XmlAccessorType (XmlAccessType.FIELD)
 public class Scientist extends Model
 {   
     private static final String ID_COL = "scientistId";
@@ -16,6 +23,8 @@ public class Scientist extends Model
     private String lastName;
     private Degree degree;
     private List<Experiment> experiments;
+
+    public Scientist(){}
 
     public Scientist(Integer id, String firstName, String lastName, Degree degree) 
     {
