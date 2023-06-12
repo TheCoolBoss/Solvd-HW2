@@ -1,64 +1,56 @@
 package com.solvd.hw2.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import com.solvd.hw2.dao.abstracts.Dao;
+import com.solvd.hw2.models.Institution;
 
-public class InstitutionsDao 
+public class InstitutionsDao extends Dao
 {
     private static final Logger LOGGER = LogManager.getLogger("Institution DAO");
-    private final String INSTITUTION_TABLE;
+    private static final String INSTITUTION_TABLE = "institutions";
+    private static final String ID_COL = "institutionId";
+    private static final String NAME_COL = "intstitutionName";
 
-    public InstitutionsDao(String institutionTable)
-    {
-        INSTITUTION_TABLE = institutionTable;
-    }
-
-    public void make(Connection c, String name)
+    public List<Institution> select(ArrayList<String> fields, Institution criteriaVals, String operator)
     {
         try
         {
-            PreparedStatement newInst = c.prepareStatement("insert into " + INSTITUTION_TABLE + " (institutionName) values (?)");
-            newInst.setString(1, name);
-            newInst.executeQuery();
+            ArrayList<Institution> ret = new ArrayList<Institution>();
+            ResultSet results = getSelectResults(fields, criteriaVals, INSTITUTION_TABLE, operator);
+
+            while (results.next())
+            {
+                Integer newId = null;
+                String newName = null;
+
+                for (int i = 1; i <= results.getMetaData().getColumnCount(); i++)
+                {
+                    if (results.getMetaData().getColumnLabel(i).equals(ID_COL))
+                    {
+                        newId = results.getInt(i);
+                    }
+
+                    else if (results.getMetaData().getColumnLabel(i).equals(NAME_COL))
+                    {
+                        newName = results.getString(i);
+                    }
+                }
+
+                ret.add(new Institution(newId, newName));
+            }
+            
+            return ret;
         }
 
         catch (SQLException sqle)
         {
             LOGGER.error(sqle.getMessage());
-        }
-    }
-
-    //TODO: add criteria
-    public void update(Connection c, String newName)
-    {
-        try
-        {
-            PreparedStatement updatedInst = c.prepareStatement("update " + INSTITUTION_TABLE + " set institutionName = ?");
-            updatedInst.setString(1, newName);
-            updatedInst.executeUpdate();
-        }
-
-        catch (SQLException sqle)
-        {
-            LOGGER.error(sqle.getMessage());
-        }
-    }
-
-    public void delete(Connection c, int idToDelete)
-    {
-        try
-        {
-            PreparedStatement removedInst = c.prepareStatement("delete from " + INSTITUTION_TABLE + " where institutionId = ?");
-            removedInst.setInt(1, idToDelete);
-            removedInst.executeQuery();
-        }
-
-        catch (SQLException sqle)
-        {
-            LOGGER.error(sqle.getMessage());
+            return null;
         }
     }
 }

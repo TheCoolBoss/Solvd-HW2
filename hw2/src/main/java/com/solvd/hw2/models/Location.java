@@ -1,8 +1,8 @@
 package com.solvd.hw2.models;
 
-import java.util.ArrayList;
+import com.solvd.hw2.models.abstracts.Model;
 
-public class Location 
+public class Location extends Model
 {
     private static final String ID_COL = "locId";
     private static final String CITY_COL = "city";
@@ -20,52 +20,26 @@ public class Location
         this.country = country;
     }
 
-
-    public ArrayList<Object> getVals()
+    protected void populateFieldsAndVals()
     {
-        ArrayList<Object> ret = new ArrayList<Object>();
-
         if (id != null)
         {
-            ret.add(id);
+            vals.add(id);
+            fields.add(ID_COL);
         }
 
         if (city != null)
         {
-            ret.add(city);
+            vals.add(city);
+            fields.add(CITY_COL);
         }
 
         if (country != null)
         {
-            ret.add(city);
+            vals.add(country);
+            fields.add(COUNTRY_COL);
         }
-
-        return ret;
     }
-    
-
-    public ArrayList<String> getFields()
-    {
-        ArrayList<String> toRet = new ArrayList<String>();
-        
-        if (id != null)
-        {
-            toRet.add(ID_COL);
-        }
-
-        if (city != null)
-        {
-            toRet.add(CITY_COL);
-        }
-
-        if (country != null)
-        {
-            toRet.add(CITY_COL);
-        }
-
-        return toRet;
-    }
-
 
     public Integer getId() 
     {

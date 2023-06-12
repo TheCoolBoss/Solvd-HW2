@@ -1,12 +1,12 @@
 package com.solvd.hw2.models;
 
-import java.util.ArrayList;
 import com.solvd.hw2.models.abstracts.Model;
 
 public class ClientType extends Model
 {
     private static final String ID_COL = "clientTypeId";
     private static final String NAME_COL = "clientTypeName";
+
     private Integer id;
     private String clientTypeName;
 
@@ -14,43 +14,23 @@ public class ClientType extends Model
     {
         this.id = id;
         this.clientTypeName = clientTypeName;
+        populateFieldsAndVals();
     }
 
-
-    public ArrayList<Object> getVals()
+    protected void populateFieldsAndVals()
     {
-        ArrayList<Object> ret = new ArrayList<Object>();
-
         if (id != null)
         {
-            ret.add(id);
+            vals.add(id);
+            fields.add(ID_COL);
         }
 
         if (clientTypeName != null)
         {
-            ret.add(clientTypeName);
+            vals.add(clientTypeName);
+            fields.add(NAME_COL);
         }
-
-        return ret;
     }
-    
-    public ArrayList<String> getFields()
-    {
-        ArrayList<String> toRet = new ArrayList<String>();
-        if (id != null)
-        {
-            toRet.add(ID_COL);
-        }
-
-        if (clientTypeName != null)
-        {
-            toRet.add(NAME_COL);
-        }
-
-        return toRet;
-    }
-
-
 
     public Integer getId() 
     {

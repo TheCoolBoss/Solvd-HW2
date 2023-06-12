@@ -13,10 +13,10 @@ import com.solvd.hw2.models.ClientType;
 public class ClientDao extends Dao
 {
     private static final Logger LOGGER = LogManager.getLogger("Client DAO");
-    private final String CLIENT_TABLE = "clients";
-    private final String ID_COL = "clientId";
-    private final String NAME_COL = "clientName";
-    private final String TYPE_COL = "clientTypeId";
+    private static final String CLIENT_TABLE = "clients";
+    private static final String ID_COL = "clientId";
+    private static final String NAME_COL = "clientName";
+    private static final String TYPE_COL = "clientTypeId";
 
     public List<Client> select(ArrayList<String> fields, Client criteriaVals, String operator)
     {

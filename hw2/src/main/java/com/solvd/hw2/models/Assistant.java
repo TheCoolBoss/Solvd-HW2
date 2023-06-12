@@ -1,22 +1,56 @@
 package com.solvd.hw2.models;
 
-public class Assistant 
+import com.solvd.hw2.models.abstracts.Model;
+
+public class Assistant extends Model
 {
-    private int id;
+    private static final String ID_COL = "assistantId";
+    private static final String FIRST_NAME_COL = "firstName";
+    private static final String LAST_NAME__COL = "lastName";
+    private static final String ASSISTEE_COL = "assisteeId";
+
+    private Integer id;
     private String firstName;
     private String lastName;
-    Scientist assistee;
+    private Scientist assistee;
 
-
-    public Assistant(int id, String firstName, String lastName, Scientist assistee)
+    public Assistant(Integer id, String firstName, String lastName, Scientist assistee)
     {
         this.id= id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.assistee = assistee;
+        populateFieldsAndVals();
     }
 
-    public int getId() 
+    protected void populateFieldsAndVals()
+    {
+        if (id != null)
+        {
+            vals.add(id);
+            fields.add(ID_COL);
+        }
+
+        if (firstName != null)
+        {
+            vals.add(firstName);
+            fields.add(FIRST_NAME_COL);
+        }
+
+        if (lastName != null)
+        {
+            vals.add(lastName);
+            fields.add(LAST_NAME__COL);
+        }
+
+        if (assistee != null)
+        {
+            vals.add(assistee.getId());
+            fields.add(ASSISTEE_COL);
+        }
+    }
+    
+    public Integer getId() 
     {
         return id;
     }
@@ -32,7 +66,7 @@ public class Assistant
     }
 
 
-    public void setId(int id) 
+    public void setId(Integer id) 
     {
         this.id = id;
     }

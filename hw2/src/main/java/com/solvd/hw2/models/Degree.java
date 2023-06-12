@@ -1,6 +1,5 @@
 package com.solvd.hw2.models;
 
-import java.util.ArrayList;
 import com.solvd.hw2.models.abstracts.Model;
 
 public class Degree extends Model
@@ -18,55 +17,29 @@ public class Degree extends Model
         this.id = id;
         this.degreeName = degreeName;
         this.numOfYears = numOfYears;
+        populateFieldsAndVals();
     }
 
-
-    public ArrayList<Object> getVals()
+    protected void populateFieldsAndVals()
     {
-        ArrayList<Object> ret = new ArrayList<Object>();
-
         if (id != null)
         {
-            ret.add(id);
-        }
-        
-        if (degreeName != null)
-        {
-            ret.add(degreeName);
-        }
-
-        if (numOfYears != null)
-        {
-            ret.add(numOfYears);
-        }
-
-        return ret;
-    }
-    
-    public ArrayList<String> getFields()
-    {
-        ArrayList<String> toRet = new ArrayList<String>();
-
-        if (id != null)
-        {
-            toRet.add(DEGREE_ID_COL);
+            vals.add(id);
+            fields.add(DEGREE_ID_COL);
         }
 
         if (degreeName != null)
         {
-            toRet.add(DEGREE_NAME_COL);
+            vals.add(degreeName);
+            fields.add(DEGREE_NAME_COL);
         }
 
         if (numOfYears != null)
         {
-            toRet.add(YEAR_COL);
+            vals.add(numOfYears);
+            fields.add(YEAR_COL);
         }
-
-        return toRet;
     }
-
-
-
 
     public int getId() 
     {

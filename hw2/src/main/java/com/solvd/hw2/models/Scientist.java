@@ -1,31 +1,65 @@
 package com.solvd.hw2.models;
 
+import java.util.ArrayList;
 import java.util.List;
+import com.solvd.hw2.models.abstracts.Model;
 
-public class Scientist 
-{
-    private int id;
+public class Scientist extends Model
+{   
+    private static final String ID_COL = "scientistId";
+    private static final String FIRST_NAME_COL = "firstName";
+    private static final String LAST_NAME_COL = "lastName";
+    private static final String DEGREE_COL = "degreeId"; 
+
+    private Integer id;
     private String firstName;
     private String lastName;
     private Degree degree;
     private List<Experiment> experiments;
 
-    public Scientist(int id, String firstName, String lastName, Degree degree, List<Experiment> experiments) 
+    public Scientist(Integer id, String firstName, String lastName, Degree degree) 
     {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.degree = degree;
-        this.experiments = experiments;
+        experiments = new ArrayList<Experiment>();
     }
 
+    
+    protected void populateFieldsAndVals()
+    {
+        if (id != null)
+        {
+            vals.add(id);
+            fields.add(ID_COL);
+        }
 
-    public int getId() 
+        if (firstName != null)
+        {
+            vals.add(firstName);
+            fields.add(FIRST_NAME_COL);
+        }
+
+        if (lastName != null)
+        {
+            vals.add(lastName);
+            fields.add(LAST_NAME_COL);
+        }
+
+        if (degree != null)
+        {
+            vals.add(degree.getId());
+            fields.add(DEGREE_COL);
+        }
+    }
+
+    public Integer getId() 
     {
         return id;
     }
 
-    public void setId(int id) 
+    public void setId(Integer id) 
     {
         this.id = id;
     }
@@ -69,8 +103,4 @@ public class Scientist
     {
         this.experiments = experiments;
     }
-
-
-
-
 }

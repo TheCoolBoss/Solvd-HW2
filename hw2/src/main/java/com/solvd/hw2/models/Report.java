@@ -1,24 +1,51 @@
 package com.solvd.hw2.models;
 
-public class Report 
+import com.solvd.hw2.models.abstracts.Model;
+
+public class Report extends Model
 {
-    private int id;
+    private static final String ID_COL = "locId";
+    private static final String NAME_COL = "reportName";
+    private static final String LINK_COL = "link";
+
+    private Integer id;
     private String name;
     private String link;
 
-    public Report(int id, String name, String link) 
+    public Report(Integer id, String name, String link) 
     {
         this.id = id;
         this.name = name;
         this.link = link;
     }
 
-    public int getId() 
+    protected void populateFieldsAndVals()
+    {
+        if (id != null)
+        {
+            vals.add(id);
+            fields.add(ID_COL);
+        }
+
+        if (name != null)
+        {
+            vals.add(name);
+            fields.add(NAME_COL);
+        }
+
+        if (link != null)
+        {
+            vals.add(link);
+            fields.add(LINK_COL);
+        }
+    }
+
+    public Integer getId() 
     {
         return id;
     }
 
-    public void setId(int id) 
+    public void setId(Integer id) 
     {
         this.id = id;
     }

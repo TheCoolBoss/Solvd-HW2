@@ -1,14 +1,20 @@
 package com.solvd.hw2.models;
 
-//Does not include a col added from part 2's update
-public class Lab 
+import com.solvd.hw2.models.abstracts.Model;
+
+public class Lab extends Model
 {
-    private int id;
+    private static final String ID_COL = "labId";
+    private static final String NAME_COL = "labName";
+    private static final String LOCATION_COL = "locationId";
+    private static final String INST_COL = "institutionId";
+
+    private Integer id;
     private String name;
     private Location location;
     private Institution institution;
 
-    public Lab(int id, String name, Location location, Institution institution) 
+    public Lab(Integer id, String name, Location location, Institution institution) 
     {
         this.id = id;
         this.name = name;
@@ -16,13 +22,39 @@ public class Lab
         this.institution = institution;
     }
 
+    protected void populateFieldsAndVals()
+    {
+        if (id != null)
+        {
+            vals.add(id);
+            fields.add(ID_COL);
+        }
 
-    public int getId() 
+        if (name != null)
+        {
+            vals.add(name);
+            fields.add(NAME_COL);
+        }
+
+        if (location != null)
+        {
+            vals.add(location);
+            fields.add(LOCATION_COL);
+        }
+
+        if (institution != null)
+        {
+            vals.add(institution);
+            fields.add(INST_COL);
+        }
+    }
+    
+    public Integer getId() 
     {
         return id;
     }
 
-    public void setId(int id) 
+    public void setId(Integer id) 
     {
         this.id = id;
     }

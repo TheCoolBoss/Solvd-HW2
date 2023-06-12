@@ -1,34 +1,63 @@
 package com.solvd.hw2.models;
 
-public class Investment 
+import com.solvd.hw2.models.abstracts.Model;
+
+public class Investment extends Model
 {
-    private int id;
-    private double amount;
+    private static final String ID_COL = "investmentId";
+    private static final String AMOUNT_COL = "amount";
+    private static final String BANK_COL = "bank";
+
+    private Integer id;
+    private Double amount;
     private String bank;
 
-    public Investment(int id, double amount, String bank) 
+    public Investment(Integer id, Double amount, String bank) 
     {
         this.id = id;
         this.amount = amount;
         this.bank = bank;
+        populateFieldsAndVals();
     }
 
-    public int getId() 
+
+    protected void populateFieldsAndVals()
+    {
+        if (id != null)
+        {
+            vals.add(id);
+            fields.add(ID_COL);
+        }
+
+        if (amount != null)
+        {
+            vals.add(amount);
+            fields.add(AMOUNT_COL);
+        }
+
+        if (bank != null)
+        {
+            vals.add(bank);
+            fields.add(BANK_COL);
+        }
+    }
+
+    public Integer getId() 
     {
         return id;
     }
 
-    public void setId(int id) 
+    public void setId(Integer id) 
     {
         this.id = id;
     }
 
-    public double getAmount() 
+    public Double getAmount() 
     {
         return amount;
     }
 
-    public void setAmount(double amount) 
+    public void setAmount(Double amount) 
     {
         this.amount = amount;
     }

@@ -1,70 +1,63 @@
 package com.solvd.hw2.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import com.solvd.hw2.dao.abstracts.Dao;
+import com.solvd.hw2.models.Investment;
 
-
-//Includes a col that is deleted via queries from 2nd part
-public class InvestmentDao
+public class InvestmentDao extends Dao
 {
     private static final Logger LOGGER = LogManager.getLogger("Investment DAO");
-    private final String INVESTMENTS_TABLE;
+    private static final String INVESTMENTS_TABLE = "investments";
+    private static final String ID_COL = "investmentId";
+    private static final String AMOUNT_COL = "amount";
+    private static final String BANK_COL = "bank";
 
-    public InvestmentDao(String investmentsTable)
-    {
-        INVESTMENTS_TABLE = investmentsTable;
-    }
-
-    public void make(Connection c, double amount, int clientId, String bank)
+    public List<Investment> select(ArrayList<String> fields, Investment criteriaVals, String operator)
     {
         try
         {
-            PreparedStatement newInvestment = c.prepareStatement("insert into " + INVESTMENTS_TABLE + " (amount, clientId, bank) values (?, ?, ?)");
-            newInvestment.setDouble(1, amount);
-            newInvestment.setInt(2, clientId);
-            newInvestment.setString(3, bank);
-            newInvestment.executeUpdate();
+            ArrayList<Investment> ret = new ArrayList<Investment>();
+            ResultSet results = getSelectResults(fields, criteriaVals, INVESTMENTS_TABLE, operator);
+
+            while (results.next())
+            {
+                Integer newId = null;
+                Double amount = null;
+                String bank = null;
+
+                for (int i = 1; i <= results.getMetaData().getColumnCount(); i++)
+                {
+                    if (results.getMetaData().getColumnLabel(i).equals(ID_COL))
+                    {
+                        newId = results.getInt(i);
+                    }
+
+                    else if (results.getMetaData().getColumnLabel(i).equals(AMOUNT_COL))
+                    {
+                        amount = results.getDouble(i);
+                    }
+
+                    else if (results.getMetaData().getColumnLabel(i).equals(BANK_COL))
+                    {
+                        bank = results.getString(i);
+                    }
+                }
+
+                ret.add(new Investment(newId, amount, bank));
+            }
+            
+            return ret;
         }
 
         catch (SQLException sqle)
         {
             LOGGER.error(sqle.getMessage());
-        }
-    }
-
-    //TODO: add criteria
-    public void update(Connection c, double newAmount, int newClientId, String newBank)
-    {
-        try
-        {
-            PreparedStatement updatedInvestment = c.prepareStatement("update " + INVESTMENTS_TABLE + " set amount = ?, set clientId = ?, set bank = ?");
-            updatedInvestment.setDouble(1, newAmount);
-            updatedInvestment.setInt(2, newClientId);
-            updatedInvestment.setString(3, newBank);
-            updatedInvestment.executeQuery();
-        }
-
-        catch (SQLException sqle)
-        {
-            LOGGER.error(sqle.getMessage());
-        }
-    }
-
-    public void delete(Connection c, int idToDelete)
-    {
-        try
-        {
-            PreparedStatement removedInvestment = c.prepareStatement("delete from " + INVESTMENTS_TABLE + " where investmentId = ?");
-            removedInvestment.setInt(1, idToDelete);
-            removedInvestment.executeQuery();
-        }
-
-        catch (SQLException sqle)
-        {
-            LOGGER.error(sqle.getMessage());
+            return null;
         }
     }
 }
