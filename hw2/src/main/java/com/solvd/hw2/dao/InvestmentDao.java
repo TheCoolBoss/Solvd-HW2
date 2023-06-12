@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.solvd.hw2.dao.abstracts.Dao;
+import com.solvd.hw2.models.Client;
 import com.solvd.hw2.models.Investment;
 
 public class InvestmentDao extends Dao
@@ -16,6 +17,7 @@ public class InvestmentDao extends Dao
     private static final String ID_COL = "investmentId";
     private static final String AMOUNT_COL = "amount";
     private static final String BANK_COL = "bank";
+    private static final String INVESTOR_COL = "clientId";
 
     public List<Investment> select(ArrayList<String> fields, Investment criteriaVals, String operator)
     {
@@ -29,6 +31,7 @@ public class InvestmentDao extends Dao
                 Integer newId = null;
                 Double amount = null;
                 String bank = null;
+                Client client = new Client(null, null, null);
 
                 for (int i = 1; i <= results.getMetaData().getColumnCount(); i++)
                 {
@@ -46,9 +49,15 @@ public class InvestmentDao extends Dao
                     {
                         bank = results.getString(i);
                     }
+
+                    else if (results.getMetaData().getColumnLabel(i).equals(INVESTOR_COL))
+                    {
+                        client.setId(results.getInt(i));
+                    }
+
                 }
 
-                ret.add(new Investment(newId, amount, bank));
+                ret.add(new Investment(newId, amount, bank, client));
             }
             
             return ret;

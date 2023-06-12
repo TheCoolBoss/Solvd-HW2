@@ -8,8 +8,8 @@
                 <xs:element name="id" type="xs:integer"/>
                 <xs:element name="name" type="xs:string"/>
                 <xs:element name="status" type="xs:string"/>
-                <xs:element name="start" type="xs:date"/>
-                <xs:element name="end" type="xs:date"/>
+                <xs:element name="startDate" type="xs:date"/>
+                <xs:element name="endDate" type="xs:date"/>
                 <xs:element name="type">
                     <xs:complexType>
                         <xs:sequence>

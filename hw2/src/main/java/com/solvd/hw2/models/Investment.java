@@ -1,22 +1,29 @@
 package com.solvd.hw2.models;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import com.solvd.hw2.models.abstracts.Model;
 
+@XmlRootElement (name="investment")
 public class Investment extends Model
 {
     private static final String ID_COL = "investmentId";
     private static final String AMOUNT_COL = "amount";
     private static final String BANK_COL = "bank";
+    private static final String INVESTOR_COL = "clientId";
 
     private Integer id;
     private Double amount;
     private String bank;
+    private Client investor;
 
-    public Investment(Integer id, Double amount, String bank) 
+    public Investment(){}
+    
+    public Investment(Integer id, Double amount, String bank, Client investor) 
     {
         this.id = id;
         this.amount = amount;
         this.bank = bank;
+        this.investor = investor;
         populateFieldsAndVals();
     }
 
@@ -39,6 +46,12 @@ public class Investment extends Model
         {
             vals.add(bank);
             fields.add(BANK_COL);
+        }
+
+        if (investor != null)
+        {
+            vals.add(investor.getId());
+            fields.add(INVESTOR_COL);
         }
     }
 
@@ -71,4 +84,16 @@ public class Investment extends Model
     {
         this.bank = bank;
     }
+
+    public Client getClient() 
+    {
+        return investor;
+    }
+
+    public void setClient(Client investor) 
+    {
+        this.investor = investor;
+    }
+
+    
 }

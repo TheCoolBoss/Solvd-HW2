@@ -29,5 +29,23 @@ public class JaxbMain
         ClientType ct = clientTypeMaker.unmarshal();
         LOGGER.info("Type id: " + ct.getClientTypeId());
         LOGGER.info("Type name: " + ct.getClientTypeName());
+
+        ExperimentUnmarshaller expMaker = new ExperimentUnmarshaller("hw2/src/main/resources/xml/experiments/FalconGanonPlays.xml");
+        Experiment expTest = expMaker.unmarshal();
+        LOGGER.info("Exp id: " + expTest.getId());
+        LOGGER.info("Exp name: " + expTest.getName());
+        LOGGER.info("Exp dates: " + expTest.getStartDate() + " and " + expTest.getEndDate());
+        LOGGER.info("Exp type info:\n"
+            + "Type name: " + expTest.getExperimentType().getTypeName()
+            );
+
+
+        Investment testInvestment = expTest.getInvestment();
+        LOGGER.info("Exp investment info:\n" + 
+            "Amount: " + testInvestment.getAmount() + "\n"
+            + "Client: " + testInvestment.getClient().getClientType().getClientTypeName() + " " 
+            + testInvestment.getClient().getName()
+            );
+
     }    
 }

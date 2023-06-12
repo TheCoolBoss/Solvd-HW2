@@ -1,7 +1,10 @@
 package com.solvd.hw2.models;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import com.solvd.hw2.models.abstracts.Model;
 
+@XmlRootElement (name="experimentType")
 public class ExperimentType extends Model
 {
     private static final String ID_COL = "expTypeId";
@@ -9,6 +12,8 @@ public class ExperimentType extends Model
 
     private Integer id;
     private String typeName;
+
+    public ExperimentType(){}
 
     public ExperimentType(Integer id, String typeName) 
     {
@@ -38,6 +43,7 @@ public class ExperimentType extends Model
         return id;
     }
 
+    @XmlElement (name="experimentTypeId")
     public void setId(Integer id) 
     {
         this.id = id;
@@ -48,6 +54,7 @@ public class ExperimentType extends Model
         return typeName;
     }
 
+    @XmlElement (name="experimentTypeName")
     public void setTypeName(String typeName) 
     {
         this.typeName = typeName;
