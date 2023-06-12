@@ -1,68 +1,70 @@
 package com.solvd.hw2.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import com.solvd.hw2.dao.abstracts.Dao;
+import com.solvd.hw2.models.*;
 
-public class LabDao 
+public class LabDao extends Dao
 {
     private static final Logger LOGGER = LogManager.getLogger("Lab DAO");
-    private final String LAB_TABLE;
+    private static final String ID_COL = "labId";
+    private static final String NAME_COL = "labName";
+    private static final String LOCATION_COL = "locationId";
+    private static final String INST_COL = "institutionId";
+    private static final String LAB_TABLE = "labs";
 
-    public LabDao(String labTable)
-    {
-        LAB_TABLE = labTable;
-    }
-
-    public void make(Connection c, String name, int institutionId, int locationId)
+    public List<Lab> select(ArrayList<String> fields, Lab criteriaVals, String operator)
     {
         try
         {
-            PreparedStatement newLab = c.prepareStatement("insert into " + LAB_TABLE + " (labName, institutionId, locationId) values (?, ?, ?)");
-            newLab.setString(1, name);
-            newLab.setInt(2, institutionId);
-            newLab.setInt(3, locationId);
-            newLab.executeUpdate();
+            ArrayList<Lab> ret = new ArrayList<Lab>();
+            ResultSet results = getSelectResults(fields, criteriaVals, LAB_TABLE, operator);
+
+            while (results.next())
+            {
+                Integer newId = null;
+                String newName = null;
+                Location loc = new Location(null, null, null);
+                Institution inst = new Institution(null, null);
+
+                for (int i = 1; i <= results.getMetaData().getColumnCount(); i++)
+                {
+                    if (results.getMetaData().getColumnLabel(i).equals(ID_COL))
+                    {
+                        newId = results.getInt(i);
+                    }
+
+                    else if (results.getMetaData().getColumnLabel(i).equals(NAME_COL))
+                    {
+                        newName = results.getString(i);
+                    }
+
+                    else if (results.getMetaData().getColumnLabel(i).equals(LOCATION_COL))
+                    {
+                        loc.setId(results.getInt(i));
+                    }
+
+                    else if (results.getMetaData().getColumnLabel(i).equals(INST_COL))
+                    {
+                        inst.setId(results.getInt(i));
+                    }
+                }
+
+                ret.add(new Lab(newId, newName, loc, inst));
+            }
+            
+            return ret;
         }
 
         catch (SQLException sqle)
         {
             LOGGER.error(sqle.getMessage());
-        }
-    }
-
-    //TODO: add criteria
-    public void update(Connection c, String newName, int newInstId, int newLocationId)
-    {
-        try
-        {
-            PreparedStatement updatedLab = c.prepareStatement("update " + LAB_TABLE + " set labName = ?, institutionId = ?, locationId = ?");
-            updatedLab.setString(1, newName);
-            updatedLab.setInt(2, newInstId);
-            updatedLab.setInt(3, newLocationId);
-            updatedLab.executeQuery();
-        }
-
-        catch (SQLException sqle)
-        {
-            LOGGER.error(sqle.getMessage());
-        }
-    }
-
-    public void delete(Connection c, int idToDelete)
-    {
-        try
-        {
-            PreparedStatement removedLab = c.prepareStatement("delete from " + LAB_TABLE + " where labId = ?");
-            removedLab.setInt(1, idToDelete);
-            removedLab.executeQuery();
-        }
-
-        catch (SQLException sqle)
-        {
-            LOGGER.error(sqle.getMessage());
+            return null;
         }
     }
 }
