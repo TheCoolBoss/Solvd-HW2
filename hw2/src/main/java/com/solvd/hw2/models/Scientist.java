@@ -1,8 +1,5 @@
 package com.solvd.hw2.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,7 +19,6 @@ public class Scientist extends Model
     private String firstName;
     private String lastName;
     private Degree degree;
-    private List<Experiment> experiments;
 
     public Scientist(){}
 
@@ -32,7 +28,6 @@ public class Scientist extends Model
         this.firstName = firstName;
         this.lastName = lastName;
         this.degree = degree;
-        experiments = new ArrayList<Experiment>();
     }
 
     
@@ -101,15 +96,5 @@ public class Scientist extends Model
     public void setDegree(Degree degree) 
     {
         this.degree = degree;
-    }
-
-    public List<Experiment> getExperiments() 
-    {
-        return experiments;
-    }
-
-    public void setExperiments(List<Experiment> experiments) 
-    {
-        this.experiments = experiments;
     }
 }

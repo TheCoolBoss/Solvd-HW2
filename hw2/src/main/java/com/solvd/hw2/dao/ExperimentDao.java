@@ -40,7 +40,7 @@ public class ExperimentDao extends Dao
                 Date start = null;
                 Date end = null;
                 ExperimentType type = new ExperimentType(null, null);
-                Investment investment = new Investment(null, null, null);
+                Investment investment = new Investment(null, null, null, null);
                 Report report = new Report(null, null, null);
                 Lab lab = new Lab(null, null, null, null);
 
