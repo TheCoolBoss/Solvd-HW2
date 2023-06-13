@@ -1,6 +1,7 @@
 package com.solvd.hw2;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,7 +27,16 @@ public class CustomPool
         activeConns = new ArrayList<Connection>();
         idleConns = new ArrayList<Connection>();
         props = new Properties();
-        props.load(new FileInputStream("hw2/src/main/resources/db.properties"));
+        try
+        {
+            props.load(new FileInputStream("hw2/src/main/resources/db.properties"));
+        }
+
+        catch (FileNotFoundException fnfe)
+        {
+            props.load(new FileInputStream("/src/main/resources/db.properties"));
+        }
+
         url = props.getProperty("url");
         user = props.getProperty("user");
         pass = props.getProperty("pass");
