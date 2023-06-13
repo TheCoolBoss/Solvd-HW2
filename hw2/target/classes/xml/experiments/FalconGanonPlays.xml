@@ -4,12 +4,12 @@
     <id>0</id>
     <name>Best Captain Falcon and Ganondorf Plays</name>
     <status>Done</status>
-    <start>2023-01-01</start>
-    <end>2023-06-08</end>
-    <type>
+    <startDate>2023-01-01</startDate>
+    <endDate>2023-06-08</endDate>
+    <experimentType>
         <experimentTypeId>0</experimentTypeId>
         <experimentTypeName>Meme Montage</experimentTypeName>
-    </type>
+    </experimentType>
     <investment>
         <id>0</id>
         <amount>100.0</amount>
@@ -22,4 +22,26 @@
             </clientType>
         </client>
     </investment>
+    <scientists>
+        <scientist>
+            <id>0</id>
+            <firstName>Captain</firstName>
+            <lastName>Falcon</lastName>
+            <degree>
+                <id>7</id>
+                <degreeName>F-Zero</degreeName>
+                <numOfYears>33</numOfYears>
+            </degree>
+        </scientist>
+        <scientist>
+            <id>1</id>
+            <firstName>Ganondorf</firstName>
+            <lastName> </lastName>
+            <degree>
+                <id>3</id>
+                <degreeName>Power</degreeName>
+                <numOfYears>3</numOfYears>
+            </degree>
+        </scientist>
+    </scientists>
 </experiment>

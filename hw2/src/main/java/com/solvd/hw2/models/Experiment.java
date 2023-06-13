@@ -3,8 +3,16 @@ package com.solvd.hw2.models;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import com.solvd.hw2.jaxb.adapters.DateAdapter;
 import com.solvd.hw2.models.abstracts.Model;
 
+
+@XmlRootElement (name="experiment")
 public class Experiment extends Model
 {
     private static final String ID_COL = "experimentId";
@@ -28,6 +36,8 @@ public class Experiment extends Model
     private Lab lab;
     private List<Scientist> scientists;
 
+    public Experiment(){}
+    
     public Experiment(Integer id, String name, String status, Date startDate, Date endDate, ExperimentType experimentType,
             Investment investment, Report report, Lab lab) 
     {
@@ -135,6 +145,7 @@ public class Experiment extends Model
         return startDate;
     }
 
+    @XmlJavaTypeAdapter (DateAdapter.class)
     public void setStartDate(Date startDate) 
     {
         this.startDate = startDate;
@@ -145,6 +156,7 @@ public class Experiment extends Model
         return endDate;
     }
 
+    @XmlJavaTypeAdapter (DateAdapter.class)
     public void setEndDate(Date endDate) 
     {
         this.endDate = endDate;
@@ -195,6 +207,8 @@ public class Experiment extends Model
         return scientists;
     }
 
+    @XmlElementWrapper (name="scientists")
+    @XmlElement (name="scientist")
     public void setScientists(List<Scientist> scientists) 
     {
         this.scientists = scientists;

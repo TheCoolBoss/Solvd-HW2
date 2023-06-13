@@ -1,7 +1,9 @@
 package com.solvd.hw2.models;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import com.solvd.hw2.models.abstracts.Model;
 
+@XmlRootElement (name="client")
 public class Client extends Model
 {
     private static final String ID_COL = "clientId";
@@ -12,6 +14,8 @@ public class Client extends Model
     private String name;
     private ClientType clientType;
 
+    public Client(){}
+    
     public Client(Integer id, String name, ClientType type) 
     {
         this.id = id;
@@ -36,7 +40,7 @@ public class Client extends Model
 
         if (clientType != null)
         {
-            vals.add(clientType.getId());
+            vals.add(clientType.getClientTypeId());
             fields.add(TYPE_COL);
         }
     }
@@ -56,7 +60,6 @@ public class Client extends Model
         return clientType;
     }
 
-    
     public void setId(int id) 
     {
         this.id = id;
@@ -67,7 +70,8 @@ public class Client extends Model
         this.name = name;
     }
 
-    public void setClientTypeId(ClientType clientType) 
+    
+    public void setClientType(ClientType clientType) 
     {
         this.clientType = clientType;
     }
