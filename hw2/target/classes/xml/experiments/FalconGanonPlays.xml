@@ -10,17 +10,23 @@
         <experimentTypeId>0</experimentTypeId>
         <experimentTypeName>Meme Montage</experimentTypeName>
     </experimentType>
+    <report>
+        <reportId>100</reportId>
+        <reportName>Falcon and Ganon Report</reportName>
+        <link>falconganon.cpm/reports/report1</link>
+    </report>
     <investment>
         <id>0</id>
         <amount>100.0</amount>
         <client>
-            <id>0</id>
-            <name>Captain Falcon and Ganondorf</name>
+            <clientId>0</clientId>
+            <clientName>Captain Falcon and Ganondorf</clientName>
             <clientType>
                 <clientTypeId>1</clientTypeId>
                 <clientTypeName>Meme</clientTypeName>
             </clientType>
         </client>
+        <bank>Smash Bros Bank</bank>
     </investment>
     <scientists>
         <scientist>
@@ -44,4 +50,17 @@
             </degree>
         </scientist>
     </scientists>
+    <lab>
+        <labId>5</labId>
+        <labName>Best Plays</labName>
+        <location>
+            <locationId>2</locationId>
+            <city>Some city</city>
+            <country>Some country</country>
+        </location>
+        <institution>
+            <institutionId>15</institutionId>
+            <institutionName>Smash Bros</institutionName>
+        </institution>
+    </lab>
 </experiment>

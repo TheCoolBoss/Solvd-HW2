@@ -59,5 +59,12 @@ public class ExperimentType extends Model
     {
         this.typeName = typeName;
     }
+
+    public String toString()
+    {
+        return
+        "Experiment type " + typeName + ":\n"
+        + "Id: " + id;
+    }
     
 }

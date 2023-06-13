@@ -1,9 +1,13 @@
 package com.solvd.hw2.models;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import com.solvd.hw2.models.abstracts.Model;
 
 @XmlRootElement (name="investment")
+@XmlAccessorType (XmlAccessType.FIELD)
 public class Investment extends Model
 {
     private static final String ID_COL = "investmentId";
@@ -14,6 +18,8 @@ public class Investment extends Model
     private Integer id;
     private Double amount;
     private String bank;
+
+    @XmlElement (name="client")
     private Client investor;
 
     public Investment(){}
@@ -95,5 +101,12 @@ public class Investment extends Model
         this.investor = investor;
     }
 
-    
+    public String toString()
+    {
+        return
+        "Investment of " + bank + ":\n"
+        + "Amount: " + amount + "\n"
+        + "Investor:\n"
+        + investor;
+    }
 }

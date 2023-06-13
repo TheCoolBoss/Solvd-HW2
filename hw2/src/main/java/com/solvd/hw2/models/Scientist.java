@@ -97,4 +97,12 @@ public class Scientist extends Model
     {
         this.degree = degree;
     }
+
+    public String toString()
+    {
+        return
+        "Scientist " + firstName + " " + lastName + ":\n"
+        + "Id: " + id + "\n"
+        + "Degree: " + degree.getDegreeName();
+    }
 }

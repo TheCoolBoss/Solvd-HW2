@@ -92,4 +92,12 @@ public class Assistant extends Model
         this.assistee = assistee;
     }
 
+    public String toString()
+    {
+        return
+        "Assistant " + firstName + " " + lastName + ":\n"
+        + "Id: " + id + "\n"
+        + "Assisting: " + assistee.toString();
+    }
+
 }

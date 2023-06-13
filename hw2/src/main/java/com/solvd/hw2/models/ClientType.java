@@ -1,9 +1,12 @@
 package com.solvd.hw2.models;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import com.solvd.hw2.models.abstracts.Model;
 
 @XmlRootElement (name="clientType")
+@XmlAccessorType (XmlAccessType.FIELD)
 public class ClientType extends Model
 {
     private static final String ID_COL = "clientTypeId";
@@ -54,5 +57,12 @@ public class ClientType extends Model
     public void setClientTypeName(String clientTypeName) 
     {
         this.clientTypeName = clientTypeName;
+    }
+
+    public String toString()
+    {
+        return 
+        "Client type " + clientTypeName + ":\n"
+        + "Id: " + clientTypeId;
     }
 }

@@ -74,4 +74,11 @@ public class Degree extends Model
     {
         this.numOfYears = numOfYears;
     }
+
+    public String toString()
+    {
+        return
+        "Degree " + degreeName + ":\n"
+        + "Years required: " + numOfYears;
+    }
 }
