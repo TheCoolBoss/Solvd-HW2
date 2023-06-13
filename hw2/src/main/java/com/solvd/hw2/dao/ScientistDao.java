@@ -59,7 +59,7 @@ public class ScientistDao extends Dao
                 ret.add(new Scientist(newId, firstName, lastName, degree));
             }
             
-            CustomPool.closeConn();
+            CustomPool.releaseConn();
             return ret;
         }
 

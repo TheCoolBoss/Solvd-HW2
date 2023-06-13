@@ -35,5 +35,7 @@ public class Main
             LOGGER.info("Client name: " + client.getName());
             LOGGER.info("Client type: " + clientTypeOf2);
         }
+
+        CustomPool.closePool();
     }
 }

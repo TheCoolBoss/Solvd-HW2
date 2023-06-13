@@ -46,7 +46,7 @@ public class InstitutionsDao extends Dao
                 ret.add(new Institution(newId, newName));
             }
             
-            CustomPool.closeConn();
+            CustomPool.releaseConn();
             return ret;
         }
 

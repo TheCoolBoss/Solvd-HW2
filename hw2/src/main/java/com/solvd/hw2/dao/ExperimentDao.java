@@ -95,7 +95,7 @@ public class ExperimentDao extends Dao
                 ret.add(new Experiment(newId, name, status, start, end, type, investment, report, lab));
             }
             
-            CustomPool.closeConn();
+            CustomPool.releaseConn();
             return ret;
         }
 

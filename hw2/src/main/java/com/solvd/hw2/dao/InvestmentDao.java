@@ -62,7 +62,7 @@ public class InvestmentDao extends Dao
                 ret.add(new Investment(newId, amount, bank, client));
             }
             
-            CustomPool.closeConn();
+            CustomPool.releaseConn();
             return ret;
         }
 

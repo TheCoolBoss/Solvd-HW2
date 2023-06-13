@@ -53,7 +53,7 @@ public class LocationDao extends Dao
                 ret.add(new Location(newId, city, country));
             }
             
-            CustomPool.closeConn();
+            CustomPool.releaseConn();
             return ret;
         }
 
