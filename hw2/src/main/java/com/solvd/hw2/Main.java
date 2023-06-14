@@ -17,23 +17,11 @@ public class Main
         new CustomPool();
 
         ClientService cs = new ClientService();
-        ClientTypeService cts = new ClientTypeService();
-        List<Client> idOf3 = cs.getById(3);
         List<Client> typeIdOf2 = cs.getByTypeId(2);
-        String clientTypeOf2 = cts.getTypeNameById(2);
-
-        for (Client client : idOf3) 
-        {
-            LOGGER.info("Client id: " + client.getId());
-            LOGGER.info("Client name: " + client.getName());
-            LOGGER.info("Client type: " + cts.getTypeNameById(client.getClientType().getClientTypeId()));
-        }
 
         for (Client client : typeIdOf2) 
         {
-            LOGGER.info("Client id: " + client.getId());
-            LOGGER.info("Client name: " + client.getName());
-            LOGGER.info("Client type: " + clientTypeOf2);
+            LOGGER.info(client.toString());
         }
 
         CustomPool.closePool();

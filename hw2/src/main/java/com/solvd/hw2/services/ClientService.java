@@ -8,6 +8,7 @@ import com.solvd.hw2.models.ClientType;
 public class ClientService 
 {
     private static final ClientDao CLIENT_DAO = new ClientDao();
+    private static final ClientTypeService TYPE_SERVICE = new ClientTypeService();
     private static final String CLIENT_TABLE = "clients";
 
 
@@ -22,8 +23,7 @@ public class ClientService
         Client allFields = new Client(null, null, null);
         Client criteria = new Client(id, null, null);
 
-        List<Client> ret = CLIENT_DAO.select(allFields.getFields(), criteria, " = ");
-        return ret;
+        return doSelect(allFields, criteria);
     }
 
     public List<Client> getByTypeId(int typeId)
@@ -31,7 +31,16 @@ public class ClientService
         Client allFields = new Client(null, null, null);
         Client criteria = new Client(null, null, new ClientType(typeId, null));
 
-        List<Client> ret = CLIENT_DAO.select(allFields.getFields(), criteria, " = ");
+        return doSelect(allFields, criteria);
+    }
+
+    private List<Client> doSelect(Client fields, Client criteria)
+    {
+        List<Client> ret = CLIENT_DAO.select(fields.getFields(), criteria, " = ");
+        for (Client client : ret) 
+        {
+            client.getClientType().setClientTypeName(TYPE_SERVICE.getTypeNameById(client.getClientType().getClientTypeId()));
+        }
         return ret;
     }
 

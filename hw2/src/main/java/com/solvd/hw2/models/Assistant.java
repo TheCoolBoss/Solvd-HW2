@@ -14,6 +14,8 @@ public class Assistant extends Model
     private String lastName;
     private Scientist assistee;
 
+    public Assistant(){}
+    
     public Assistant(Integer id, String firstName, String lastName, Scientist assistee)
     {
         this.id= id;
