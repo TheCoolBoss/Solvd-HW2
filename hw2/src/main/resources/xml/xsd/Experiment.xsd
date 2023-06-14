@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:include schemaLocation="Investment.xsd"/>
+    <xs:include schemaLocation="Report.xsd"/>
+    <xs:include schemaLocation="Lab.xsd"/>
+    <xs:include schemaLocation="Scientist.xsd"/>
 
     <xs:element name="experiment">
         <xs:complexType>
@@ -10,7 +13,7 @@
                 <xs:element name="status" type="xs:string"/>
                 <xs:element name="startDate" type="xs:date"/>
                 <xs:element name="endDate" type="xs:date"/>
-                <xs:element name="type">
+                <xs:element name="experimentType">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="experimentTypeId" type="xs:integer"/>
@@ -18,7 +21,16 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
+                <xs:element name="report" type="report"/>
                 <xs:element name="investment" type="investment"/>
+                <xs:element name="scientists">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name ="scientist" type="scientist" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="lab" type="lab"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

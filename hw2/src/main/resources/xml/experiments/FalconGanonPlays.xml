@@ -34,7 +34,7 @@
             <firstName>Captain</firstName>
             <lastName>Falcon</lastName>
             <degree>
-                <id>7</id>
+                <degreeId>7</degreeId>
                 <degreeName>F-Zero</degreeName>
                 <numOfYears>33</numOfYears>
             </degree>
@@ -44,7 +44,7 @@
             <firstName>Ganondorf</firstName>
             <lastName> </lastName>
             <degree>
-                <id>3</id>
+                <degreeId>3</degreeId>
                 <degreeName>Power</degreeName>
                 <numOfYears>3</numOfYears>
             </degree>
@@ -53,14 +53,14 @@
     <lab>
         <labId>5</labId>
         <labName>Best Plays</labName>
+        <institution>
+            <institutionId>15</institutionId>
+            <institutionName>Smash Bros</institutionName>
+        </institution>
         <location>
             <locationId>2</locationId>
             <city>Some city</city>
             <country>Some country</country>
         </location>
-        <institution>
-            <institutionId>15</institutionId>
-            <institutionName>Smash Bros</institutionName>
-        </institution>
     </lab>
 </experiment>
