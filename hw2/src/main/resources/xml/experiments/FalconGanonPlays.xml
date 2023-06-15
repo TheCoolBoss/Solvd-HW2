@@ -42,7 +42,7 @@
         <scientist>
             <id>1</id>
             <firstName>Ganondorf</firstName>
-            <lastName> </lastName>
+            <lastName></lastName>
             <degree>
                 <degreeId>3</degreeId>
                 <degreeName>Power</degreeName>

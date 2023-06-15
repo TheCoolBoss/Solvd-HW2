@@ -5,10 +5,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.solvd.hw2.models.abstracts.Model;
 
 @XmlRootElement (name="location")
 @XmlAccessorType (XmlAccessType.FIELD)
+@JsonRootName ("location")
 public class Location extends Model
 {
     private static final String ID_COL = "locId";
@@ -51,6 +54,7 @@ public class Location extends Model
         }
     }
 
+    @JsonGetter ("locationId")
     public Integer getId() 
     {
         return id;

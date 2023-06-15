@@ -4,10 +4,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.solvd.hw2.models.abstracts.Model;
 
 @XmlRootElement (name="client")
 @XmlAccessorType (XmlAccessType.FIELD)
+@JsonRootName ("client")
 public class Client extends Model
 {
     private static final String ID_COL = "clientId";
@@ -53,11 +56,13 @@ public class Client extends Model
         }
     }
 
+    @JsonGetter ("clientId")
     public int getId() 
     {
         return id;
     }
 
+    @JsonGetter ("clientName")
     public String getName() 
     {
         return name;

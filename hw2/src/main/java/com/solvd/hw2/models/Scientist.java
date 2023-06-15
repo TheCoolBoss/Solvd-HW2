@@ -3,11 +3,15 @@ package com.solvd.hw2.models;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.solvd.hw2.models.abstracts.Model;
 
 
 @XmlRootElement (name="scientist")
 @XmlAccessorType (XmlAccessType.FIELD)
+@JsonRootName (value="scientist")
+@JsonInclude (JsonInclude.Include.NON_NULL)
 public class Scientist extends Model
 {   
     private static final String ID_COL = "scientistId";

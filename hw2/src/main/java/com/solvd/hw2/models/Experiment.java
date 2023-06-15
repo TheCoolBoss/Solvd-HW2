@@ -8,11 +8,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.solvd.hw2.jaxb.adapters.DateAdapter;
 import com.solvd.hw2.models.abstracts.Model;
 
 
 @XmlRootElement (name="experiment")
+@JsonInclude (JsonInclude.Include.NON_NULL)
 public class Experiment extends Model
 {
     private static final String ID_COL = "experimentId";
@@ -110,6 +113,7 @@ public class Experiment extends Model
         }
     }
 
+    @JsonGetter ("id")
     public Integer getId() 
     {
         return id;
@@ -120,6 +124,7 @@ public class Experiment extends Model
         this.id = id;
     }
 
+    @JsonGetter ("name")
     public String getName() 
     {
         return name;
@@ -130,6 +135,7 @@ public class Experiment extends Model
         this.name = name;
     }
 
+    @JsonGetter ("status")
     public String getStatus() 
     {
         return status;
@@ -140,6 +146,7 @@ public class Experiment extends Model
         this.status = status;
     }
 
+    @JsonGetter ("startDate")
     public Date getStartDate() 
     {
         return startDate;
@@ -151,6 +158,7 @@ public class Experiment extends Model
         this.startDate = startDate;
     }
 
+    @JsonGetter ("endDate")
     public Date getEndDate() 
     {
         return endDate;
@@ -202,6 +210,7 @@ public class Experiment extends Model
         this.lab = lab;
     }
 
+    @JsonGetter ("scientists")
     public List<Scientist> getScientists() 
     {
         return scientists;
@@ -214,12 +223,25 @@ public class Experiment extends Model
         this.scientists = scientists;
     }
 
+    private String printScientists()
+    {
+        String ret = "";
+        for (Scientist scientist : scientists)
+        {
+            ret = ret.concat(scientist.toString() + "\n");
+        }
+
+        return ret;
+
+    }
     public String toString()
     {
         return
         "Experiment " + name + " of type " + experimentType.getTypeName() + ":\n"
         + "Status: " + status + "\n"
         + "Dates: " + startDate + " to " + endDate + "\n"
+        + "Scientists:\n"
+        + printScientists()
         + "Report: " + report + "\n"
         + "Investment: " + investment + "\n"
         + "Lab: " + lab;

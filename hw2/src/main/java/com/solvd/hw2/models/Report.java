@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.solvd.hw2.models.abstracts.Model;
 
 @XmlRootElement (name="report")
@@ -53,6 +54,7 @@ public class Report extends Model
         }
     }
 
+    @JsonGetter ("reportId")
     public Integer getId() 
     {
         return id;
@@ -63,6 +65,7 @@ public class Report extends Model
         this.id = id;
     }
 
+    @JsonGetter ("reportName")
     public String getName() 
     {
         return name;
@@ -73,6 +76,7 @@ public class Report extends Model
         this.name = name;
     }
 
+    @JsonGetter ("link")
     public String getLink() 
     {
         return link;

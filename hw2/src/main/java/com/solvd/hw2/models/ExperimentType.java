@@ -2,9 +2,12 @@ package com.solvd.hw2.models;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.solvd.hw2.models.abstracts.Model;
 
 @XmlRootElement (name="experimentType")
+@JsonRootName ("experimentType")
 public class ExperimentType extends Model
 {
     private static final String ID_COL = "expTypeId";
@@ -38,6 +41,7 @@ public class ExperimentType extends Model
         }
     }
     
+    @JsonGetter ("experimentTypeId")
     public Integer getId() 
     {
         return id;
@@ -49,6 +53,7 @@ public class ExperimentType extends Model
         this.id = id;
     }
 
+    @JsonGetter ("experimentTypeName")
     public String getTypeName() 
     {
         return typeName;
