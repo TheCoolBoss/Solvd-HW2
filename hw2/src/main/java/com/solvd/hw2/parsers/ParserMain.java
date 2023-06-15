@@ -32,7 +32,6 @@ public class ParserMain
         XmlValidator playsVal = new XmlValidator("hw2/src/main/resources/xml/xsd/Experiment.xsd");
         LOGGER.info("Validating " + FALCON_GANON_PLAYS);
 
-        //Currently having issues with using parser vals so just using JAXB after validation
         if (playsVal.check(FALCON_GANON_PLAYS))
         {
             LOGGER.info("Making experiment from xml.");
