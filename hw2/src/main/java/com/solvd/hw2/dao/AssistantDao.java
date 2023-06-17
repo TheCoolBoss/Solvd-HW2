@@ -63,7 +63,7 @@ public class AssistantDao extends Dao
                 ret.add(new Assistant(newId, firstName, lastName, newScientist));
             }
             
-            CustomPool.closeConn();
+            CustomPool.releaseConn();
             return ret;
         }
 

@@ -94,7 +94,6 @@ public class QueryGen
         query = query.concat(" from " + table);
         query = query.concat(condition);
 
-        LOGGER.info(query);
         PreparedStatement ret = makeStatement(query, vals);
 
         return ret;

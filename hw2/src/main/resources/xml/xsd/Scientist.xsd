@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="scientist" type="scientist"/>
+
+    <xs:complexType name="scientist">
+      <xs:sequence>
+        <xs:element name="id" type="xs:integer"/>
+        <xs:element name="firstName" type="xs:string"/>
+        <xs:element name="lastName" type="xs:string"/>
+        <xs:element name="degree">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="degreeId" type="xs:integer"/>
+              <xs:element name="degreeName" type="xs:string"/>
+              <xs:element name="numOfYears" type="xs:integer"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+
+
+</xs:schema>

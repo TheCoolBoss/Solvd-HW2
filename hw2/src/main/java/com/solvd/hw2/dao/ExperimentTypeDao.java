@@ -46,7 +46,7 @@ public class ExperimentTypeDao extends Dao
                 ret.add(new ExperimentType(newId, name));
             }
             
-            CustomPool.closeConn();
+            CustomPool.releaseConn();
             return ret;
         }
 

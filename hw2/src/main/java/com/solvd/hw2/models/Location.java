@@ -1,18 +1,31 @@
 package com.solvd.hw2.models;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.solvd.hw2.models.abstracts.Model;
 
+@XmlRootElement (name="location")
+@XmlAccessorType (XmlAccessType.FIELD)
+@JsonRootName ("location")
 public class Location extends Model
 {
     private static final String ID_COL = "locId";
     private static final String CITY_COL = "city";
     private static final String COUNTRY_COL = "country";
 
+    @XmlElement (name="locationId")
     private Integer id;
+
     private String city;
     private String country;
 
-
+    public Location(){}
+    
     public Location(Integer id, String city, String country) 
     {
         this.id = id;
@@ -41,6 +54,7 @@ public class Location extends Model
         }
     }
 
+    @JsonGetter ("locationId")
     public Integer getId() 
     {
         return id;
@@ -71,5 +85,10 @@ public class Location extends Model
         this.country = country;
     }
 
-    
+    public String toString()
+    {
+        return
+        "Location " + city + ", " + country + ":\n"
+        + "Id: " + id;
+    }
 }

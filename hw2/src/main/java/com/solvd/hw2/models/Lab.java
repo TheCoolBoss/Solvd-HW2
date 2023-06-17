@@ -1,7 +1,16 @@
 package com.solvd.hw2.models;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.solvd.hw2.models.abstracts.Model;
 
+@XmlRootElement (name="lab")
+@XmlAccessorType (XmlAccessType.FIELD)
+@JsonRootName("lab")
 public class Lab extends Model
 {
     private static final String ID_COL = "labId";
@@ -9,10 +18,16 @@ public class Lab extends Model
     private static final String LOCATION_COL = "locationId";
     private static final String INST_COL = "institutionId";
 
+    @XmlElement (name="labId")
     private Integer id;
+
+    @XmlElement (name="labName")
     private String name;
+    
     private Location location;
     private Institution institution;
+
+    public Lab(){}
 
     public Lab(Integer id, String name, Location location, Institution institution) 
     {
@@ -49,6 +64,7 @@ public class Lab extends Model
         }
     }
     
+    @JsonGetter ("labId")
     public Integer getId() 
     {
         return id;
@@ -59,6 +75,7 @@ public class Lab extends Model
         this.id = id;
     }
 
+    @JsonGetter ("labName")
     public String getName() 
     {
         return name;
@@ -89,6 +106,12 @@ public class Lab extends Model
         this.institution = institution;
     }
 
-
+    public String toString()
+    {
+        return
+        "Lab " + name + " of institution " + institution.getName() + ":\n"
+        + "Id: " + id + "\n"
+        + "Location: " + location.getCity() + ", " + location.getCountry();
+    }
 
 }

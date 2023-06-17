@@ -1,19 +1,35 @@
 package com.solvd.hw2.models;
 
 import java.util.ArrayList;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.solvd.hw2.models.abstracts.Model;
 
+@XmlRootElement (name="institution")
+@XmlAccessorType (XmlAccessType.FIELD)
+@JsonRootName("institution")
 public class Institution extends Model
 {
     private static final String ID_COL = "institutionId";
     private static final String NAME_COL = "institutionName";
 
+    @XmlElement (name="institutionId")
     private Integer id;
+
+    @XmlElement (name="institutionName")
     private String name;
 
     private ArrayList<Object> vals = new ArrayList<Object>();
     private ArrayList<String> fields = new ArrayList<String>();
 
+    public Institution(){}
+    
     public Institution(Integer id, String name)
     {
         this.id = id;
@@ -37,11 +53,13 @@ public class Institution extends Model
         }
     }
 
+    @JsonGetter ("institutionId")
     public Integer getId() 
     {
         return id;
     }
 
+    @JsonGetter ("institutionName")
     public String getName() 
     {
         return name;
@@ -57,5 +75,10 @@ public class Institution extends Model
         this.name = name;
     }
 
-    
+    public String toString()
+    {
+        return
+        "Institution " + name + ":\n"
+        + "Id: " + id;
+    }
 }

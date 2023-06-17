@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema SolvdDBHW
+-- Schema StephenSolvdDb
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema SolvdDBHW
+-- Schema StephenSolvdDb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `SolvdDBHW` DEFAULT CHARACTER SET utf8 ;
-USE `SolvdDBHW` ;
+CREATE SCHEMA IF NOT EXISTS `StephenSolvdDb` DEFAULT CHARACTER SET utf8 ;
+USE `StephenSolvdDb` ;
 
 -- -----------------------------------------------------
--- Table `SolvdDBHW`.`institutions`
+-- Table `StephenSolvdDb`.`institutions`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`institutions` (
+CREATE TABLE IF NOT EXISTS `StephenSolvdDb`.`institutions` (
   `institutionId` INT NOT NULL AUTO_INCREMENT,
   `institutionName` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`institutionId`))
@@ -28,9 +28,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SolvdDBHW`.`locations`
+-- Table `StephenSolvdDb`.`locations`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`locations` (
+CREATE TABLE IF NOT EXISTS `StephenSolvdDb`.`locations` (
   `locationId` INT NOT NULL AUTO_INCREMENT,
   `country` VARCHAR(45) NULL DEFAULT NULL,
   `city` VARCHAR(45) NULL DEFAULT NULL,
@@ -39,9 +39,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SolvdDBHW`.`labs`
+-- Table `StephenSolvdDb`.`labs`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`labs` (
+CREATE TABLE IF NOT EXISTS `StephenSolvdDb`.`labs` (
   `labId` INT NOT NULL AUTO_INCREMENT,
   `labName` VARCHAR(45) NOT NULL,
   `institutionId` INT NULL,
@@ -49,21 +49,21 @@ CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`labs` (
   PRIMARY KEY (`labId`),
   CONSTRAINT `institutionId`
     FOREIGN KEY (`institutionId`)
-    REFERENCES `SolvdDBHW`.`institutions` (`institutionId`)
+    REFERENCES `StephenSolvdDb`.`institutions` (`institutionId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `locationId`
     FOREIGN KEY (`locationId`)
-    REFERENCES `SolvdDBHW`.`locations` (`locationId`)
+    REFERENCES `StephenSolvdDb`.`locations` (`locationId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SolvdDBHW`.`degrees`
+-- Table `StephenSolvdDb`.`degrees`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`degrees` (
+CREATE TABLE IF NOT EXISTS `StephenSolvdDb`.`degrees` (
   `degreeId` INT NOT NULL AUTO_INCREMENT,
   `degreeName` VARCHAR(45) NULL DEFAULT NULL,
   `numOfYears` VARCHAR(45) NULL DEFAULT NULL,
@@ -72,9 +72,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SolvdDBHW`.`scientists`
+-- Table `StephenSolvdDb`.`scientists`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`scientists` (
+CREATE TABLE IF NOT EXISTS `StephenSolvdDb`.`scientists` (
   `scientistId` INT NOT NULL AUTO_INCREMENT,
   `firstName` VARCHAR(45) NOT NULL,
   `lastName` VARCHAR(45) NOT NULL,
@@ -82,16 +82,16 @@ CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`scientists` (
   PRIMARY KEY (`scientistId`),
   CONSTRAINT `degreeId`
     FOREIGN KEY (`degreeId`)
-    REFERENCES `SolvdDBHW`.`degrees` (`degreeId`)
+    REFERENCES `StephenSolvdDb`.`degrees` (`degreeId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SolvdDBHW`.`assistants`
+-- Table `StephenSolvdDb`.`assistants`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`assistants` (
+CREATE TABLE IF NOT EXISTS `StephenSolvdDb`.`assistants` (
   `assistantId` INT NOT NULL AUTO_INCREMENT,
   `firstName` VARCHAR(45) NULL DEFAULT NULL,
   `lastName` VARCHAR(45) NULL DEFAULT NULL,
@@ -99,16 +99,16 @@ CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`assistants` (
   PRIMARY KEY (`assistantId`),
   CONSTRAINT `assisteeId`
     FOREIGN KEY (`assisteeId`)
-    REFERENCES `SolvdDBHW`.`scientists` (`scientistId`)
+    REFERENCES `StephenSolvdDb`.`scientists` (`scientistId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SolvdDBHW`.`experimentTypes`
+-- Table `StephenSolvdDb`.`experimentTypes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`experimentTypes` (
+CREATE TABLE IF NOT EXISTS `StephenSolvdDb`.`experimentTypes` (
   `expTypeId` INT NOT NULL AUTO_INCREMENT,
   `expTypeName` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`expTypeId`))
@@ -116,9 +116,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SolvdDBHW`.`reports`
+-- Table `StephenSolvdDb`.`reports`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`reports` (
+CREATE TABLE IF NOT EXISTS `StephenSolvdDb`.`reports` (
   `reportId` INT NOT NULL AUTO_INCREMENT,
   `reportName` VARCHAR(45) NULL DEFAULT NULL,
   `link` VARCHAR(45) NULL DEFAULT NULL,
@@ -127,9 +127,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SolvdDBHW`.`clientTypes`
+-- Table `StephenSolvdDb`.`clientTypes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`clientTypes` (
+CREATE TABLE IF NOT EXISTS `StephenSolvdDb`.`clientTypes` (
   `clientTypeId` INT NOT NULL AUTO_INCREMENT,
   `clientTypeName` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`clientTypeId`))
@@ -137,25 +137,25 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SolvdDBHW`.`clients`
+-- Table `StephenSolvdDb`.`clients`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`clients` (
+CREATE TABLE IF NOT EXISTS `StephenSolvdDb`.`clients` (
   `clientId` INT NOT NULL AUTO_INCREMENT,
   `clientName` VARCHAR(45) NULL DEFAULT NULL,
   `clientTypeId` INT NULL,
   PRIMARY KEY (`clientId`),
   CONSTRAINT `clientTypeId`
     FOREIGN KEY (`clientTypeId`)
-    REFERENCES `SolvdDBHW`.`clientTypes` (`clientTypeId`)
+    REFERENCES `StephenSolvdDb`.`clientTypes` (`clientTypeId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SolvdDBHW`.`investments`
+-- Table `StephenSolvdDb`.`investments`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`investments` (
+CREATE TABLE IF NOT EXISTS `StephenSolvdDb`.`investments` (
   `investmentId` INT NOT NULL AUTO_INCREMENT,
   `amount` DECIMAL NULL DEFAULT NULL,
   `bank` VARCHAR(45) NULL DEFAULT NULL,
@@ -163,16 +163,16 @@ CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`investments` (
   PRIMARY KEY (`investmentId`),
   CONSTRAINT `clientId`
     FOREIGN KEY (`clientId`)
-    REFERENCES `SolvdDBHW`.`clients` (`clientId`)
+    REFERENCES `StephenSolvdDb`.`clients` (`clientId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SolvdDBHW`.`experiments`
+-- Table `StephenSolvdDb`.`experiments`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`experiments` (
+CREATE TABLE IF NOT EXISTS `StephenSolvdDb`.`experiments` (
   `experimentId` INT NOT NULL AUTO_INCREMENT,
   `experimentName` VARCHAR(45) NOT NULL,
   `status` VARCHAR(45) NOT NULL,
@@ -185,44 +185,43 @@ CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`experiments` (
   PRIMARY KEY (`experimentId`),
   CONSTRAINT `experimentTypeId`
     FOREIGN KEY (`experimentTypeId`)
-    REFERENCES `SolvdDBHW`.`experimentTypes` (`expTypeId`)
+    REFERENCES `StephenSolvdDb`.`experimentTypes` (`expTypeId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `reportId`
     FOREIGN KEY (`reportId`)
-    REFERENCES `SolvdDBHW`.`reports` (`reportId`)
+    REFERENCES `StephenSolvdDb`.`reports` (`reportId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `investmentId`
     FOREIGN KEY (`investmentId`)
-    REFERENCES `SolvdDBHW`.`investments` (`investmentId`)
+    REFERENCES `StephenSolvdDb`.`investments` (`investmentId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `labId`
     FOREIGN KEY (`labId`)
-    REFERENCES `SolvdDBHW`.`labs` (`labId`)
+    REFERENCES `StephenSolvdDb`.`labs` (`labId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `SolvdDBHW`.`experimentGroups`
+-- Table `StephenSolvdDb`.`experimentGroups`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `SolvdDBHW`.`experimentGroups` (
+CREATE TABLE IF NOT EXISTS `StephenSolvdDb`.`experimentGroups` (
   `groupId` INT NOT NULL AUTO_INCREMENT,
   `experimentId` INT NULL,
   `scientistId` INT NULL,
-  INDEX `experimentId_idx` (`experimentId` ASC) VISIBLE,
   PRIMARY KEY (`groupId`),
   CONSTRAINT `experimentId`
     FOREIGN KEY (`experimentId`)
-    REFERENCES `SolvdDBHW`.`experiments` (`experimentId`)
+    REFERENCES `StephenSolvdDb`.`experiments` (`experimentId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `scientistId`
     FOREIGN KEY (`scientistId`)
-    REFERENCES `SolvdDBHW`.`scientists` (`scientistId`)
+    REFERENCES `StephenSolvdDb`.`scientists` (`scientistId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

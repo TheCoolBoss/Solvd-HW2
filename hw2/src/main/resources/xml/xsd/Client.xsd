@@ -5,8 +5,8 @@
 
     <xs:complexType name="client">
       <xs:sequence>
-        <xs:element name="id" type="xs:integer"/>
-        <xs:element name="name" type="xs:string"/>
+        <xs:element name="clientId" type="xs:integer"/>
+        <xs:element name="clientName" type="xs:string"/>
         <xs:element name="clientType">
           <xs:complexType>
             <xs:sequence>

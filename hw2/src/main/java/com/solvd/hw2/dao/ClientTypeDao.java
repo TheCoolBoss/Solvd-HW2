@@ -46,7 +46,7 @@ public class ClientTypeDao extends Dao
                 ret.add(new ClientType(newId, newName));
             }
             
-            CustomPool.closeConn();           
+            CustomPool.releaseConn();           
             return ret;
         }
 

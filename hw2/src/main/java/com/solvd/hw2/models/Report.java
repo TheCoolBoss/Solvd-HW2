@@ -1,21 +1,29 @@
 package com.solvd.hw2.models;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.solvd.hw2.models.abstracts.Model;
 
 @XmlRootElement (name="report")
+@XmlAccessorType (XmlAccessType.FIELD)
 public class Report extends Model
 {
-    private static final String ID_COL = "locId";
+    private static final String ID_COL = "reportId";
     private static final String NAME_COL = "reportName";
     private static final String LINK_COL = "link";
 
+    @XmlElement (name="reportId")
     private Integer id;
+    
+    @XmlElement (name="reportName")
     private String name;
+
     private String link;
 
-    //For Jaxb stuff
     public Report(){}
 
     public Report(Integer id, String name, String link) 
@@ -46,6 +54,7 @@ public class Report extends Model
         }
     }
 
+    @JsonGetter ("reportId")
     public Integer getId() 
     {
         return id;
@@ -56,6 +65,7 @@ public class Report extends Model
         this.id = id;
     }
 
+    @JsonGetter ("reportName")
     public String getName() 
     {
         return name;
@@ -66,6 +76,7 @@ public class Report extends Model
         this.name = name;
     }
 
+    @JsonGetter ("link")
     public String getLink() 
     {
         return link;
@@ -76,5 +87,11 @@ public class Report extends Model
         this.link = link;
     }
 
-    
+    public String toString()
+    {
+        return
+        "Report " + name + ":\n"
+        + "Id: " + id + "\n"
+        + "URL: " + link;
+    }
 }

@@ -1,9 +1,12 @@
 package com.solvd.hw2.models;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.solvd.hw2.models.abstracts.Model;
 
 @XmlRootElement (name="degree")
+@JsonRootName ("degree")
 public class Degree extends Model
 {
     private static final String DEGREE_ID_COL = "degreeId";
@@ -45,6 +48,7 @@ public class Degree extends Model
         }
     }
 
+    @JsonGetter ("degreeId")
     public int getId() 
     {
         return id;
@@ -55,6 +59,7 @@ public class Degree extends Model
         this.id = id;
     }
 
+    @JsonGetter ("degreeName")
     public String getDegreeName() 
     {
         return degreeName;
@@ -73,5 +78,12 @@ public class Degree extends Model
     public void setNumOfYears(int numOfYears) 
     {
         this.numOfYears = numOfYears;
+    }
+
+    public String toString()
+    {
+        return
+        "Degree " + degreeName + ":\n"
+        + "Years required: " + numOfYears;
     }
 }

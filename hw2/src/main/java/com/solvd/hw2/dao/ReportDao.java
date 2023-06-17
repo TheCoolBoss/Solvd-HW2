@@ -53,7 +53,7 @@ public class ReportDao extends Dao
                 ret.add(new Report(newId, name, link));
             }
             
-            CustomPool.closeConn();
+            CustomPool.releaseConn();
             return ret;
         }
 

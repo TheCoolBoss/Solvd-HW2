@@ -22,7 +22,7 @@ public abstract class Dao
         {
             PreparedStatement newModel = QueryGen.genInsert(toInsert, table, Concaters.CONCATER, Concaters.ARRAY_LIST_STRING_CONCAT);
             newModel.executeUpdate();
-            CustomPool.closeConn();
+            CustomPool.releaseConn();
         }
 
         catch (SQLException sqle)
@@ -38,7 +38,7 @@ public abstract class Dao
         {
             PreparedStatement updatedModel = QueryGen.genUpdate(newVals, table, criteriaVals, ConditionGen.makeBasicWhere(criteriaVals.getFields(), operator), Concaters.ARRAY_LIST_STRING_CONCAT);
             updatedModel.executeUpdate();
-            CustomPool.closeConn();
+            CustomPool.releaseConn();
         }
 
         catch (SQLException sqle)
@@ -53,7 +53,7 @@ public abstract class Dao
         {
             PreparedStatement updatedModel = QueryGen.genDelete(criteriaVals, table, ConditionGen.makeBasicWhere(criteriaVals.getFields(), operator));
             updatedModel.executeUpdate();
-            CustomPool.closeConn();
+            CustomPool.releaseConn();
         }
 
         catch (SQLException sqle)

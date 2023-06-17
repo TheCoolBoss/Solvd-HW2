@@ -1,16 +1,17 @@
 package com.solvd.hw2.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.solvd.hw2.models.abstracts.Model;
 
 
 @XmlRootElement (name="scientist")
 @XmlAccessorType (XmlAccessType.FIELD)
+@JsonRootName (value="scientist")
+@JsonInclude (JsonInclude.Include.NON_NULL)
 public class Scientist extends Model
 {   
     private static final String ID_COL = "scientistId";
@@ -22,7 +23,6 @@ public class Scientist extends Model
     private String firstName;
     private String lastName;
     private Degree degree;
-    private List<Experiment> experiments;
 
     public Scientist(){}
 
@@ -32,7 +32,6 @@ public class Scientist extends Model
         this.firstName = firstName;
         this.lastName = lastName;
         this.degree = degree;
-        experiments = new ArrayList<Experiment>();
     }
 
     
@@ -103,13 +102,11 @@ public class Scientist extends Model
         this.degree = degree;
     }
 
-    public List<Experiment> getExperiments() 
+    public String toString()
     {
-        return experiments;
-    }
-
-    public void setExperiments(List<Experiment> experiments) 
-    {
-        this.experiments = experiments;
+        return
+        "Scientist " + firstName + " " + lastName + ":\n"
+        + "Id: " + id + "\n"
+        + "Degree: " + degree.getDegreeName();
     }
 }

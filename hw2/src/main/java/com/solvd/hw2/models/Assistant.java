@@ -14,6 +14,8 @@ public class Assistant extends Model
     private String lastName;
     private Scientist assistee;
 
+    public Assistant(){}
+    
     public Assistant(Integer id, String firstName, String lastName, Scientist assistee)
     {
         this.id= id;
@@ -90,6 +92,14 @@ public class Assistant extends Model
     public void setAssistee(Scientist assistee) 
     {
         this.assistee = assistee;
+    }
+
+    public String toString()
+    {
+        return
+        "Assistant " + firstName + " " + lastName + ":\n"
+        + "Id: " + id + "\n"
+        + "Assisting: " + assistee.toString();
     }
 
 }

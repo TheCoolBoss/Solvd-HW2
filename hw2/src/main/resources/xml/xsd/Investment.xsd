@@ -9,8 +9,7 @@
             <xs:element name="id" type="xs:integer"/>
             <xs:element name="amount" type="xs:decimal"/>
             <xs:element name="client" type="client"/>
+            <xs:element name="bank" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
-
-
 </xs:schema>

@@ -60,7 +60,7 @@ public class LabDao extends Dao
                 ret.add(new Lab(newId, newName, loc, inst));
             }
             
-            CustomPool.closeConn();
+            CustomPool.releaseConn();
             return ret;
         }
 

@@ -11,12 +11,16 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 public class XmlValidator 
 {   
+    private static final Logger LOGGER = LogManager.getLogger("Validator");
+
     private Validator val;
     private List<SAXParseException> errors;
 
@@ -53,8 +57,29 @@ public class XmlValidator
         return errors;
     }
 
-    public void check(String xml) throws SAXException, IOException
+    public boolean printErrors()
+    {
+        if (errors.size() != 0)
+        {
+            errors.forEach((SAXParseException saxpe) ->
+            {
+                LOGGER.info(saxpe.getMessage());
+            });
+            
+            return false;
+        }
+
+        else
+        {
+            LOGGER.info("No errors :)");
+            return true;
+        }
+    }
+
+    public boolean check(String xml) throws SAXException, IOException
     {
         val.validate(new StreamSource(new File(xml)));
+        LOGGER.info("Result of validation: ");
+        return printErrors();
     }
 }
