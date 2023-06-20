@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DegreeMap.xml">
+    <select id="getDegreeById" parameterType="int" resultType="com.solvd.hw2.models.Degree">
+        select id, degreeName, numOfYears from degrees where degreeId = #{id}
+    </select>
+
+    <insert id="insertDegree">
+        insert into degrees (degreeName, numOfYears) values(#{degreeName}, #{numOfYears})
+    </insert>
+
+    <update id="updateDegree">
+        update degrees set degreeName = #{newName}, numOfYears = #{newYears} where degreeId = #{degreeId}
+    </update>
+
+    <delete id="deleteDegree" parameterType="int">
+        delete from degrees where degreeId = #{degreeId}
+    </delete>
+</mapper>

@@ -11,14 +11,13 @@ import org.apache.logging.log4j.Logger;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.solvd.hw2.models.*;
 import com.solvd.hw2.parsers.makers.ExperimentMaker;
 
 public class ParserMain 
 {
-    private static final String FALCON_GANON_PLAYS = "hw2/src/main/resources/xml/experiments/FalconGanonPlays.xml";
-    private static final String FALCON_GANON_PLAYS_JSON = "hw2/src/main/resources/json/FalconGanonJson.json";
+    private static final String FALCON_GANON_PLAYS = "src/main/resources/xml/experiments/FalconGanonPlays.xml";
+    private static final String FALCON_GANON_PLAYS_JSON = "src/main/resources/json/FalconGanonJson.json";
     private static final Logger LOGGER = LogManager.getLogger("Main");
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, URISyntaxException, JAXBException, DOMException, java.text.ParseException
@@ -29,7 +28,7 @@ public class ParserMain
 
         XmlParser expParser = new XmlParser(falconGanon, "experiment");
         
-        XmlValidator playsVal = new XmlValidator("hw2/src/main/resources/xml/xsd/Experiment.xsd");
+        XmlValidator playsVal = new XmlValidator("src/main/resources/xml/xsd/Experiment.xsd");
         LOGGER.info("Validating " + FALCON_GANON_PLAYS);
 
         if (playsVal.check(FALCON_GANON_PLAYS))
@@ -40,18 +39,7 @@ public class ParserMain
         }
 
         JsonParser jsonVersion = new JsonParser(FALCON_GANON_PLAYS_JSON, Experiment.class);
-        Experiment jsonExp;
-        try
-        {
-            jsonExp = (Experiment) jsonVersion.parse();
-        }
-
-        catch (JsonProcessingException e)
-        {
-            jsonVersion.setPath(FALCON_GANON_PLAYS_JSON.substring(3, FALCON_GANON_PLAYS_JSON.length()));
-            jsonExp = (Experiment) jsonVersion.parse();
-        }
-
+        Experiment jsonExp = (Experiment) jsonVersion.parse();
         LOGGER.info("JSON version:");
         LOGGER.info(jsonExp);
     }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<lab>
+    <id>0</id>
+    <name>Best Plays</name>
+    <institution>Smash Bros</institution>
+    <location>
+        <city>Some city</city>
+        <country>Some country</country>
+    </location>
+</lab>

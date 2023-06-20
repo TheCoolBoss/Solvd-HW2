@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ExperimentMap.xml">
+    <select id="getExperimentById" parameterType="int" resultType="hashmap">
+        select * from experiments where experimentId = #{id}
+    </select>
+
+    <delete id="deleteExperiment" parameterType="int">
+        delete from experiments where experimentId = #{experimentId}
+    </delete>
+</mapper>
