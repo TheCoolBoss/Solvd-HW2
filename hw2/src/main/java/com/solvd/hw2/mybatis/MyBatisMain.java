@@ -26,43 +26,20 @@ public class MyBatisMain
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         SqlSessionFactory factory = builder.build(stream);
 
-        ClientMBDao clientDao = new ClientMBDao(factory);
         ExperimentServiceMB expService = new ExperimentServiceMB(factory);
 
-        ExperimentType dummy = new ExperimentType(6, "Meme Montage");
-        Investment dummyInv = new Investment(3, null, null, null);
-        Report dummyReport = new Report(5, "", "");
-        Lab dummyLab = new Lab(3, "", null, null);
-        Date start = dateAdapter.unmarshal("2023-01-01");
-        Date end = dateAdapter.unmarshal("2023-06-21");
-
-        Scientist sci1 = new Scientist(1, "", "", null);
-        Scientist sci2 = new Scientist(2, "", "", null);
-        Experiment testInsert = new Experiment(0, "Best Ganon and Falcon Plays 2", "Done", start, end, dummy, dummyInv, dummyReport, dummyLab);
-        testInsert.getScientists().add(sci1);
-        testInsert.getScientists().add(sci2);
+        // ExperimentType dummy = new ExperimentType(6, "Meme Montage");
+        // Investment dummyInv = new Investment(3, null, null, null);
+        // Report dummyReport = new Report(5, "", "");
+        // Lab dummyLab = new Lab(3, "", null, null);
+        // Date start = dateAdapter.unmarshal("2023-01-01");
+        // Date end = dateAdapter.unmarshal("2023-06-21");
+        // Scientist sci1 = new Scientist(1, "", "", null);
+        // Scientist sci2 = new Scientist(2, "", "", null);
+        // Experiment testInsert = new Experiment(0, "Best Ganon and Falcon Plays 2", "Done", start, end, dummy, dummyInv, dummyReport, dummyLab);
+        // testInsert.getScientists().add(sci1);
+        // testInsert.getScientists().add(sci2);
         //expService.insertExperiment(testInsert);
         LOGGER.info(expService.getExperimentById(4).toString());
-
-
-
-        //Client testClient = clientDao.getClientById(4);
-        //LOGGER.info(testClient);
-
-        //Client testInsert = new Client(null, "Ganondorf", new ClientType(2, ""));
-        //clientDao.insertClient(testInsert);
-
-        // clientDao.deleteClient(7);
-
-        // Client testUpdate = new Client(5, "Captain Falcon and Ganondorf", new ClientType(2, ""));
-        // clientDao.updateClient(testUpdate);
-
-        // List<Client> list = clientDao.getClientByTypeId(2);
-        // for (Client mbClient : list) 
-        // {
-        //     LOGGER.info(mbClient);
-        // }
-
-
     }
 }

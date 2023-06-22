@@ -5,7 +5,7 @@
     <xs:include schemaLocation="Lab.xsd"/>
     <xs:include schemaLocation="Scientist.xsd"/>
 
-    <xs:attribute name="id" type="xs:integer"/>
+
     <xs:element name="experiment">
         <xs:complexType>
             <xs:sequence>
@@ -32,6 +32,7 @@
                 </xs:element>
                 <xs:element name="lab" type="lab"/>
             </xs:sequence>
+            <xs:attribute name="id" type="xs:integer"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>

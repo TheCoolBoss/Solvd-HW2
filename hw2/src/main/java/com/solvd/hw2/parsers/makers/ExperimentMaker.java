@@ -28,7 +28,6 @@ public class ExperimentMaker
 
         for (int j = 0; j < children.getLength(); j++)
         {
-            System.out.println(children.item(j).getNodeName());
             if (children.item(j).getNodeName().contains("name"))
             {
                 name = children.item(j).getTextContent();    
