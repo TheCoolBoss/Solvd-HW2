@@ -16,12 +16,8 @@
   </environments>
   <mappers>
     <mapper resource="mappers/ClientMap.xml"/>
-    <mapper resource="mappers/DegreeMap.xml"/>
-    <mapper resource="mappers/ClientTypeMap.xml"/>
-    <mapper resource="mappers/AssistantMap.xml"/>
+    <mapper resource="mappers/ScientistMap.xml"/>
     <mapper resource="mappers/ExperimentMap.xml"/>
-    <mapper resource="mappers/ExperimentTypeMap.xml"/>
-    <mapper resource="mappers/InstitutionMap.xml"/>
 
   </mappers>
 </configuration>

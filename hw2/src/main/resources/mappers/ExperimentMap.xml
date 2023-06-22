@@ -3,9 +3,97 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="ExperimentMap.xml">
-    <select id="getExperimentById" parameterType="int" resultType="hashmap">
-        select * from experiments where experimentId = #{id}
+<mapper namespace="ExperimentMap">
+    <resultMap id="expMap" type="com.solvd.hw2.models.Experiment">
+        <id property="id" column="experimentId"/>
+        <result property="name" column="experimentName"/>
+        <result property="status" column="status"/>
+        <result property="startDate" column="startDate"/>
+        <result property="endDate" column="endDate"/>
+        <association property="experimentType" javaType="com.solvd.hw2.models.ExperimentType">
+            <id property="id" column="expTypeId"/>
+            <result property="typeName" column="expTypeName"/>
+        </association>
+        <association property="investment" javaType="com.solvd.hw2.models.Investment">
+            <id property="id" column="investmentId"/>
+            <result property="amount" column="amount"/>
+            <result property="bank" column="bank"/>
+            <association property="investor" javaType="com.solvd.hw2.models.Client">
+                <id property="id" column="clientId"/>
+                <result property="name" column="clientName"/>
+                <association property="clientType" javaType="com.solvd.hw2.models.ClientType">
+                    <id property="clientTypeId" column="clientTypeId"/>
+                    <result property="clientTypeName" column="clientTypeName"/>
+                </association>
+            </association> 
+        </association>
+        <association property="report" javaType="com.solvd.hw2.models.Report">
+            <id property="id" column="reportId"/>
+            <result property="name" column="reportName"/>
+            <result property="link" column="link"/>
+        </association>      
+        <association property="lab" javaType="com.solvd.hw2.models.Lab">
+            <id property="id" column="labId"/>
+            <result property="name" column="labName"/>
+            <association property="location" javaType="com.solvd.hw2.models.Location">
+                <id property="id" column="locId"/>
+                <result property="city" column="city"/>
+                <result property="country" column="country"/>
+            </association> 
+            <association property="institution" javaType="com.solvd.hw2.models.Institution">
+                <id property="id" column="institutionId"/>
+                <result property="name" column="institutionName"/>
+            </association>
+        </association>  
+        <collection property="scientists" resultMap="ScientistMap.scientistMap"/>
+    </resultMap>
+
+
+
+    <insert id="insertExperiment" parameterType="com.solvd.hw2.models.Experiment">
+        insert into experiments (experimentName, status, startDate, endDate, experimentTypeId, investmentId, reportId, labId)
+        values(#{name}, #{status}, #{startDate}, #{endDate}, #{experimentType.id}, #{investment.id}, #{report.id}, #{lab.id})
+    </insert>
+
+    <insert id="insertExpGroup" parameterType="com.solvd.hw2.models.Experiment">
+        insert into experimentGroups (experimentId, scientistId)
+        values
+        <foreach item="item" collection="scientists" separator=",">
+            (#{id}, #{item.id})
+        </foreach>
+    </insert>
+
+    <select id="getLastId" resultType="int">
+        select experimentId from experiments order by experimentId desc limit 1
+    </select>
+
+
+
+    <select id="getExperimentById" parameterType="int" resultMap="expMap">
+        select experiments.experimentId, experiments.experimentName, experiments.status, experiments.startDate, experiments.endDate,
+               experiments.experimentTypeId, experimentTypes.expTypeName,
+               experiments.investmentId, investments.amount, investments.bank, investments.clientId,
+               clients.clientName, clients.clientTypeId,
+               clientTypes.clientTypeName,
+               experiments.reportId, reports.reportName, reports.link,
+               experiments.labId, labs.labName, labs.institutionId, labs.locationId,
+               institutions.institutionName, 
+               locations.city, locations.country
+        from experiments
+        inner join experimentTypes on experiments.experimentTypeId = experimentTypes.expTypeId
+        inner join investments on experiments.investmentId = investments.investmentId
+        inner join clients on investments.clientId = clients.clientId
+        inner join clientTypes on clients.clientTypeId = clientTypes.clientTypeId
+        inner join reports on experiments.reportId = reports.reportId
+        inner join labs on experiments.labId = labs.labId
+        inner join institutions on labs.institutionId = institutions.institutionId
+        inner join locations on labs.locationId = locations.locationId
+
+        where experimentId = #{id}
+    </select>
+
+    <select id="getScientistIdByExperimentId" parameterType="int" resultType="int">
+        select scientistId from experimentGroups where experimentId = #{id}
     </select>
 
     <delete id="deleteExperiment" parameterType="int">

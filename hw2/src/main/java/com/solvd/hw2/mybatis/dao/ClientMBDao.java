@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.solvd.hw2.models.Client;
-import com.solvd.hw2.mybatis.models.MBClient;
 
 public class ClientMBDao 
 {
@@ -19,32 +18,29 @@ public class ClientMBDao
     }
 
 
-    public List<MBClient> getClientByTypeId(Integer clientTypeId) 
+    public List<Client> getClientByTypeId(Integer clientTypeId) 
     {
         try(SqlSession session = factory.openSession())
         {
-            List<MBClient> ret = session.selectList("ClientMap.xml.getClientByTypeId", clientTypeId);
+            List<Client> ret = session.selectList("ClientMap.getClientByTypeId", clientTypeId);
             //session.commit();
             return ret;
         }
     }
 
-    public MBClient getClientById(Integer clientId)
+    public Client getClientById(Integer clientId)
     {
         try(SqlSession session = factory.openSession())
         {
-            MBClient ret = session.selectOne("ClientMap.xml.getClientById", clientId);
-            //session.commit();
-            return ret;
+            return session.selectOne("ClientMap.getClientById", clientId);
         }
     }
 
     public void updateClient(Client newVals)
     {
-        MBClient mbVersion = new MBClient(newVals.getId(), newVals.getName(), newVals.getClientType().getClientTypeId());
         try(SqlSession session = factory.openSession())
         {
-            int updatedRows = session.update("ClientMap.xml.updateClient", mbVersion);
+            int updatedRows = session.update("ClientMap.updateClient", newVals);
             session.commit();
             LOGGER.info("Updated " + updatedRows + " rows.");
         } 
@@ -52,10 +48,9 @@ public class ClientMBDao
 
     public void insertClient(Client toInsert)
     {
-        MBClient mbVersion = new MBClient(null, toInsert.getName(), toInsert.getClientType().getClientTypeId());
         try(SqlSession session = factory.openSession())
         {
-            session.insert("ClientMap.xml.insertClient", mbVersion);
+            session.insert("ClientMap.insertClient", toInsert);
             session.commit();
         } 
     }
@@ -64,7 +59,7 @@ public class ClientMBDao
     {
         try(SqlSession session = factory.openSession())
         {
-            int updatedRows = session.update("ClientMap.xml.deleteClient", clientId);
+            int updatedRows = session.update("ClientMap.deleteClient", clientId);
             session.commit();
             LOGGER.info("Updated " + updatedRows + " rows.");
         } 
