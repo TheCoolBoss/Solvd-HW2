@@ -13,9 +13,9 @@ public class ExperimentMaker
     public static Experiment makeExperiment(NodeList expInfo) throws ParseException
     {
         DateAdapter adapter = new DateAdapter();
-
         NodeList children = expInfo.item(0).getChildNodes();
-        int id = 1000;
+
+        int id = Integer.parseInt(expInfo.item(0).getAttributes().getNamedItem("id").getNodeValue());
         String name = "";
         String status = "";
         Date start = null;
