@@ -6,13 +6,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.solvd.hw2.models.abstracts.Model;
+import com.solvd.hw2.models.interfaces.Person;
 
 
 @XmlRootElement (name="scientist")
 @XmlAccessorType (XmlAccessType.FIELD)
 @JsonRootName (value="scientist")
 @JsonInclude (JsonInclude.Include.NON_NULL)
-public class Scientist extends Model
+public class Scientist extends Model implements Person
 {   
     private static final String ID_COL = "scientistId";
     private static final String FIRST_NAME_COL = "firstName";

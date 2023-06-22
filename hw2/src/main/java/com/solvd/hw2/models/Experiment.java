@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.solvd.hw2.builders.ExperimentBuilder;
 import com.solvd.hw2.jaxb.adapters.DateAdapter;
 import com.solvd.hw2.models.abstracts.Model;
 
@@ -41,6 +42,20 @@ public class Experiment extends Model
 
     public Experiment(){}
     
+    public Experiment(ExperimentBuilder expBuilder)
+    {
+        this.id = expBuilder.getId();
+        this.name = expBuilder.getName();
+        this.status = expBuilder.getStatus();
+        this.startDate = expBuilder.getStartDate();
+        this.endDate = expBuilder.getEndDate();
+        this.experimentType = expBuilder.getExperimentType();
+        this.investment = expBuilder.getInvestment();
+        this.report = expBuilder.getReport();
+        this.lab = expBuilder.getLab();
+        this.scientists = expBuilder.getScientists();
+    }
+
     public Experiment(Integer id, String name, String status, Date startDate, Date endDate, ExperimentType experimentType,
             Investment investment, Report report, Lab lab) 
     {

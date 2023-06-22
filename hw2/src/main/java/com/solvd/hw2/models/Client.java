@@ -7,11 +7,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.solvd.hw2.models.abstracts.Model;
+import com.solvd.hw2.models.interfaces.Person;
 
 @XmlRootElement (name="client")
 @XmlAccessorType (XmlAccessType.FIELD)
 @JsonRootName ("client")
-public class Client extends Model
+public class Client extends Model implements Person
 {
     private static final String ID_COL = "clientId";
     private static final String NAME_COL = "clientName";
