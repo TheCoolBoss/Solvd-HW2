@@ -8,11 +8,7 @@
         <id property="id" column="scientistId"/>
         <result property="firstName" column="firstName"/>
         <result property="lastName" column="lastName"/>
-        <association property="degree" javaType="com.solvd.hw2.models.Degree">
-            <id property="id" column="degreeId"/>
-            <result property="degreeName" column="degreeName"/>
-            <result property="numOfYears" column="numOfYears"/>
-        </association>
+        <association property="degree" resultMap="DegreeMap.degreeMap"/>
     </resultMap>
 
     <select id="getScientistById" parameterType="int" resultMap="scientistMap">

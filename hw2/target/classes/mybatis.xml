@@ -18,6 +18,12 @@
     <mapper resource="mappers/ClientMap.xml"/>
     <mapper resource="mappers/ScientistMap.xml"/>
     <mapper resource="mappers/ExperimentMap.xml"/>
-
+    <mapper resource="mappers/ExperimentTypeMap.xml"/>
+    <mapper resource="mappers/InvestmentMap.xml"/>
+    <mapper resource="mappers/ReportMap.xml"/>
+    <mapper resource="mappers/InstitutionMap.xml"/>
+    <mapper resource="mappers/LocationMap.xml"/>
+    <mapper resource="mappers/LabMap.xml"/>
+    <mapper resource="mappers/DegreeMap.xml"/>
   </mappers>
 </configuration>

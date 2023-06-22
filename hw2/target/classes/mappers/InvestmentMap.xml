@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="InvestmentMap">
+    <resultMap id="investmentMap" type="com.solvd.hw2.models.Investment">
+        <id property="id" column="investmentId"/>
+        <result property="amount" column="amount"/>
+        <result property="bank" column="bank"/>
+        <association property="investor" resultMap="ClientMap.clientMap"/>
+    </resultMap>
+</mapper>
