@@ -47,7 +47,10 @@
                experiments.reportId, reports.reportName, reports.link,
                experiments.labId, labs.labName, labs.institutionId, labs.locationId,
                institutions.institutionName, 
-               locations.city, locations.country
+               locations.city, locations.country,
+               experimentGroups.scientistId,
+               scientists.scientistId, scientists.firstName, scientists.lastName, scientists.degreeId,
+               degrees.degreeId, degrees.degreeName, degrees.numOfYears
         from experiments
         inner join experimentTypes on experiments.experimentTypeId = experimentTypes.expTypeId
         inner join investments on experiments.investmentId = investments.investmentId
@@ -57,8 +60,11 @@
         inner join labs on experiments.labId = labs.labId
         inner join institutions on labs.institutionId = institutions.institutionId
         inner join locations on labs.locationId = locations.locationId
+        inner join experimentGroups on experiments.experimentId = experimentGroups.experimentId
+        inner join scientists on experimentGroups.scientistId = scientists.scientistId
+        inner join degrees on scientists.degreeId = degrees.degreeId
 
-        where experimentId = #{id}
+        where experiments.experimentId = #{id}
     </select>
 
     <select id="getScientistIdByExperimentId" parameterType="int" resultType="int">

@@ -1,23 +1,27 @@
 package com.solvd.hw2.mybatis.services;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.io.IOException;
+import java.io.InputStream;
+import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.solvd.hw2.models.Experiment;
-import com.solvd.hw2.models.Scientist;
 import com.solvd.hw2.mybatis.dao.ExperimentMBDao;
-import com.solvd.hw2.mybatis.dao.ScientistMBDao;
 
 public class ExperimentServiceMB 
 {
+    private static final String SETUP_PATH = "mybatis.xml";
     private ExperimentMBDao expDao;
-    private ScientistMBDao scientistDao;
+    private InputStream stream;
+    private SqlSessionFactoryBuilder builder;
+    private SqlSessionFactory factory;
 
-    public ExperimentServiceMB(SqlSessionFactory factory) 
+    public ExperimentServiceMB() throws IOException
     {
+        stream = Resources.getResourceAsStream(SETUP_PATH);  
+        builder = new SqlSessionFactoryBuilder();
+        factory = builder.build(stream);
         expDao = new ExperimentMBDao(factory);
-        scientistDao = new ScientistMBDao(factory);
     }
 
     public void insertExperiment(Experiment toInsert)
@@ -29,15 +33,6 @@ public class ExperimentServiceMB
 
     public Experiment getExperimentById(int id)
     {
-        Experiment ret = expDao.getExperimentById(id);
-        List<Integer> scientistIds = expDao.getScientistIdByExperimentId(id);
-        List<Scientist> scientists = new ArrayList<Scientist>();
-        for (Integer scientistId : scientistIds) 
-        {
-            scientists.add(scientistDao.getScientistById(scientistId));
-        }
-        
-        ret.setScientists(scientists);
-        return ret;
+        return expDao.getExperimentById(id);
     }
 }

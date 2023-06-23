@@ -1,32 +1,18 @@
 package com.solvd.hw2.mybatis;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Date;
-import java.util.List;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.solvd.hw2.jaxb.adapters.DateAdapter;
-import com.solvd.hw2.models.*;
-import com.solvd.hw2.mybatis.dao.*;
 import com.solvd.hw2.mybatis.services.ExperimentServiceMB;
 
 public class MyBatisMain 
 {
     private static final Logger LOGGER = LogManager.getLogger("Main");
-    private static final String SETUP_PATH = "mybatis.xml";
+
 
     public static void main(String[] args) throws IOException, java.text.ParseException
     {
-        DateAdapter dateAdapter = new DateAdapter();
-        InputStream stream = Resources.getResourceAsStream(SETUP_PATH);
-        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-        SqlSessionFactory factory = builder.build(stream);
-
-        ExperimentServiceMB expService = new ExperimentServiceMB(factory);
+        ExperimentServiceMB expService = new ExperimentServiceMB();
 
         // ExperimentType dummy = new ExperimentType(6, "Meme Montage");
         // Investment dummyInv = new Investment(3, null, null, null);
