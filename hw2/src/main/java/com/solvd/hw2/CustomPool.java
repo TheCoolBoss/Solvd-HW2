@@ -1,14 +1,13 @@
 package com.solvd.hw2;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,8 +15,8 @@ import org.apache.logging.log4j.Logger;
 public class CustomPool 
 {
     private static final Logger LOGGER = LogManager.getLogger("Conn Pool");
-    private static BlockingQueue<Connection> activeConns;
-    private static BlockingQueue<Connection> idleConns;
+    private static LinkedBlockingQueue<Connection> activeConns;
+    private static LinkedBlockingQueue<Connection> idleConns;
     private static Properties props;
     private static String url;
     private static String user;
@@ -32,8 +31,8 @@ public class CustomPool
         user = props.getProperty("user");
         pass = props.getProperty("pass");
         maxConns = Integer.parseInt(props.getProperty("maxSize"));
-        activeConns = new LinkedBlockingDeque<>(maxConns);
-        idleConns = new LinkedBlockingDeque<>(maxConns);
+        activeConns = new LinkedBlockingQueue<>(maxConns);
+        idleConns = new LinkedBlockingQueue<>(maxConns);
     }
 
     public static BlockingQueue<Connection> getActiveConns() 

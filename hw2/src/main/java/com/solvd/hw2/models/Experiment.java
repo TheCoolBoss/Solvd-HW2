@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.solvd.hw2.builders.ExperimentBuilder;
 import com.solvd.hw2.jaxb.adapters.DateAdapter;
 import com.solvd.hw2.models.abstracts.Model;
 
