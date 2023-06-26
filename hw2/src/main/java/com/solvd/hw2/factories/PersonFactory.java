@@ -5,7 +5,7 @@ import com.solvd.hw2.models.interfaces.Person;
 
 public class PersonFactory 
 {
-    public Person getPerson(String type)
+    public static Person getPerson(String type)
     {
         if (type.equals("assistant"))
         {
