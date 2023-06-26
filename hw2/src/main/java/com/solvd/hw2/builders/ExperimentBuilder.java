@@ -128,4 +128,9 @@ public class ExperimentBuilder
         return scientists;
     }
 
+    public Experiment build()
+    {
+        return new Experiment(id, name, status, startDate, endDate, experimentType, investment, report, lab);
+    }
+
 }

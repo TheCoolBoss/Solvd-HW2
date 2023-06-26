@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.w3c.dom.NodeList;
+
+import com.solvd.hw2.builders.ExperimentBuilder;
 import com.solvd.hw2.jaxb.adapters.DateAdapter;
 import com.solvd.hw2.models.*;
 
@@ -83,9 +85,7 @@ public class ExperimentMaker
             } 
         }
                 
-        Experiment ret = new Experiment(id, name, status, start, end, expType, investment, report, lab);
-        ret.setScientists(scientists);
-        
-        return ret;
+        ExperimentBuilder builder = new ExperimentBuilder().withId(id).withName(name).withStart(start).withEnd(end).withType(expType).withInvestment(investment).withReport(report).withLab(lab).withScientists(scientists);
+        return builder.build();
     }
 }

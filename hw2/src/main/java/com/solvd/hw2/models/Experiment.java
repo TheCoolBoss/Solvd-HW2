@@ -42,20 +42,6 @@ public class Experiment extends Model
 
     public Experiment(){}
     
-    public Experiment(ExperimentBuilder expBuilder)
-    {
-        this.id = expBuilder.getId();
-        this.name = expBuilder.getName();
-        this.status = expBuilder.getStatus();
-        this.startDate = expBuilder.getStartDate();
-        this.endDate = expBuilder.getEndDate();
-        this.experimentType = expBuilder.getExperimentType();
-        this.investment = expBuilder.getInvestment();
-        this.report = expBuilder.getReport();
-        this.lab = expBuilder.getLab();
-        this.scientists = expBuilder.getScientists();
-    }
-
     public Experiment(Integer id, String name, String status, Date startDate, Date endDate, ExperimentType experimentType,
             Investment investment, Report report, Lab lab) 
     {
