@@ -10,7 +10,7 @@ public class ConditionGen
     {
         String ret = " where ";
 
-        ret = ret.concat(Concaters.ARRAY_LIST_STRING_CONCAT.concatArrayList(criteriaFields, operator + "? and "));
+        ret = ret.concat(Concaters.LIST_STRING_CONCAT.concatList(criteriaFields, operator + "? and "));
         ret = ret.substring(0, ret.length() - 4);
 
         return ret;

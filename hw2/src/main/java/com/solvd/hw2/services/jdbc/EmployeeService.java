@@ -1,17 +1,15 @@
-package com.solvd.hw2.services;
+package com.solvd.hw2.services.jdbc;
 
 import java.util.List;
 
-import com.solvd.hw2.dao.AssistantDao;
-import com.solvd.hw2.dao.ScientistDao;
+import com.solvd.hw2.dao.jdbc.AssistantDao;
+import com.solvd.hw2.dao.jdbc.ScientistDao;
 import com.solvd.hw2.models.*;
 
 public class EmployeeService 
 {
     private static final AssistantDao ASSISTANT_DAO = new AssistantDao();
-    private static final String ASSISTANT_TABLE = "assistants";
     private static final ScientistDao SCIENTIST_DAO = new ScientistDao();
-    private static final String SCIENTIST_TABLE = "scientists";
 
     public List<Assistant> getAssistantsByScientistId(int scientistId)
     {

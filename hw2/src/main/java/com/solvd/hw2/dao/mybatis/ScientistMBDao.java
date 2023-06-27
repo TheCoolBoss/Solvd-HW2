@@ -1,4 +1,4 @@
-package com.solvd.hw2.mybatis.dao;
+package com.solvd.hw2.dao.mybatis;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

@@ -1,7 +1,7 @@
-package com.solvd.hw2.services;
+package com.solvd.hw2.services.jdbc;
 
 import java.util.List;
-import com.solvd.hw2.dao.ClientDao;
+import com.solvd.hw2.dao.jdbc.ClientDao;
 import com.solvd.hw2.models.Client;
 import com.solvd.hw2.models.ClientType;
 

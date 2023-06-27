@@ -1,8 +1,8 @@
 package com.solvd.hw2.lambda;
 
-import java.util.ArrayList;
+import java.util.List;
 import com.solvd.hw2.lambda.interfaces.IConcat;
-import com.solvd.hw2.lambda.interfaces.IConcatArrayList;
+import com.solvd.hw2.lambda.interfaces.IConcatList;
 
 public class Concaters <T>
 {
@@ -17,7 +17,7 @@ public class Concaters <T>
         return ret;
     };
 
-    public static final IConcatArrayList<String> ARRAY_LIST_STRING_CONCAT = (ArrayList<String> list, String extraStuff) ->
+    public static final IConcatList<String> LIST_STRING_CONCAT = (List<String> list, String extraStuff) ->
     {
         String ret = "";
 

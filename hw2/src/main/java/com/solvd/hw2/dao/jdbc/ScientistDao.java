@@ -1,4 +1,4 @@
-package com.solvd.hw2.dao;
+package com.solvd.hw2.dao.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

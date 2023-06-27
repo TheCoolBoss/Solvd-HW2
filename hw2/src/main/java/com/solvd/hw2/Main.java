@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.solvd.hw2.services.*;
+import com.solvd.hw2.services.jdbc.ClientService;
 import com.solvd.hw2.models.*;
 
 public class Main 

@@ -40,7 +40,7 @@
 
     <select id="getExperimentById" parameterType="int" resultMap="expMap">
         select experiments.experimentId, experiments.experimentName, experiments.status, experiments.startDate, experiments.endDate,
-               experiments.experimentTypeId, experimentTypes.expTypeName,
+               experiments.experimentTypeId, experimentTypes.experimentTypeName,
                experiments.investmentId, investments.amount, investments.bank, investments.clientId,
                clients.clientName, clients.clientTypeId,
                clientTypes.clientTypeName,
@@ -52,7 +52,7 @@
                scientists.scientistId, scientists.firstName, scientists.lastName, scientists.degreeId,
                degrees.degreeId, degrees.degreeName, degrees.numOfYears
         from experiments
-        inner join experimentTypes on experiments.experimentTypeId = experimentTypes.expTypeId
+        inner join experimentTypes on experiments.experimentTypeId = experimentTypes.experimentTypeId
         inner join investments on experiments.investmentId = investments.investmentId
         inner join clients on investments.clientId = clients.clientId
         inner join clientTypes on clients.clientTypeId = clientTypes.clientTypeId
@@ -70,6 +70,19 @@
     <select id="getScientistIdByExperimentId" parameterType="int" resultType="int">
         select scientistId from experimentGroups where experimentId = #{id}
     </select>
+
+    <update id="updateExperiment" parameterType="com.solvd.hw2.models.Experiment">
+        update experiments set 
+            experimentName=#{name}, 
+            status=#{status}, 
+            startDate=#{startDate}, 
+            endDAte=#{endDate}, 
+            experimentTypeId=#{experimentType.id}, 
+            investmentId=#{investment.id},
+            reportId=#{report.id},
+            labId=#{lab.id}
+        where experimentId=#{id}
+    </update>
 
     <delete id="deleteExperiment" parameterType="int">
         delete from experiments where experimentId = #{experimentId}
