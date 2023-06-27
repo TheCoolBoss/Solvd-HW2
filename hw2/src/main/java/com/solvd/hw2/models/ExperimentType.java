@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.solvd.hw2.builders.ExperimentTypeBuilder;
 import com.solvd.hw2.models.abstracts.Model;
 
 @XmlRootElement (name="experimentType")
@@ -18,6 +19,12 @@ public class ExperimentType extends Model
 
     public ExperimentType(){}
 
+    public ExperimentType(ExperimentTypeBuilder expTypeBuilder)
+    {
+        this.id = expTypeBuilder.getId();
+        this.typeName = expTypeBuilder.getTypeName();
+    }
+    
     public ExperimentType(Integer id, String typeName) 
     {
         this.id = id;

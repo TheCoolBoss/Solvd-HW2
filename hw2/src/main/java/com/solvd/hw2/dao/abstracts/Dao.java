@@ -25,7 +25,7 @@ public abstract class Dao
             CustomPool.releaseConn();
         }
 
-        catch (SQLException sqle)
+        catch (SQLException | InterruptedException sqle)
         {
             LOGGER.error(sqle.getMessage());
         }
@@ -41,7 +41,7 @@ public abstract class Dao
             CustomPool.releaseConn();
         }
 
-        catch (SQLException sqle)
+        catch (SQLException | InterruptedException sqle)
         {
             LOGGER.error(sqle.getMessage());
         }
@@ -56,13 +56,13 @@ public abstract class Dao
             CustomPool.releaseConn();
         }
 
-        catch (SQLException sqle)
+        catch (SQLException | InterruptedException sqle)
         {
             LOGGER.error(sqle.getMessage());
         }
     }
 
-    public ResultSet getSelectResults(ArrayList<String> fields, Model criteriaVals, String table, String operator) throws SQLException
+    public ResultSet getSelectResults(ArrayList<String> fields, Model criteriaVals, String table, String operator) throws SQLException, InterruptedException
     {
         PreparedStatement stmt = QueryGen.genSelect(fields, table, criteriaVals, ConditionGen.makeBasicWhere(criteriaVals.getFields(), operator), Concaters.ARRAY_LIST_STRING_CONCAT);
         return stmt.executeQuery();

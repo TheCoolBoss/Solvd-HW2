@@ -14,7 +14,7 @@ public class QueryGen
 {
     private static final Logger LOGGER = LogManager.getLogger("Query Gen");
 
-    public static PreparedStatement genInsert(Model obj, String table, IConcat regConcater, IConcatArrayList<String> listConcater) throws SQLException
+    public static PreparedStatement genInsert(Model obj, String table, IConcat regConcater, IConcatArrayList<String> listConcater) throws SQLException, InterruptedException
     {
         ArrayList<String> fields = obj.getFields();
         ArrayList<Object> vals = obj.getVals();
@@ -35,7 +35,7 @@ public class QueryGen
     }
 
 
-    public static PreparedStatement genUpdate(Model newVals, String table, Model criteria, String condition, IConcatArrayList<String> listConcater) throws SQLException
+    public static PreparedStatement genUpdate(Model newVals, String table, Model criteria, String condition, IConcatArrayList<String> listConcater) throws SQLException, InterruptedException
     {
         ArrayList<String> fields = newVals.getFields();
         ArrayList<Object> vals = newVals.getVals();
@@ -60,7 +60,7 @@ public class QueryGen
     }
 
 
-    public static PreparedStatement genDelete(Model toDelete, String table, String condition) throws SQLException
+    public static PreparedStatement genDelete(Model toDelete, String table, String condition) throws SQLException, InterruptedException
     {
         ArrayList<Object> vals = toDelete.getVals();
 
@@ -71,7 +71,7 @@ public class QueryGen
     }
 
 
-    public static PreparedStatement genSelect(ArrayList<String> fields, String table, Model criteria, String condition, IConcatArrayList<String> listConcater) throws SQLException
+    public static PreparedStatement genSelect(ArrayList<String> fields, String table, Model criteria, String condition, IConcatArrayList<String> listConcater) throws SQLException, InterruptedException
     {
         ArrayList<Object> vals = criteria.getVals();
         ArrayList<Object> allVals = new ArrayList<Object>();
@@ -100,7 +100,7 @@ public class QueryGen
     }
 
 
-    public static PreparedStatement makeStatement(String baseQuery, ArrayList<Object> vals) throws SQLException
+    public static PreparedStatement makeStatement(String baseQuery, ArrayList<Object> vals) throws SQLException, InterruptedException
     {
         PreparedStatement ret = CustomPool.getConn().prepareStatement(baseQuery);
         int startingIndex = 0;

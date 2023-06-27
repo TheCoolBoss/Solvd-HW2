@@ -58,7 +58,7 @@ public class ClientDao extends Dao
             return ret;
         }
 
-        catch (SQLException sqle)
+        catch (SQLException | InterruptedException sqle)
         {
             LOGGER.error(sqle.getMessage());
             return null;

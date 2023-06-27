@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ExperimentMap">
+    <resultMap id="expMap" type="com.solvd.hw2.models.Experiment">
+        <id property="id" column="experimentId"/>
+        <result property="name" column="experimentName"/>
+        <result property="status" column="status"/>
+        <result property="startDate" column="startDate"/>
+        <result property="endDate" column="endDate"/>
+        <association property="experimentType" resultMap="ExpTypeMap.expTypeMap"/>
+        <association property="investment" resultMap="InvestmentMap.investmentMap"/>
+        <association property="report" resultMap="ReportMap.reportMap"/>    
+        <association property="lab" resultMap="LabMap.labMap"/> 
+        <collection property="scientists" resultMap="ScientistMap.scientistMap"/>
+    </resultMap>
+
+
+
+    <insert id="insertExperiment" parameterType="com.solvd.hw2.models.Experiment">
+        insert into experiments (experimentName, status, startDate, endDate, experimentTypeId, investmentId, reportId, labId)
+        values(#{name}, #{status}, #{startDate}, #{endDate}, #{experimentType.id}, #{investment.id}, #{report.id}, #{lab.id})
+    </insert>
+
+    <insert id="insertExpGroup" parameterType="com.solvd.hw2.models.Experiment">
+        insert into experimentGroups (experimentId, scientistId)
+        values
+        <foreach item="item" collection="scientists" separator=",">
+            (#{id}, #{item.id})
+        </foreach>
+    </insert>
+
+    <select id="getLastId" resultType="int">
+        select experimentId from experiments order by experimentId desc limit 1
+    </select>
+
+
+
+    <select id="getExperimentById" parameterType="int" resultMap="expMap">
+        select experiments.experimentId, experiments.experimentName, experiments.status, experiments.startDate, experiments.endDate,
+               experiments.experimentTypeId, experimentTypes.expTypeName,
+               experiments.investmentId, investments.amount, investments.bank, investments.clientId,
+               clients.clientName, clients.clientTypeId,
+               clientTypes.clientTypeName,
+               experiments.reportId, reports.reportName, reports.link,
+               experiments.labId, labs.labName, labs.institutionId, labs.locationId,
+               institutions.institutionName, 
+               locations.city, locations.country,
+               experimentGroups.scientistId,
+               scientists.scientistId, scientists.firstName, scientists.lastName, scientists.degreeId,
+               degrees.degreeId, degrees.degreeName, degrees.numOfYears
+        from experiments
+        inner join experimentTypes on experiments.experimentTypeId = experimentTypes.expTypeId
+        inner join investments on experiments.investmentId = investments.investmentId
+        inner join clients on investments.clientId = clients.clientId
+        inner join clientTypes on clients.clientTypeId = clientTypes.clientTypeId
+        inner join reports on experiments.reportId = reports.reportId
+        inner join labs on experiments.labId = labs.labId
+        inner join institutions on labs.institutionId = institutions.institutionId
+        inner join locations on labs.locationId = locations.locationId
+        inner join experimentGroups on experiments.experimentId = experimentGroups.experimentId
+        inner join scientists on experimentGroups.scientistId = scientists.scientistId
+        inner join degrees on scientists.degreeId = degrees.degreeId
+
+        where experiments.experimentId = #{id}
+    </select>
+
+    <select id="getScientistIdByExperimentId" parameterType="int" resultType="int">
+        select scientistId from experimentGroups where experimentId = #{id}
+    </select>
+
+    <delete id="deleteExperiment" parameterType="int">
+        delete from experiments where experimentId = #{experimentId}
+    </delete>
+</mapper>

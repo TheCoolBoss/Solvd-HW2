@@ -16,7 +16,7 @@ public class ExperimentService
     private static final String GROUP_TABLE = "experimentGroups";
 
     //Inserts data into experiment group table 
-    public void insertIntoGroups(List<Experiment> list) throws SQLException
+    public void insertIntoGroups(List<Experiment> list) throws SQLException, InterruptedException
     {
         for (Experiment experiment : list) 
         {

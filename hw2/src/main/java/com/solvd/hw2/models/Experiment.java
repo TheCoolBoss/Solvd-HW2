@@ -237,7 +237,7 @@ public class Experiment extends Model
     public String toString()
     {
         return
-        "Experiment " + name + " of type " + experimentType.getTypeName() + ":\n"
+        "Experiment " + id + " " + name + " of type " + experimentType.getTypeName() + ":\n"
         + "Status: " + status + "\n"
         + "Dates: " + startDate + " to " + endDate + "\n"
         + "Scientists:\n"
