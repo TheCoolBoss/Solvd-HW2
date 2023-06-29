@@ -19,4 +19,12 @@ public class ClientTypeService
 
         return returnedVals.get(0).getClientTypeName();
     }
+
+    public int getTypeIdByName(String name)
+    {
+        ClientType fields = new ClientType(0, null);
+        ClientType criteria = new ClientType(null, name);
+
+        return TYPE_DAO.select(fields.getFields(), criteria, " = ").get(0).getClientTypeId();
+    }
 }

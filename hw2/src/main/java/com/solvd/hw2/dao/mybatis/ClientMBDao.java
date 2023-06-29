@@ -23,7 +23,6 @@ public class ClientMBDao
         try(SqlSession session = factory.openSession())
         {
             List<Client> ret = session.selectList("ClientMap.getClientByTypeId", clientTypeId);
-            //session.commit();
             return ret;
         }
     }
@@ -33,6 +32,14 @@ public class ClientMBDao
         try(SqlSession session = factory.openSession())
         {
             return session.selectOne("ClientMap.getClientById", clientId);
+        }
+    }
+
+    public Client getClientByName(String name)
+    {
+        try(SqlSession session = factory.openSession())
+        {
+            return session.selectOne("ClientMap.getClientByName", name);
         }
     }
 

@@ -15,7 +15,7 @@ public class InstitutionsDao extends Dao
     private static final Logger LOGGER = LogManager.getLogger("Institution DAO");
     private static final String INSTITUTION_TABLE = "institutions";
     private static final String ID_COL = "institutionId";
-    private static final String NAME_COL = "intstitutionName";
+    private static final String NAME_COL = "institutionName";
 
     public List<Institution> select(ArrayList<String> fields, Institution criteriaVals, String operator)
     {

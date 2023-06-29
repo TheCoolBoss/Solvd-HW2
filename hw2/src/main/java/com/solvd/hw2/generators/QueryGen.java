@@ -4,13 +4,17 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import com.solvd.hw2.CustomPool;
 import com.solvd.hw2.lambda.interfaces.IConcat;
 import com.solvd.hw2.lambda.interfaces.IConcatList;
 import com.solvd.hw2.models.abstracts.Model;
 
 public class QueryGen 
-{
+{    
+    private static final Logger LOGGER = LogManager.getLogger("Query Gen");
+
     public static PreparedStatement genInsert(Model obj, String table, IConcat regConcater, IConcatList<String> listConcater) throws SQLException, InterruptedException
     {
         ArrayList<String> fields = obj.getFields();
@@ -22,7 +26,7 @@ public class QueryGen
         query = query.substring(0, query.length() - 2);
         query = query.concat(") values (");
 
-        query = query.concat(regConcater.concatXTimes("? ", fields.size()));
+        query = query.concat(regConcater.concatXTimes("?, ", vals.size()));
         query = query.substring(0, query.length() - 2);
         query = query.concat(");");
 

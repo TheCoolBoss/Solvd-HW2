@@ -8,7 +8,7 @@ import com.solvd.hw2.builders.ExperimentBuilder;
 import com.solvd.hw2.dao.jdbc.ExperimentDao;
 import com.solvd.hw2.models.Experiment;
 import com.solvd.hw2.models.Scientist;
-import com.solvd.hw2.services.abstracts.IExperimentService;
+import com.solvd.hw2.services.interfaces.IExperimentService;
 
 public class ExperimentService implements IExperimentService
 {

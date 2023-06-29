@@ -1,5 +1,7 @@
 package com.solvd.hw2.models;
 
+import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -35,6 +37,7 @@ public class Lab extends Model
         this.name = name;
         this.location = location;
         this.institution = institution;
+        populateFieldsAndVals();
     }
 
     protected void populateFieldsAndVals()
@@ -53,13 +56,13 @@ public class Lab extends Model
 
         if (location != null)
         {
-            vals.add(location);
+            vals.add(location.getId());
             fields.add(LOCATION_COL);
         }
 
         if (institution != null)
         {
-            vals.add(institution);
+            vals.add(institution.getId());
             fields.add(INST_COL);
         }
     }
@@ -114,4 +117,13 @@ public class Lab extends Model
         + "Location: " + location.getCity() + ", " + location.getCountry();
     }
 
+    public ArrayList<String> getFields()
+    {
+        return this.fields;
+    }
+
+    public ArrayList<Object> getVals()
+    {
+        return this.vals;
+    }
 }

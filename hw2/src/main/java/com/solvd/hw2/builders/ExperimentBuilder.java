@@ -130,7 +130,9 @@ public class ExperimentBuilder
 
     public Experiment build()
     {
-        return new Experiment(id, name, status, startDate, endDate, experimentType, investment, report, lab);
+        Experiment ret = new Experiment(id, name, status, startDate, endDate, experimentType, investment, report, lab);
+        ret.setScientists(scientists);
+        return ret;
     }
 
 }

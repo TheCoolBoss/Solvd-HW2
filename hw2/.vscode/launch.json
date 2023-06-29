@@ -15,20 +15,14 @@
             "name": "Main",
             "request": "launch",
             "mainClass": "com.solvd.hw2.Main",
-            "projectName": "solvd"
+            "projectName": "solvd",
+            "vmArgs": ["-Djdbc=jdbc", "-Dmybatis=mybatis"]
         },
         {
             "type": "java",
             "name": "JaxbMain",
             "request": "launch",
             "mainClass": "com.solvd.hw2.jaxb.JaxbMain",
-            "projectName": "solvd"
-        },
-        {
-            "type": "java",
-            "name": "MyBatisMain",
-            "request": "launch",
-            "mainClass": "com.solvd.hw2.mybatis.MyBatisMain",
             "projectName": "solvd"
         },
         {

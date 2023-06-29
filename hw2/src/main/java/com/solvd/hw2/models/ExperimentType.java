@@ -1,5 +1,7 @@
 package com.solvd.hw2.models;
 
+import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import com.fasterxml.jackson.annotation.JsonGetter;
@@ -79,4 +81,13 @@ public class ExperimentType extends Model
         + "Id: " + id;
     }
     
+    public ArrayList<String> getFields()
+    {
+        return this.fields;
+    }
+
+    public ArrayList<Object> getVals()
+    {
+        return this.vals;
+    }
 }

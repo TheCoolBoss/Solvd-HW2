@@ -1,4 +1,4 @@
-package com.solvd.hw2.services.abstracts;
+package com.solvd.hw2.services.interfaces;
 
 import com.solvd.hw2.models.Experiment;
 

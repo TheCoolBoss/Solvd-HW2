@@ -1,5 +1,7 @@
 package com.solvd.hw2.models;
 
+import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -69,5 +71,15 @@ public class ClientType extends Model
         return 
         "Client type " + clientTypeName + ":\n"
         + "Id: " + clientTypeId;
+    }
+
+    public ArrayList<String> getFields()
+    {
+        return this.fields;
+    }
+
+    public ArrayList<Object> getVals()
+    {
+        return this.vals;
     }
 }

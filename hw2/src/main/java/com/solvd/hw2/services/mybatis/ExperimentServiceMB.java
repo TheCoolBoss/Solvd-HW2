@@ -1,11 +1,10 @@
 package com.solvd.hw2.services.mybatis;
 
 import java.io.IOException;
-
 import com.solvd.hw2.dao.mybatis.ExperimentMBDao;
 import com.solvd.hw2.models.Experiment;
-import com.solvd.hw2.services.abstracts.IExperimentService;
 import com.solvd.hw2.services.abstracts.ServiceMB;
+import com.solvd.hw2.services.interfaces.IExperimentService;
 
 public class ExperimentServiceMB extends ServiceMB implements IExperimentService
 {

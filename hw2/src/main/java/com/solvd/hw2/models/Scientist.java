@@ -1,5 +1,7 @@
 package com.solvd.hw2.models;
 
+import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -33,6 +35,7 @@ public class Scientist extends Model implements Person
         this.firstName = firstName;
         this.lastName = lastName;
         this.degree = degree;
+        populateFieldsAndVals();
     }
 
     
@@ -109,5 +112,15 @@ public class Scientist extends Model implements Person
         "Scientist " + firstName + " " + lastName + ":\n"
         + "Id: " + id + "\n"
         + "Degree: " + degree.getDegreeName();
+    }
+
+    public ArrayList<String> getFields()
+    {
+        return this.fields;
+    }
+
+    public ArrayList<Object> getVals()
+    {
+        return this.vals;
     }
 }

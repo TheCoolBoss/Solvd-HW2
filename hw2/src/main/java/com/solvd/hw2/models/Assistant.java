@@ -1,5 +1,7 @@
 package com.solvd.hw2.models;
 
+import java.util.ArrayList;
+
 import com.solvd.hw2.models.abstracts.Model;
 import com.solvd.hw2.models.interfaces.Person;
 
@@ -103,4 +105,13 @@ public class Assistant extends Model implements Person
         + "Assisting: " + assistee.toString();
     }
 
+    public ArrayList<String> getFields()
+    {
+        return this.fields;
+    }
+
+    public ArrayList<Object> getVals()
+    {
+        return this.vals;
+    }
 }

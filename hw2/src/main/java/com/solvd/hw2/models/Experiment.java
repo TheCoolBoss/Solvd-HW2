@@ -54,6 +54,7 @@ public class Experiment extends Model
         this.report = report;
         this.lab = lab;
         scientists = new ArrayList<Scientist>();
+        populateFieldsAndVals();
     }
 
     protected void populateFieldsAndVals()
@@ -245,5 +246,15 @@ public class Experiment extends Model
         + "Report: " + report + "\n"
         + "Investment: " + investment + "\n"
         + "Lab: " + lab;
+    }
+
+    public ArrayList<String> getFields()
+    {
+        return this.fields;
+    }
+
+    public ArrayList<Object> getVals()
+    {
+        return this.vals;
     }
 }

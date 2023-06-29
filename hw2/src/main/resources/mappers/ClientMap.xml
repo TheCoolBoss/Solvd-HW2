@@ -27,6 +27,13 @@
         where clients.clientId = #{id}
     </select>
 
+    <select id="getClientByName" parameterType="string" resultMap="clientMap">
+        select clients.clientId, clients.clientName, clients.clientTypeId, clientTypes.clientTypeName 
+        from clients 
+        inner join clientTypes on clients.clientTypeId = clientTypes.clientTypeId
+        where clients.clientName = #{name}
+    </select>
+
     <insert id="insertClient" parameterType="com.solvd.hw2.models.Client">
         insert into clients (clientName, clientTypeId)
         values(#{name}, #{clientType.clientTypeId})

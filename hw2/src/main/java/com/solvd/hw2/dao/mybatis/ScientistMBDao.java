@@ -14,6 +14,24 @@ public class ScientistMBDao
         this.factory = factory;
     }
 
+    public void insertScientist(Scientist toInsert)
+    {
+        try(SqlSession session = factory.openSession())
+        {
+            session.insert("ScientistMap.insertScientist", toInsert);
+            session.commit();
+        }
+    }
+
+    public void updateScientist(Scientist newVals)
+    {
+        try(SqlSession session = factory.openSession())
+        {
+            session.insert("ScientistMap.updateScientist", newVals);
+            session.commit();
+        }      
+    }
+
     public Scientist getScientistById(int id)
     {
         try(SqlSession session = factory.openSession())

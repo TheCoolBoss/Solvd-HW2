@@ -14,7 +14,7 @@ public class LocationDao extends Dao
 {
     private static final Logger LOGGER = LogManager.getLogger("Location DAO");
     private static final String LOCATION_TABLE = "locations";
-    private static final String ID_COL = "locId";
+    private static final String ID_COL = "locationId";
     private static final String CITY_COL = "city";
     private static final String COUNTRY_COL = "country";
 

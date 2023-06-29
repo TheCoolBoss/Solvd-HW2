@@ -76,7 +76,7 @@
             experimentName=#{name}, 
             status=#{status}, 
             startDate=#{startDate}, 
-            endDAte=#{endDate}, 
+            endDate=#{endDate}, 
             experimentTypeId=#{experimentType.id}, 
             investmentId=#{investment.id},
             reportId=#{report.id},

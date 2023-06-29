@@ -1,5 +1,7 @@
 package com.solvd.hw2.models;
 
+import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -92,7 +94,17 @@ public class Client extends Model implements Person
     public String toString()
     {
         return 
-        clientType.getClientTypeName() + " Client " + name + ":\n"
+        clientType.getClientTypeName() + " (type id of " + clientType.getClientTypeId() + ") Client " + name + ":\n"
         + "Id: " + id;
+    }
+       
+    public ArrayList<String> getFields()
+    {
+        return this.fields;
+    }
+
+    public ArrayList<Object> getVals()
+    {
+        return this.vals;
     }
 }
