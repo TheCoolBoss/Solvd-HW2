@@ -43,12 +43,13 @@ public class Main
         scientists.add(huey);
 
         Lab rad = Helpers.getRAndDLab();
-        Experiment mGZeke = new ExperimentBuilder().withName("Metal Gear Zeke")
-                                            .withStatus("Building")
-                                            .withStart(dateAdapter.unmarshal("2023-06-29"))
-                                            .withLab(rad)
-                                            .withScientists(scientists)
-                                            .build();
+        Experiment mGZeke = new ExperimentBuilder()
+        .withName("Metal Gear Zeke")
+        .withStatus("Building")
+        .withStart(dateAdapter.unmarshal("2023-06-29"))
+        .withLab(rad)
+        .withScientists(scientists)
+        .build();
         
 
         expService.insertExperiment(mGZeke);
