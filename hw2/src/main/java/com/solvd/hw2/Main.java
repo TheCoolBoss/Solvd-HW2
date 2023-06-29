@@ -33,6 +33,7 @@ public class Main
 
         LOGGER.info("Introducing Big Boss.");
         Client bigBoss = Helpers.getBoss(clientService, clientTypeService);
+        LOGGER.info(bigBoss);
 
         LOGGER.info("Big Boss wants to commission Metal Gear Zeke at Mother Base.");
 

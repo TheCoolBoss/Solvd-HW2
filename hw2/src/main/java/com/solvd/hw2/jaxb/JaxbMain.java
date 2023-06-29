@@ -12,17 +12,7 @@ public class JaxbMain
     private static final String PATH = "src/main/resources/xml/experiments/FalconGanonPlays.xml";
     public static void main(String[] args) throws JAXBException, FileNotFoundException
     {
-        CustomUnmarshaller expMaker;
-        try
-        {
-            expMaker = new CustomUnmarshaller(Experiment.class, PATH);
-        }
-
-        catch (FileNotFoundException fnfe)
-        {
-            expMaker = new CustomUnmarshaller(Experiment.class, "src/main/resources/xml/experiments/FalconGanonPlays.xml");
-        }
-
+        CustomUnmarshaller expMaker = new CustomUnmarshaller(Experiment.class, PATH);
         Experiment expTest = (Experiment) expMaker.unmarshal();
         LOGGER.info(expTest.toString());
     }    

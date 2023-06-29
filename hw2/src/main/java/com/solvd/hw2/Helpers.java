@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import com.solvd.hw2.dao.jdbc.*;
 import com.solvd.hw2.models.*;
 import com.solvd.hw2.services.interfaces.IClientService;
-import com.solvd.hw2.services.interfaces.IEmployeeService;
 import com.solvd.hw2.services.jdbc.ClientTypeService;
 
 public class Helpers 
