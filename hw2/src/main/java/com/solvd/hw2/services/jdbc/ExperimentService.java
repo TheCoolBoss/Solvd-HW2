@@ -39,7 +39,7 @@ public class ExperimentService implements IExperimentService
 
         catch (SQLException | InterruptedException e)
         {
-            
+            //Do nothing for now
         }
     }
 
@@ -53,5 +53,12 @@ public class ExperimentService implements IExperimentService
     {
         Experiment criteria = new ExperimentBuilder().withId(newVals.getId()).build();
         EXP_DAO.update(newVals, criteria, EXP_TABLE, " = ");
+    }
+
+    public void deleteExperiment(Experiment toDelete)
+    {
+        Experiment criteria = new ExperimentBuilder().withId(toDelete.getId()).build();
+        EXP_DAO.delete(criteria, GROUP_TABLE, " = ");
+        EXP_DAO.delete(criteria, EXP_TABLE, " = ");
     }
 }

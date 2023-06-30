@@ -85,6 +85,10 @@
     </update>
 
     <delete id="deleteExperiment" parameterType="int">
-        delete from experiments where experimentId = #{experimentId}
+        delete from experiments where experimentId = #{id}
+    </delete>
+
+    <delete id="deleteFromGroup" parameterType="int">
+        delete from experimentGroups where experimentId = #{id}
     </delete>
 </mapper>

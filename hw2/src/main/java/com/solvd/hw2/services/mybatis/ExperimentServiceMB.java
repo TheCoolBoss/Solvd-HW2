@@ -32,4 +32,10 @@ public class ExperimentServiceMB extends ServiceMB implements IExperimentService
     {
         expDao.updateExperiment(newVals);
     }
+
+    public void deleteExperiment(Experiment toDelete)
+    {
+        expDao.deleteExperimentFromGroup(toDelete);
+        expDao.deleteExperiment(toDelete);
+    }
 }

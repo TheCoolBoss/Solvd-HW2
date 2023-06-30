@@ -9,7 +9,3 @@
         <result property="typeName" column="experimentTypeName"/>
     </resultMap>
 </mapper>
-
-
-
-

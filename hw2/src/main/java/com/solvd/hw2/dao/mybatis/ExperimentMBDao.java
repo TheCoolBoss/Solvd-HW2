@@ -55,4 +55,22 @@ public class ExperimentMBDao
             session.commit();
         }
     }
+
+    public void deleteExperiment(Experiment toDelete)
+    {
+        try(SqlSession session = factory.openSession())
+        {
+            session.delete("ExperimentMap.deleteExperiment", toDelete);
+            session.commit();
+        }
+    }
+
+    public void deleteExperimentFromGroup(Experiment toDelete)
+    {
+        try(SqlSession session = factory.openSession())
+        {
+            session.delete("ExperimentMap.deleteFromGroup", toDelete.getId());
+            session.commit();
+        }
+    }
 }

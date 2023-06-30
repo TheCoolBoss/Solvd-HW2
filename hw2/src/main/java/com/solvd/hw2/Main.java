@@ -45,6 +45,7 @@ public class Main
         Lab rad = Helpers.getRAndDLab();
         Experiment mGZeke = new ExperimentBuilder()
         .withName("Metal Gear Zeke")
+        .withType(new ExperimentType(4, ""))
         .withStatus("Building")
         .withStart(dateAdapter.unmarshal("2023-06-29"))
         .withLab(rad)
@@ -58,5 +59,10 @@ public class Main
         LOGGER.info("Done.");
         mGZeke.setStatus("Completed");
         expService.updateExperiment(mGZeke);
+        LOGGER.info(mGZeke);
+        Thread.sleep(2000);
+        LOGGER.info("Deleting MG Zeke from DB because it's classified. :)");
+        expService.deleteExperiment(mGZeke);
+        LOGGER.info("Deleted");
     }
 }
