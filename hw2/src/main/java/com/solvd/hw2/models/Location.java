@@ -1,5 +1,7 @@
 package com.solvd.hw2.models;
 
+import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -14,7 +16,7 @@ import com.solvd.hw2.models.abstracts.Model;
 @JsonRootName ("location")
 public class Location extends Model
 {
-    private static final String ID_COL = "locId";
+    private static final String ID_COL = "locationId";
     private static final String CITY_COL = "city";
     private static final String COUNTRY_COL = "country";
 
@@ -31,6 +33,7 @@ public class Location extends Model
         this.id = id;
         this.city = city;
         this.country = country;
+        populateFieldsAndVals();
     }
 
     protected void populateFieldsAndVals()
@@ -90,5 +93,15 @@ public class Location extends Model
         return
         "Location " + city + ", " + country + ":\n"
         + "Id: " + id;
+    }
+
+    public ArrayList<String> getFields()
+    {
+        return this.fields;
+    }
+
+    public ArrayList<Object> getVals()
+    {
+        return this.vals;
     }
 }

@@ -1,37 +1,36 @@
-package com.solvd.hw2.dao;
+package com.solvd.hw2.dao.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import com.solvd.hw2.CustomPool;
 import com.solvd.hw2.dao.abstracts.Dao;
-import com.solvd.hw2.models.Degree;
+import com.solvd.hw2.models.Client;
+import com.solvd.hw2.models.ClientType;
 
-public class DegreeDao extends Dao
+public class ClientDao extends Dao
 {
-    private static final Logger LOGGER = LogManager.getLogger("Degree DAO");
-    private final String DEGREE_TABLE = "degrees";
-    private final String ID_COL = "degreeId";
-    private final String NAME_COL = "name";
-    private final String YEAR_COL = "numOfYears";
+    private static final Logger LOGGER = LogManager.getLogger("Client DAO");
+    private static final String CLIENT_TABLE = "clients";
+    private static final String ID_COL = "clientId";
+    private static final String NAME_COL = "clientName";
+    private static final String TYPE_COL = "clientTypeId";
 
-    public List<Degree> select(ArrayList<String> fields, Degree criteriaVals, String operator)
+    public List<Client> select(ArrayList<String> fields, Client criteriaVals, String operator)
     {
         try
         {
-            ArrayList<Degree> ret = new ArrayList<Degree>();
-            ResultSet results = getSelectResults(fields, criteriaVals, DEGREE_TABLE, operator);
+            ArrayList<Client> ret = new ArrayList<Client>();
+            ResultSet results = getSelectResults(fields, criteriaVals, CLIENT_TABLE, operator);
 
             while (results.next())
             {
                 Integer newId = null;
-                String name = null;
-                Integer years = null;
+                String newName = null;
+                ClientType newType = new ClientType(null, null);
 
                 for (int i = 1; i <= results.getMetaData().getColumnCount(); i++)
                 {
@@ -42,16 +41,16 @@ public class DegreeDao extends Dao
 
                     else if (results.getMetaData().getColumnLabel(i).equals(NAME_COL))
                     {
-                        name = results.getString(i);
+                        newName = results.getString(i);
                     }
 
-                    else if (results.getMetaData().getColumnLabel(i).equals(YEAR_COL))
+                    else if (results.getMetaData().getColumnLabel(i).equals(TYPE_COL))
                     {
-                        years = results.getInt(i);
+                        newType.setClientTypeId(results.getInt(i));
                     }
                 }
 
-                ret.add(new Degree(newId, name, years));
+                ret.add(new Client(newId, newName, newType));
             }
             
             CustomPool.releaseConn();

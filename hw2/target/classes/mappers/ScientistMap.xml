@@ -11,6 +11,20 @@
         <association property="degree" resultMap="DegreeMap.degreeMap"/>
     </resultMap>
 
+    <insert id="insertScientist" parameterType="com.solvd.hw2.models.Scientist">
+        insert into scientists (firstName, lastName, degreeId)
+        values
+        (#{firstName}, #{lastName}, #(degree.id))
+    </insert>
+
+    <update id="updateScientist" parameterType="com.solvd.hw2.models.Scientist">
+        update scientists set
+            firstName=#{firstName},
+            lastName=#{lastName},
+            degreeId=#{degree.id}
+        where scientistId=#{id}
+    </update>
+
     <select id="getScientistById" parameterType="int" resultMap="scientistMap">
         select scientists.scientistId, scientists.firstName, scientists.lastName,
                scientists.degreeId, degrees.degreeName, degrees.numOfYears

@@ -1,5 +1,7 @@
 package com.solvd.hw2.models;
 
+import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -31,6 +33,7 @@ public class Report extends Model
         this.id = id;
         this.name = name;
         this.link = link;
+        populateFieldsAndVals();
     }
 
     protected void populateFieldsAndVals()
@@ -93,5 +96,15 @@ public class Report extends Model
         "Report " + name + ":\n"
         + "Id: " + id + "\n"
         + "URL: " + link;
+    }
+
+    public ArrayList<String> getFields()
+    {
+        return this.fields;
+    }
+
+    public ArrayList<Object> getVals()
+    {
+        return this.vals;
     }
 }

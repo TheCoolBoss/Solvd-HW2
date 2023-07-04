@@ -1,5 +1,7 @@
 package com.solvd.hw2.models;
 
+import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import com.fasterxml.jackson.annotation.JsonGetter;
@@ -11,8 +13,8 @@ import com.solvd.hw2.models.abstracts.Model;
 @JsonRootName ("experimentType")
 public class ExperimentType extends Model
 {
-    private static final String ID_COL = "expTypeId";
-    private static final String TYPE_COL = "expTypeName";
+    private static final String ID_COL = "experimentTypeId";
+    private static final String TYPE_COL = "experimentTypeName";
 
     private Integer id;
     private String typeName;
@@ -79,4 +81,13 @@ public class ExperimentType extends Model
         + "Id: " + id;
     }
     
+    public ArrayList<String> getFields()
+    {
+        return this.fields;
+    }
+
+    public ArrayList<Object> getVals()
+    {
+        return this.vals;
+    }
 }

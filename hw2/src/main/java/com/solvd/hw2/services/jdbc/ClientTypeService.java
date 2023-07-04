@@ -1,7 +1,7 @@
-package com.solvd.hw2.services;
+package com.solvd.hw2.services.jdbc;
 
 import java.util.List;
-import com.solvd.hw2.dao.ClientTypeDao;
+import com.solvd.hw2.dao.jdbc.ClientTypeDao;
 import com.solvd.hw2.models.ClientType;
 
 public class ClientTypeService 
@@ -18,5 +18,13 @@ public class ClientTypeService
         List<ClientType> returnedVals = TYPE_DAO.select(fields.getFields(), criteria, "= ");
 
         return returnedVals.get(0).getClientTypeName();
+    }
+
+    public int getTypeIdByName(String name)
+    {
+        ClientType fields = new ClientType(0, null);
+        ClientType criteria = new ClientType(null, name);
+
+        return TYPE_DAO.select(fields.getFields(), criteria, " = ").get(0).getClientTypeId();
     }
 }

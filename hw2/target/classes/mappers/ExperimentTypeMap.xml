@@ -5,11 +5,7 @@
 
 <mapper namespace="ExpTypeMap">
     <resultMap id="expTypeMap" type="com.solvd.hw2.models.ExperimentType">
-        <id property="id" column="expTypeId"/>
-        <result property="typeName" column="expTypeName"/>
+        <id property="id" column="experimentTypeId"/>
+        <result property="typeName" column="experimentTypeName"/>
     </resultMap>
 </mapper>
-
-
-
-

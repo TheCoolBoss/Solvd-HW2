@@ -3,29 +3,30 @@ package com.solvd.hw2.generators;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.solvd.hw2.CustomPool;
 import com.solvd.hw2.lambda.interfaces.IConcat;
-import com.solvd.hw2.lambda.interfaces.IConcatArrayList;
+import com.solvd.hw2.lambda.interfaces.IConcatList;
 import com.solvd.hw2.models.abstracts.Model;
 
 public class QueryGen 
-{
+{    
     private static final Logger LOGGER = LogManager.getLogger("Query Gen");
 
-    public static PreparedStatement genInsert(Model obj, String table, IConcat regConcater, IConcatArrayList<String> listConcater) throws SQLException, InterruptedException
+    public static PreparedStatement genInsert(Model obj, String table, IConcat regConcater, IConcatList<String> listConcater) throws SQLException, InterruptedException
     {
         ArrayList<String> fields = obj.getFields();
         ArrayList<Object> vals = obj.getVals();
 
         String query = "insert into " + table + " (";
 
-        query = query.concat(listConcater.concatArrayList(fields, ", "));
+        query = query.concat(listConcater.concatList(fields, ", "));
         query = query.substring(0, query.length() - 2);
         query = query.concat(") values (");
 
-        query = query.concat(regConcater.concatXTimes("? ", fields.size()));
+        query = query.concat(regConcater.concatXTimes("?, ", vals.size()));
         query = query.substring(0, query.length() - 2);
         query = query.concat(");");
 
@@ -35,7 +36,7 @@ public class QueryGen
     }
 
 
-    public static PreparedStatement genUpdate(Model newVals, String table, Model criteria, String condition, IConcatArrayList<String> listConcater) throws SQLException, InterruptedException
+    public static PreparedStatement genUpdate(Model newVals, String table, Model criteria, String condition, IConcatList<String> listConcater) throws SQLException, InterruptedException
     {
         ArrayList<String> fields = newVals.getFields();
         ArrayList<Object> vals = newVals.getVals();
@@ -51,7 +52,7 @@ public class QueryGen
         }
 
         String query = "update " + table + " set ";
-        query = query.concat(listConcater.concatArrayList(fields, "= ?,"));
+        query = query.concat(listConcater.concatList(fields, "= ?,"));
         query = query.substring(0, query.length() - 2);
         query = query.concat(condition);
 
@@ -71,7 +72,7 @@ public class QueryGen
     }
 
 
-    public static PreparedStatement genSelect(ArrayList<String> fields, String table, Model criteria, String condition, IConcatArrayList<String> listConcater) throws SQLException, InterruptedException
+    public static PreparedStatement genSelect(List<String> fields, String table, Model criteria, String condition, IConcatList<String> listConcater) throws SQLException, InterruptedException
     {
         ArrayList<Object> vals = criteria.getVals();
         ArrayList<Object> allVals = new ArrayList<Object>();
@@ -87,7 +88,7 @@ public class QueryGen
 
         else
         {
-            query = query.concat(listConcater.concatArrayList(fields, ", "));           
+            query = query.concat(listConcater.concatList(fields, ", "));           
             query = query.substring(0, query.length() - 2);
         }
 

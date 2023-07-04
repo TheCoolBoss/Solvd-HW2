@@ -3,7 +3,8 @@ package com.solvd.hw2.dao.abstracts;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,7 +21,7 @@ public abstract class Dao
     {
         try
         {
-            PreparedStatement newModel = QueryGen.genInsert(toInsert, table, Concaters.CONCATER, Concaters.ARRAY_LIST_STRING_CONCAT);
+            PreparedStatement newModel = QueryGen.genInsert(toInsert, table, Concaters.CONCATER, Concaters.LIST_STRING_CONCAT);
             newModel.executeUpdate();
             CustomPool.releaseConn();
         }
@@ -36,7 +37,7 @@ public abstract class Dao
     {
         try
         {
-            PreparedStatement updatedModel = QueryGen.genUpdate(newVals, table, criteriaVals, ConditionGen.makeBasicWhere(criteriaVals.getFields(), operator), Concaters.ARRAY_LIST_STRING_CONCAT);
+            PreparedStatement updatedModel = QueryGen.genUpdate(newVals, table, criteriaVals, ConditionGen.makeBasicWhere(criteriaVals.getFields(), operator), Concaters.LIST_STRING_CONCAT);
             updatedModel.executeUpdate();
             CustomPool.releaseConn();
         }
@@ -62,9 +63,9 @@ public abstract class Dao
         }
     }
 
-    public ResultSet getSelectResults(ArrayList<String> fields, Model criteriaVals, String table, String operator) throws SQLException, InterruptedException
+    public ResultSet getSelectResults(List<String> fields, Model criteriaVals, String table, String operator) throws SQLException, InterruptedException
     {
-        PreparedStatement stmt = QueryGen.genSelect(fields, table, criteriaVals, ConditionGen.makeBasicWhere(criteriaVals.getFields(), operator), Concaters.ARRAY_LIST_STRING_CONCAT);
+        PreparedStatement stmt = QueryGen.genSelect(fields, table, criteriaVals, ConditionGen.makeBasicWhere(criteriaVals.getFields(), operator), Concaters.LIST_STRING_CONCAT);
         return stmt.executeQuery();
     }
 }

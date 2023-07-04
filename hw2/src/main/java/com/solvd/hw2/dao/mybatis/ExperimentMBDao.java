@@ -1,4 +1,4 @@
-package com.solvd.hw2.mybatis.dao;
+package com.solvd.hw2.dao.mybatis;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -44,6 +44,33 @@ public class ExperimentMBDao
         try(SqlSession session = factory.openSession())
         {
             return session.selectOne("ExperimentMap.getExperimentById", id);
+        }
+    }
+
+    public void updateExperiment(Experiment newVals)
+    {
+        try(SqlSession session = factory.openSession())
+        {
+            session.update("ExperimentMap.updateExperiment", newVals);
+            session.commit();
+        }
+    }
+
+    public void deleteExperiment(Experiment toDelete)
+    {
+        try(SqlSession session = factory.openSession())
+        {
+            session.delete("ExperimentMap.deleteExperiment", toDelete);
+            session.commit();
+        }
+    }
+
+    public void deleteExperimentFromGroup(Experiment toDelete)
+    {
+        try(SqlSession session = factory.openSession())
+        {
+            session.delete("ExperimentMap.deleteFromGroup", toDelete.getId());
+            session.commit();
         }
     }
 }

@@ -37,6 +37,15 @@ public class Institution extends Model
         populateFieldsAndVals();
     }
 
+    public ArrayList<String> getFields()
+    {
+        return this.fields;
+    }
+
+    public ArrayList<Object> getVals()
+    {
+        return this.vals;
+    }
 
     protected void populateFieldsAndVals()
     {

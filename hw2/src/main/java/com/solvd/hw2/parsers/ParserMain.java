@@ -38,9 +38,9 @@ public class ParserMain
             LOGGER.info(parsedExp.toString() + "\n\n");
         }
 
-        // JsonParser jsonVersion = new JsonParser(FALCON_GANON_PLAYS_JSON, Experiment.class);
-        // Experiment jsonExp = (Experiment) jsonVersion.parse();
-        // LOGGER.info("JSON version:");
-        // LOGGER.info(jsonExp);
+        JsonParser jsonVersion = new JsonParser(FALCON_GANON_PLAYS_JSON, Experiment.class);
+        Experiment jsonExp = (Experiment) jsonVersion.parse();
+        LOGGER.info("JSON version:");
+        LOGGER.info(jsonExp);
     }
 }
