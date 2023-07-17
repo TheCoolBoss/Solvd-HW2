@@ -23,6 +23,7 @@
 hs_err_pid*
 
 #Folders
-.vscode/*
-Solvd-HW2/hw2/target/*
+.vscode
+hw2/.vscode
+hw2/target
 
