@@ -2,6 +2,7 @@ package com.solvd.hw2.services.jdbc;
 
 import java.util.List;
 import com.solvd.hw2.dao.jdbc.ClientDao;
+import com.solvd.hw2.dao.jdbc.ClientTypeDao;
 import com.solvd.hw2.models.Client;
 import com.solvd.hw2.models.ClientType;
 import com.solvd.hw2.services.interfaces.IClientService;
@@ -9,8 +10,9 @@ import com.solvd.hw2.services.interfaces.IClientService;
 public class ClientService implements IClientService
 {
     private static final ClientDao CLIENT_DAO = new ClientDao();
-    private static final ClientTypeService TYPE_SERVICE = new ClientTypeService();
+    private static final ClientTypeDao TYPE_DAO = new ClientTypeDao();
     private static final String CLIENT_TABLE = "clients";
+    private static final String TYPE_TABLE = "clientTypes";
 
 
     public void insertClient(Client toInsert)
@@ -52,9 +54,11 @@ public class ClientService implements IClientService
     private List<Client> doSelect(Client fields, Client criteria)
     {
         List<Client> ret = CLIENT_DAO.select(fields.getFields(), criteria, " = ");
+        ClientType typeFields = new ClientType(null, null);
+
         for (Client client : ret) 
         {
-            client.getClientType().setClientTypeName(TYPE_SERVICE.getTypeNameById(client.getClientType().getClientTypeId()));
+            client.setClientType((TYPE_DAO.select(typeFields.getFields(), client.getClientType(), TYPE_TABLE)).get(0));
         }
         return ret;
     }
