@@ -58,8 +58,7 @@ public class LabDao extends Dao
 
                 ret.add(new Lab(newId, newName, loc, inst));
             }
-            
-            CustomPool.releaseConn();
+
             return ret;
         }
 
@@ -67,6 +66,11 @@ public class LabDao extends Dao
         {
             LOGGER.error(sqle.getMessage());
             return null;
+        }
+
+        finally
+        {
+            CustomPool.releaseConn();
         }
     }
 }

@@ -61,7 +61,7 @@ public class AssistantDao extends Dao
                 ret.add(new Assistant(newId, firstName, lastName, newScientist));
             }
             
-            CustomPool.releaseConn();
+
             return ret;
         }
 
@@ -69,6 +69,11 @@ public class AssistantDao extends Dao
         {
             LOGGER.error(sqle.getMessage());
             return null;
+        }
+
+        finally
+        {
+            CustomPool.releaseConn();
         }
     }
 }

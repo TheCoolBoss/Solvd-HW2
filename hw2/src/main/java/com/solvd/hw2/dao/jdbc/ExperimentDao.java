@@ -94,8 +94,7 @@ public class ExperimentDao extends Dao
 
                 ret.add(new Experiment(newId, name, status, start, end, type, investment, report, lab));
             }
-            
-            CustomPool.releaseConn();
+
             return ret;
         }
 
@@ -103,6 +102,11 @@ public class ExperimentDao extends Dao
         {
             LOGGER.error(sqle.getMessage());
             return null;
+        }
+
+        finally
+        {
+            CustomPool.releaseConn();
         }
     }   
 }

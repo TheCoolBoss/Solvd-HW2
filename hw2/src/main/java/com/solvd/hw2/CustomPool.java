@@ -71,9 +71,18 @@ public class CustomPool
         return activeConns.peek();
     }
 
-    public static synchronized void releaseConn() throws SQLException, InterruptedException
+    public static synchronized void releaseConn() 
     {
-        idleConns.put(activeConns.take());
+        try
+        {
+            idleConns.put(activeConns.take());
+        }
+
+        catch (InterruptedException e)
+        {
+            LOGGER.error(e.getMessage());
+        }
+
     }
 
     public static synchronized void closePool() throws SQLException

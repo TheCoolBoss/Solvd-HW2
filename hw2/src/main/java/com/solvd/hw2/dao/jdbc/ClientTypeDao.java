@@ -44,8 +44,7 @@ public class ClientTypeDao extends Dao
 
                 ret.add(new ClientType(newId, newName));
             }
-            
-            CustomPool.releaseConn();           
+                       
             return ret;
         }
 
@@ -53,6 +52,11 @@ public class ClientTypeDao extends Dao
         {
             LOGGER.error(sqle.getMessage());
             return null;
+        }
+
+        finally
+        {
+            CustomPool.releaseConn();
         }
     }
 

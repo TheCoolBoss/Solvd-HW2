@@ -60,8 +60,7 @@ public class InvestmentDao extends Dao
 
                 ret.add(new Investment(newId, amount, bank, client));
             }
-            
-            CustomPool.releaseConn();
+
             return ret;
         }
 
@@ -69,6 +68,11 @@ public class InvestmentDao extends Dao
         {
             LOGGER.error(sqle.getMessage());
             return null;
+        }
+
+        finally
+        {
+            CustomPool.releaseConn();
         }
     }
 }

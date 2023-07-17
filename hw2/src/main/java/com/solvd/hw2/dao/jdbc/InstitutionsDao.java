@@ -44,8 +44,7 @@ public class InstitutionsDao extends Dao
 
                 ret.add(new Institution(newId, newName));
             }
-            
-            CustomPool.releaseConn();
+
             return ret;
         }
 
@@ -53,6 +52,11 @@ public class InstitutionsDao extends Dao
         {
             LOGGER.error(sqle.getMessage());
             return null;
+        }
+
+        finally
+        {
+            CustomPool.releaseConn();
         }
     }
 }

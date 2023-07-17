@@ -51,8 +51,7 @@ public class LocationDao extends Dao
 
                 ret.add(new Location(newId, city, country));
             }
-            
-            CustomPool.releaseConn();
+
             return ret;
         }
 
@@ -60,6 +59,11 @@ public class LocationDao extends Dao
         {
             LOGGER.error(sqle.getMessage());
             return null;
+        }
+
+        finally
+        {
+            CustomPool.releaseConn();
         }
     }    
 }

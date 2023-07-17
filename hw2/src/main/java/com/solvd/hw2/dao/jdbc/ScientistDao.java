@@ -58,8 +58,7 @@ public class ScientistDao extends Dao
 
                 ret.add(new Scientist(newId, firstName, lastName, degree));
             }
-            
-            CustomPool.releaseConn();
+
             return ret;
         }
 
@@ -67,6 +66,11 @@ public class ScientistDao extends Dao
         {
             LOGGER.error(sqle.getMessage());
             return null;
+        }
+
+        finally
+        {
+            CustomPool.releaseConn();
         }
     }      
 }

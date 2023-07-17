@@ -51,8 +51,7 @@ public class ReportDao extends Dao
 
                 ret.add(new Report(newId, name, link));
             }
-            
-            CustomPool.releaseConn();
+
             return ret;
         }
 
@@ -60,6 +59,11 @@ public class ReportDao extends Dao
         {
             LOGGER.error(sqle.getMessage());
             return null;
+        }
+
+        finally
+        {
+            CustomPool.releaseConn();
         }
     }    
 }

@@ -51,8 +51,7 @@ public class DegreeDao extends Dao
 
                 ret.add(new Degree(newId, name, years));
             }
-            
-            CustomPool.releaseConn();
+
             return ret;
         }
 
@@ -60,6 +59,11 @@ public class DegreeDao extends Dao
         {
             LOGGER.error(sqle.getMessage());
             return null;
+        }
+
+        finally
+        {
+            CustomPool.releaseConn();
         }
     }
 }
